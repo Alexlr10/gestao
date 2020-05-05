@@ -165,10 +165,9 @@ class ProjetoForm(forms.ModelForm):
     class Meta:
         model = Projeto
         fields = '__all__'
-        # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
-
+            'dataEntrega': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
 
 

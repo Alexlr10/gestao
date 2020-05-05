@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load staticfiles %} {% load bootstrap %} {% block content-header %}
 
-<i class="fa fa-user "> </i> Serviço
-<small>Gerenciar Serviço</small>
+<i class="fa fa-user "> </i> Projeto
+<small>Gerenciar Projeto</small>
 
 
 {% endblock content-header %} {% block content-main %}
@@ -15,14 +15,14 @@
         <div class="box-header">
 
             <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
-                Serviço
+                Projetos
             </button>
 
         </div>
 
 
         <div class="box-header">
-            <h3 class="box-title">Todos os Serviço cadastradas no sistema</h3>
+            <h3 class="box-title">Todas os projetos cadastradas no sistema</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -31,10 +31,9 @@
 
                     <thead>
                     <tr>
-                        <th>Cliente</th>
-                        <th>Serviço</th>
-                        <th>Descrição</th>
-                        <th>Valor</th>
+                        <th>Serviço - Cliente</th>
+                        <th>Data de Entrega</th>
+                        <th>Status</th>
 
                         <th>Ações</th>
 
@@ -42,12 +41,11 @@
                     </thead>
                     <tbody>
 
-                    {% for u in servico %}
+                    {% for u in projeto %}
                     <tr>
-                        <td>{{ u.cliente }}</td>
-                        <td>{{ u.nomeServico }}</td>
-                        <td>{{ u.descricao }}</td>
-                        <td>{{ u.valor}}</td>
+                        <td>{{ u.servico }}</td>
+                        <td>{{ u.dataEntrega }}</td>
+                        <td>{{ u.status}}</td>
 
 
                         </td>
@@ -55,11 +53,11 @@
 
 
                         <td>
-                            <a href="{% url 'servico_edit' u.id %}" data-toggle="modal"
+                            <a href="{% url 'projeto_edit' u.id %}" data-toggle="modal"
                                data-target="#myModal{{ u.id }}">
                                 <button type="button" class="btn btn-xs btn-warning">Editar</button>
                             </a>
-                            <a href="{% url 'servico_delete' u.id %}">
+                            <a href="{% url 'projeto_delete' u.id %}">
                                 <button type="button" class="btn btn-xs btn-danger">Apagar</button>
                             </a>
 
@@ -97,7 +95,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Serviço</h4>
+                <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Projeto</h4>
             </div>
             <div class="modal-body">
                 <form method="POST">

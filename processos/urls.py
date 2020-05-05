@@ -29,7 +29,10 @@ urlpatterns = [
     path('servico_edit/<int:pk>/', views.servico_edit, name='servico_edit'),
     path('servico_delete/<int:pk>/', views.servico_delete, name='servico_delete'),
 
-
+    # Projeto
+    path('projeto/', views.projeto, name='projeto'),
+    path('projeto_edit/<int:pk>/', views.projeto_edit, name='projeto_edit'),
+    path('projeto_delete/<int:pk>/', views.projeto_delete, name='projeto_delete'),
 
 
 

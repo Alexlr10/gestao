@@ -193,16 +193,22 @@ class Servico(models.Model):
     descricao = models.TextField('Descrição', null=True, blank=True)
     valor = models.DecimalField('Valor', max_digits=6, decimal_places=2)
 
+    def __str__(self):
+        return self.nomeServico + ' - ' + str(self.cliente)
+
 class Projeto(models.Model):
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='Servicos')
-    dataEntrega = models.DateField('Data de entrega', blank=True, null=True)
-    status = models.CharField('Status', max_length=4, choices=STATUS)
+    dataEntrega = models.DateField('Entrega', blank=True, null=True)
+    status = models.IntegerField('Status', max_length=4, choices=STATUS)
+
+
+
 
 class Reuniao(models.Model):
     datareuniao = models.DateField('Data da reuniao', blank=True, null=True)
     tipoReuniao = models.CharField('Reuniao', max_length=4, choices=FUNCAO_CHOICE_REUNIAO)
-    presenca = models.ManyToManyField('Usuario', null=True, blank=True, related_name="presenca")
-    ausencia = models.ManyToManyField('Usuario', null=True, blank=True, related_name="ausencia")
+   # presenca = models.ManyToManyField('Usuario', null=True, blank=True, related_name="presenca")
+   # ausencia = models.ManyToManyField('Usuario', null=True, blank=True, related_name="ausencia")
 
 
 

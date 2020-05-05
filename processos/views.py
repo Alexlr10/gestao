@@ -271,7 +271,7 @@ def servico_edit(request, pk):
 
 @login_required
 def servico_delete(request, pk):
-    servico = ServicoForm.objects.get(pk=pk)
+    servico = get_object_or_404(Servico,pk=pk)
     servico.delete()
     messages.error(request, 'Cadastro removido com sucesso')
 
@@ -279,6 +279,52 @@ def servico_delete(request, pk):
 
 
 
+
+######## Projeto
+@login_required
+def projeto(request):
+    projeto = Projeto.objects.all()
+    if request.method == 'POST':
+        form = ProjetoForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Projeto cadastrado com sucesso')
+            return redirect('projeto')
+
+    form = ProjetoForm()
+
+    context = {
+        'form': form,
+        'projeto': projeto
+    }
+
+    return render(request, 'projeto.html', context)
+
+@login_required
+def projeto_edit(request, pk):
+    projeto = get_object_or_404(Projeto, pk=pk)
+
+    form = ProjetoForm(request.POST or None, instance=projeto)
+
+    if form.is_valid():
+        form.save()
+        return redirect('projeto')
+
+    context = {
+        'form': form,
+        'projeto': projeto
+    }
+
+    return render(request, 'projeto_edit.html', context)
+
+@login_required
+def projeto_delete(request, pk):
+    projeto = get_object_or_404(Projeto,pk=pk)
+    projeto.delete()
+    messages.error(request, 'Cadastro removido com sucesso')
+
+    return redirect('projeto')
 
 
 
