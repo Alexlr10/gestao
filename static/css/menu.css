@@ -1,0 +1,8 @@
+$('#accordion').dcAccordion({
+eventType: 'click',
+autoClose: false,
+saveState: true,
+disableLink: true,
+showCount: true,
+speed: 'fast'
+});

@@ -1,0 +1,35 @@
+{% extends "legacy/base.html" %}
+{% load bootstrap %}
+{% block content-header %}
+
+    Clientes<small>Gestão</small>
+    
+{% endblock content-header %}
+
+
+{% block content-main %}
+
+<div class="col-xs-12">
+
+        <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Deletar usuário</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>Deseja realmente excluir o usuário "{{ object }}"?</p>
+                <a href="{% url 'usuarios' %}" class="btn btn-outline-warning">Voltar</a>
+                <input type="submit" class="btn btn-danger" value="Confirmar exclusão">
+            </form>
+        </div>
+        <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+    
+{% endblock content-main %}

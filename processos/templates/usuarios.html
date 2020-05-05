@@ -1,0 +1,162 @@
+{% extends "base.html" %} {% load staticfiles %} {% load bootstrap %} {% block content-header %}
+
+<i class="fa fa-users "> </i> Usuários
+<small>Gerenciar Usuários</small>
+
+
+{% endblock content-header %} {% block content-main %}
+
+<div class="col-xs-12">
+
+    <!-- /.box -->
+  <div class="box table-responsive">
+            <div class="box-header">
+                <h3 class="box-title">Importar arquivo</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="col-md-6">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="inputFile" class="sr-only">Arquivo</label>
+                    <input type="file" id="inputFile" name="arquivo" required=""> 
+                    <br />
+                    {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">{{ form.errors }}</div>
+                    {% endif %}
+                    <button class="btn btn btn-primary" type="submit">Enviar</button>
+                </form>
+                </div>
+                <div class="col-md-6">
+                        <div class="alert alert-warning alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-warning"></i> Aviso!</h4>
+                                <p>Última importação feita: {% for i in ultima_imp %} {{ i.DataImportacao }} </p> 
+                                <p>Cliente: {{ i.Nome }} </p> 
+                                {% endfor %}
+                        </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            </div>
+
+    <!-- /.box -->
+
+
+
+    <div class="box">
+        <div class="box-header">
+
+            <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar Usuário</button>
+
+        </div>
+
+
+        <div class="box-header">
+            <h3 class="box-title">Usuários cadastrados no sistema</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="tabela" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Login</th>
+                        <th>Função</th>
+                        <th>Filial</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for u in Usuarios %}
+                    <tr>
+                        <td>{{ u.Nome }}</td>
+                        <td>{{ u.Login }}</td>
+
+                        <td>
+                            {% if u.Funcao == 'PROP' %} 
+                                PROPRIETÁRIO 
+                            {% elif u.Funcao == 'SUPV' or u.Funcao == 'SUPM' %} 
+                                GERENTE 
+                            {% elif u.Funcao == 'VEND' %}
+                                CONSULTOR 
+                            {% endif %}
+                        </td>
+                        <td>{{ u.Filial.NomeFantasia }}</td>
+                        <td>
+                            <a href="{%url 'usuarios_edit' u.id %}" data-toggle="modal" data-target="#myModal{{ u.id }}">
+                                <button type="button" class="btn btn-xs btn-warning">Editar</button>
+                            </a>
+                            <a href="{% url 'usuarios_delete' u.pk %}">
+                                <button type="button" class="btn btn-xs btn-danger">Apagar</button>
+                            </a>
+
+                        </td>
+
+
+
+                    </tr>
+
+
+                    <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    {% endfor %}
+
+
+
+                    </tfoot>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+</div>
+<!-- /.col -->
+</div>
+<div class="modal fade" id="exampleModal51" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel"> Editar Usuário</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    {% csrf_token %} {{ formusuario|bootstrap }}
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content-main %} {% block extraJS %}
+
+<script>
+
+
+
+
+    $(document).ready(function () {
+
+        $('#tabela').DataTable({
+            "language": {
+                "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+            },
+            stateSave: true,
+        });
+
+    });
+</script> {% endblock extraJS %}

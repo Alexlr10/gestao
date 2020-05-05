@@ -1,0 +1,202 @@
+{% extends "base.html" %} {% load staticfiles %} {% load bootstrap %} {% block content-header %}
+
+<i class="fa fa-user "> </i> Balanço
+<small>Gerenciar Balanço</small>
+
+
+{% endblock content-header %} {% block content-main %}
+
+<div class="col-xs-12">
+
+    <!-- /.box -->
+
+
+   <div class="box table-responsive">
+        <div class="box-header">
+
+
+
+        </div>
+
+
+        <div class="box-header">
+            <h3 class="box-title">Balanço mensal das receitas e despesas</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="table-responsive">
+                <table id="tabela" class="table no-margin table-bordered" style="font-size: 13px">
+
+                    <thead>
+                    <tr>
+                        <th>Periodo</th>
+                        <th>Rendimentos (R$)</th>
+                        <th>Despesas  (R$)</th>
+                        <th>Balanco  (R$)</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for u in balanco %}
+                    <tr>
+
+                        <td>{{ u.periodo }}</td>
+                       <td>{{ u.rendimento }}</td>
+                        <td>{{ u.despesa }}</td>
+                        <td>{{ u.total}}</td>
+
+                        </td>
+
+                    </tr>
+
+
+                    <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {% endfor %}
+
+
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+
+<div class="col-xs-12"class="box table-responsive">
+
+ <div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Giro de Caixa</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="table-responsive">
+                <table id="tabela2" class="table no-margin table-bordered" style="font-size: 13px">
+
+                    <thead>
+                    <tr>
+                        <th>Periodo</th>
+                        <th>Rendimentos (R$)</th>
+                        <th>Despesas  (R$)</th>
+
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for u in balancoCompleto %}
+                    <tr>
+
+                        <td>{{ u.datas }}</td>
+                       <td>{{ u.compra }}</td>
+                        <td>{{ u.despesa }}</td>
+
+
+                         </td>
+
+
+
+
+
+                    </tr>
+
+
+                    <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {% endfor %}
+
+
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+
+{% endblock content-main %} {% block extraJS %}
+
+
+<script type="text/javascript">
+
+    $(function(){
+	 var campo = $("#id_nomeproduto");
+	 campo.keyup(function(e){
+		 e.preventDefault();
+		 campo.val($(this).val().toUpperCase());
+	 });
+ });
+</script>
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+        $('#tabela').DataTable({
+            "language": {
+                "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+            },
+            stateSave: true,
+        });
+
+    });
+
+      $(document).ready(function () {
+
+        $('#tabela2').DataTable({
+            "language": {
+                "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+            },
+            stateSave: true,
+        });
+
+    });
+</script>
+
+
+
+
+{% endblock extraJS %}

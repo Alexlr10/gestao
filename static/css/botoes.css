@@ -1,0 +1,325 @@
+@charset "utf-8";
+/* CSS Document */
+
+.bolinhaVermelha { 
+  width: 30px; 
+  height: 30px; 
+  background: rgb(226, 7, 7); 
+  -moz-border-radius: 50px; 
+  -webkit-border-radius: 50px; 
+  border-radius: 50px; 
+}
+
+
+
+.botao {
+  cursor: pointer;
+}
+.botoesLista {
+  margin-top: 10px;
+}
+.botoesListaItem {
+  -o-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -webkit-transition: 0.2s;
+  text-align: center;
+  float: right;
+  cursor: pointer;
+  width: 200px;
+  height: 125px;
+  margin: 0px 10px 10px 0px;
+  background-color: #8246a6;
+  color: #fff;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  /* IE 5-7 */
+  filter: alpha(opacity=70);
+  /* Netscape */
+  -moz-opacity: 0.7;
+  /* Safari 1.x */
+  -khtml-opacity: 0.7;
+  /* Good browsers */
+  opacity: 0.7;
+  font-size: 16px;
+}
+.botoesListaItem i {
+  font-size: 50px;
+}
+.botoesListaItem:hover {
+  -o-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -webkit-transition: 0.2s;
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  /* IE 5-7 */
+  filter: alpha(opacity=100);
+  /* Netscape */
+  -moz-opacity: 1;
+  /* Safari 1.x */
+  -khtml-opacity: 1;
+  /* Good browsers */
+  opacity: 1;
+}
+.col .botaoInsere, .lista .botaoInsere, .form .botaoInsere, #formulario .botaoInsere {
+  color: #9ac08b;
+}
+.col .botaoEdita, .lista .botaoEdita, .form .botaoEdita, #formulario .botaoEdita, .azul {
+  color: #2779d3;
+}
+.col .botaoRemove, .lista .botaoRemove {
+  color: #b50505;
+}
+.col .botaoBusca, .lista .botaoBusca, .form .botaoBusca, #formulario .botaoBusca {
+  color: #7a77a5;
+}
+.col .botaoVer, .lista .botaoVer, .form .botaoVer, #formulario .botaoVer {
+  color: #772c69;
+}
+.col .botaoUpload, .lista .botaoUpload {
+  color: #609cb9;
+}
+.col .botaoDownload, .lista .botaoDownload {
+  color: #7ab6b4;
+}
+.col .botaoInfo, .lista .botaoInfo {
+  color: #e5b77a;
+}
+.col .botaoVideo, .lista .botaoVideo {
+  color: #c05454;
+}
+.col .botaoFinanca, .lista .botaoFinanca {
+  color: #79af7c;
+}
+.col .botaoArquivo, .lista .botaoArquivo {
+  color: #636f87;
+}
+.col .botaoTransfere, .lista .botaoTransfere {
+  color: #ffa6aa;
+}
+.col .botaoBaixa, .lista .botaoBaixa {
+  color: #d4906f;
+}
+.col .botaoDesfazer, .lista .botaoDesfazer {
+  color: #c7766d;
+}
+.col .botaoCartao, .lista .botaoCartao {
+  color: #acc0e9;
+}
+.col .botaoCartaoCancelado, .lista .botaoCartaoCancelado {
+  color: #af0303;
+}
+.col .botaoCodigoBarras, .lista .botaoCodigoBarras {
+  color: #818181;
+}
+.col .botaoPapel, .lista .botaoPapel {
+  color: #a3b2c8;
+}
+.col .botaoPapelVivo, .lista .botaoPapelVivo {
+  color: #a685ff;
+}
+.col .botaoPapelTelefonica, .lista .botaoPapelTelefonica {
+  color: #7e90ff;
+}
+.col .botaoOk, .lista .botaoOk, .item .botaoOk {
+  color: #9ac08b;
+}
+.col .botaoCancela, .lista .botaoCancela, .item .botaoCancela {
+  color: #b50505;
+}
+.col .botaoImprimir, .lista .botaoImprimir {
+  color: #627084;
+}
+.col .botaoQrCode, .lista .botaoQrCode {
+  color: #627084;
+}
+.col .botaoQrCodeEnviada, .lista .botaoQrCodeEnviada {
+  color: #9ac08b;
+}
+.col .botaoQrCodeCancelada, .lista .botaoQrCodeCancelada {
+  color: #af0303;
+}
+.col .botaoAjuda, .lista .botaoAjuda {
+  color: #a685ff;
+  cursor: help;
+}
+.botaoAjudaPequeno, .botaoDetalhes {
+  font-size: 20px !important;
+}
+.col .botaoUsuario, .lista .botaoUsuario {
+  color: #a3b2c8;
+}
+.col .botaoAlerta, .lista .botaoAlerta, .laranja {
+  color: #ffa33b;
+}
+.col .botaoChat, .lista .botaoChat {
+  color: #ffa6aa;
+}
+.col .botaoTopoVoltar .lista .botaoTopoVoltar {
+  color: #fff;
+}
+.col .botaoXml, .lista .botaoXml {
+  color: #818181;
+}
+.col .botaoCompartilhar, .lista .botaoCompartilhar {
+  color: #edac4c;
+}
+.botoesLista .corBotaoInsere {
+  background-color: #9ac08b;
+}
+.botoesLista .corBotaoEdita {
+  background-color: #2779d3;
+}
+.botoesLista .corBotaoRemove {
+  background-color: #b50505;
+}
+.botoesLista .corBotaoBusca {
+  background-color: #7a77a5;
+}
+.botoesLista .corBotaoVer {
+  background-color: #772c69;
+}
+.corBotaoVoltar {
+  background-color: #baafc2;
+}
+.botoesLista .corBotaoUpload {
+  background-color: #609cb9;
+}
+.botoesLista .corBotaoDownload {
+  background-color: #7ab6b4;
+}
+.botoesLista .corBotaoInfo {
+  background-color: #e5b77a;
+}
+.botoesLista .corBotaoVideo {
+  background-color: #c05454;
+}
+.botoesLista .corBotaoFinanca {
+  background-color: #79af7c;
+}
+.botoesLista .corBotaoArquivo {
+  background-color: #636f87;
+}
+.botoesLista .corBotaoTransfere {
+  background-color: #ffa6aa;
+}
+.botoesLista .corBotaoBaixa {
+  background-color: #d4906f;
+}
+.botoesLista .corBotaoDesfazer {
+  background-color: #c7766d;
+}
+.botoesLista .corBotaoCartao {
+  background-color: #acc0e9;
+}
+.botoesLista .corBotaoCartaoCancelado {
+  background-color: #af0303;
+}
+.botoesLista .corBotaoCodigoBarras {
+  background-color: #818181;
+}
+.botoesLista .corBotaoPapel {
+  background-color: #a3b2c8;
+}
+.botoesLista .corBotaoPapelVivo {
+  background-color: #a685ff;
+}
+.botoesLista .corBotaoPapelTelefonica {
+  background-color: #7e90ff;
+}
+.botoesLista .corBotaoOk {
+  background-color: #9ac08b;
+}
+.botoesLista .corBotaoCancela {
+  background-color: #b50505;
+}
+.botoesLista .corBotaoImprimir {
+  background-color: #627084;
+}
+.botoesLista .corBotaoQrCode {
+  background-color: #627084;
+}
+.botoesLista .corBotaoQrCodeEnviada {
+  background-color: #9ac08b;
+}
+.botoesLista .corBotaoQrCodeCancelada {
+  background-color: #af0303;
+}
+.botoesLista .corBotaoAjuda {
+  background-color: #a685ff;
+}
+.botoesLista .corBotaoUsuario {
+  background-color: #a3b2c8;
+}
+.botoesLista .corBotaoAlerta {
+  background-color: #ffa33b;
+}
+.botoesLista .corBotaoChat {
+  background-color: #ffa6aa;
+}
+.botoesLista .corBotaoXml {
+  background-color: #818181;
+}
+.botoesLista .corBotaoCompartilhar {
+  background-color: #edac4c;
+}
+.subBotoesListaItem {
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  text-align: center;
+  cursor: pointer;
+  padding: 15px;
+  background-color: #9ac08b;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  height: 90px;
+  color: #fff;
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  /* IE 5-7 */
+  filter: alpha(opacity=70);
+  /* Netscape */
+  -moz-opacity: 0.7;
+  /* Safari 1.x */
+  -khtml-opacity: 0.7;
+  /* Good browsers */
+  opacity: 0.7;
+  font-size: 16px;
+}
+.subBotoesListaItem i {
+  font-size: 50px !important;
+  color: #fff !important;
+}
+.subBotoesListaItem:hover {
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  /* IE 5-7 */
+  filter: alpha(opacity=100);
+  /* Netscape */
+  -moz-opacity: 1;
+  /* Safari 1.x */
+  -khtml-opacity: 1;
+  /* Good browsers */
+  opacity: 1;
+}
+@media screen and (max-width: 860px) {
+  .botoesListaItem {
+    width: 100%;
+    padding: 0px;
+    border: 0px;
+    margin: 0px 0px 1px 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+  }
+}
+
+
