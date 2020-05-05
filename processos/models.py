@@ -23,9 +23,8 @@ FUNCAO_CHOICE_DESPESA = (
     ('ICMS','ICMS'),
     ('SN','Simples-Nacional'),
     ('GAS', 'Gasolina'),
-    ('PROD', 'Produtos'),
+    ('SER', 'Serviços'),
     ('INSS', 'INSS'),
-
 )
 
 FUNCAO_CHOICE_MESES = (
@@ -65,10 +64,17 @@ STATUS = (
     (3, 'Resolvido'),
 )
 
-MOD = (
-    (0, 'ACC'),
-    (1, 'SAC'),
+FUNCAO_CHOICE_SERVICO = (
+    ('SPA','Single Page Application'),
+    ('PWA','Progressive Web Application'),
+    ('WS', 'WebSite'),
+    ('SW', 'Sistema Web'),
+    ('IV', 'Identidade Visual'),
+)
 
+FUNCAO_CHOICE_REUNIAO = (
+    ('GER', 'GERAL'),
+    ('DIR', 'DIRETORIA'),
 )
 
 
@@ -181,6 +187,34 @@ class Cliente(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Servico(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='Cliente')
+    nomeServico = models.CharField('Serviço', max_length=4, choices=FUNCAO_CHOICE_SERVICO)
+    descricao = models.TextField('Descrição', null=True, blank=True)
+    valor = models.DecimalField('Valor', max_digits=6, decimal_places=2)
+
+class Projeto(models.Model):
+    servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='Servicos')
+    dataEntrega = models.DateField('Data de entrega', blank=True, null=True)
+    status = models.CharField('Status', max_length=4, choices=STATUS)
+
+class Reuniao(models.Model):
+    datareuniao = models.DateField('Data da reuniao', blank=True, null=True)
+    tipoReuniao = models.CharField('Reuniao', max_length=4, choices=FUNCAO_CHOICE_REUNIAO)
+    presenca = models.ManyToManyField('Usuario', null=True, blank=True, related_name="presenca")
+    ausencia = models.ManyToManyField('Usuario', null=True, blank=True, related_name="ausencia")
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -228,6 +228,72 @@ def cliente_delete(request, pk):
 
     return redirect('cliente')
 
+
+
+######## Serviço
+@login_required
+def servico(request):
+    servico = Servico.objects.all()
+    if request.method == 'POST':
+        form = ServicoForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Serviço cadastrado com sucesso')
+            return redirect('servico')
+
+    form = ServicoForm()
+
+    context = {
+        'form': form,
+        'servico': servico
+    }
+
+    return render(request, 'servico.html', context)
+
+@login_required
+def servico_edit(request, pk):
+    servico = Servico.objects.get(pk=pk)
+
+    form = ServicoForm(request.POST or None, instance=servico)
+
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Cadastro alterado com sucesso')
+        return redirect('servico')
+
+    context = {
+        'form': form,
+        'servico': servico
+    }
+
+    return render(request, 'servico_edit.html', context)
+
+@login_required
+def servico_delete(request, pk):
+    servico = ServicoForm.objects.get(pk=pk)
+    servico.delete()
+    messages.error(request, 'Cadastro removido com sucesso')
+
+    return redirect('servico')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @login_required
 def produto(request):
     produto = Produto.objects.all()

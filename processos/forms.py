@@ -147,6 +147,43 @@ class ClienteForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'placeholder': 'E-mail '}),
         }
 
+class ServicoForm(forms.ModelForm):
+    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
+
+    class Meta:
+        model = Servico
+        fields = '__all__'
+        # exclude = ['data_cadastro', 'data_atualizacao']
+
+        widgets = {
+
+        }
+        
+class ProjetoForm(forms.ModelForm):
+    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
+
+    class Meta:
+        model = Projeto
+        fields = '__all__'
+        # exclude = ['data_cadastro', 'data_atualizacao']
+
+        widgets = {
+
+        }
+
+
+class ReuniaoForm(forms.ModelForm):
+    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
+
+    class Meta:
+        model = Reuniao
+        fields = '__all__'
+        # exclude = ['data_cadastro', 'data_atualizacao']
+
+        widgets = {
+
+        }
+
 
 class ProdutoForm(forms.ModelForm):
     # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
