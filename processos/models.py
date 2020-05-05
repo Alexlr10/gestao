@@ -110,7 +110,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     Foto = models.ImageField('Foto', upload_to='profile', default=None)
     Login = models.CharField('Login', max_length=50, unique=True)
     password = models.CharField('Senha', max_length=128)
-
     Situacao = models.BooleanField('Ativo', default=True)
     CPF = models.CharField('CPF', max_length=20)
     RG = models.CharField('RG', max_length=20, blank=True, null=True)
@@ -119,29 +118,12 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     CEP = models.CharField('CEP', max_length=50, blank=True, null=True)
     Email = models.EmailField('Email', max_length=254)
     Celular = models.CharField('Celular', max_length=50, blank=True, null=True)
-    Data_de_Nascimento = models.DateField(
-        'Data de Nascimento', blank=True, null=True)
-    Data_de_Admissão = models.DateField(
-        'Data de Admissão', blank=True, null=True)
-    Data_de_Demissão = models.DateField(
-        'Data de Demissão', blank=True, null=True)
-    Complemento = models.CharField(
-        'Complemento', max_length=50, blank=True, null=True)
-    Salario = models.DecimalField(
-        'Salário', max_digits=15, decimal_places=2, blank=True, null=True)
-    INSS = models.DecimalField(
-        'INSS', max_digits=15, decimal_places=2, blank=True, null=True)
-    Comissao = models.BooleanField('Recebe comissão', default=True)
-    Agencia = models.CharField('Agência', max_length=50, blank=True, null=True)
-    Conta_Corrente = models.CharField(
-        'Conta', max_length=50, blank=True, null=True)
-    Data_cadastro = models.DateTimeField(
-        'Data de Cadastro', blank=True, null=True)
-
-    Proximas_ferias = models.CharField(
-        'Próximas férias', max_length=50, blank=True, null=True)
-    Periodo_de_afastamento = models.CharField(
-        'Período de afastamento', max_length=50, blank=True, null=True)
+    Facebook = models.CharField('Facebook link', max_length=120, null=True, blank=True)
+    Instagram = models.CharField('Instagram link', max_length=120, null=True, blank=True)
+    LinkedIn = models.CharField('LinkedIn link', max_length=120, null=True, blank=True)
+    Data_de_Nascimento = models.DateField('Data de Nascimento', blank=True, null=True)
+    Data_de_Admissão = models.DateField('Data de Admissão', blank=True, null=True)
+    Data_de_Demissão = models.DateField('Data de Demissão', blank=True, null=True)
     Funcao = models.CharField('Função', max_length=4, choices=FUNCAO_CHOICE)
 
     # campos necessários pra o DJango
@@ -206,6 +188,7 @@ class Produto(models.Model):
     nomeproduto = models.CharField(_('Produto'), max_length=30, null=True, blank=True)
     descricao = models.TextField('Descrição', null=True, blank=True)
     valor = models.DecimalField('Valor', max_digits=6, decimal_places=2)
+
 
     class Meta:
         verbose_name = _("Produto")
@@ -285,7 +268,6 @@ class Balanco(models.Model):
 
     def __str__(self):
         return str(self.datas)
-
 
 
 

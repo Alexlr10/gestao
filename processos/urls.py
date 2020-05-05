@@ -16,7 +16,7 @@ urlpatterns = [
     # USUARIO
     path('usuarios/', views.usuarios, name='usuarios'),
     path('updateusuarios/<int:pk>/', views.usuariosEdit, name='usuarios_edit'),
-    path('usuarios/delete/<pk>',login_required(usuariosDelete.as_view()), name='usuarios_delete'),
+    path('usuarios_delete/<pk>',usuariosDelete.as_view(), name='usuarios_delete'),
     path('meus_dados/', views.editar_meus_dados, name='meusdados'),
 
     # Cliente

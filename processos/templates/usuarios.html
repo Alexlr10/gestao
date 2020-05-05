@@ -9,36 +9,7 @@
 <div class="col-xs-12">
 
     <!-- /.box -->
-  <div class="box table-responsive">
-            <div class="box-header">
-                <h3 class="box-title">Importar arquivo</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="col-md-6">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <label for="inputFile" class="sr-only">Arquivo</label>
-                    <input type="file" id="inputFile" name="arquivo" required=""> 
-                    <br />
-                    {% if form.errors %}
-                    <div class="alert alert-danger" role="alert">{{ form.errors }}</div>
-                    {% endif %}
-                    <button class="btn btn btn-primary" type="submit">Enviar</button>
-                </form>
-                </div>
-                <div class="col-md-6">
-                        <div class="alert alert-warning alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                <h4><i class="icon fa fa-warning"></i> Aviso!</h4>
-                                <p>Última importação feita: {% for i in ultima_imp %} {{ i.DataImportacao }} </p> 
-                                <p>Cliente: {{ i.Nome }} </p> 
-                                {% endfor %}
-                        </div>
-                </div>
-            </div>
-            <!-- /.box-body -->
-            </div>
+
 
     <!-- /.box -->
 
@@ -63,7 +34,9 @@
                         <th>Nome</th>
                         <th>Login</th>
                         <th>Função</th>
-                        <th>Filial</th>
+                        <th>Contato</th>
+                        <th>Email</th>
+                        <th>LinkedIn</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -83,7 +56,9 @@
                                 CONSULTOR 
                             {% endif %}
                         </td>
-                        <td>{{ u.Filial.NomeFantasia }}</td>
+                      <td>{{ u.Contato }}</td>
+                      <td>{{ u.Email }}</td>
+                      <td>{{ u.LinkedIn }}</td>
                         <td>
                             <a href="{%url 'usuarios_edit' u.id %}" data-toggle="modal" data-target="#myModal{{ u.id }}">
                                 <button type="button" class="btn btn-xs btn-warning">Editar</button>
