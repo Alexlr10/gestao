@@ -78,7 +78,6 @@ FUNCAO_CHOICE_REUNIAO = (
 )
 
 
-
 class UsuarioManager(BaseUserManager):
     def create_user(self, Login, Nome, Situacao, CPF, Email, Funcao, password=None):
         user = self.model(
