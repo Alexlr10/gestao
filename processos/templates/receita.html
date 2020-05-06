@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load staticfiles %} {% load bootstrap %} {% block content-header %}
 
-    <i class="fa fa-user "> </i> Projeto
-    <small>Gerenciar Projeto</small>
+    <i class="fa fa-user "> </i> Receitas
+    <small>Gerenciar Receitas</small>
 
 
 {% endblock content-header %} {% block content-main %}
@@ -15,14 +15,14 @@
             <div class="box-header">
 
                 <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
-                    Projetos
+                    Receita
                 </button>
 
             </div>
 
 
             <div class="box-header">
-                <h3 class="box-title">Todas os projetos cadastradas no sistema</h3>
+                <h3 class="box-title">Todas as Receitas cadastradas no sistema</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -31,38 +31,34 @@
 
                         <thead>
                         <tr>
-                            <th>Serviço - Cliente</th>
-                            <th>Data de Entrega</th>
-                            <th>Status</th>
-                            <th>Responsaveis</th>
-
+                            <th>Serviço/Cliente</th>
+                            <th>Data</th>
+                            <th>Desconto</th>
+                            <th>Pagamento(X)</th>
+                            <th>Valor Total</th>
                             <th>Ações</th>
 
                         </tr>
                         </thead>
                         <tbody>
 
-                        {% for u in projeto %}
+                        {% for u in receita %}
                             <tr>
-                                <td>{{ u.servico }}</td>
-                                <td>{{ u.dataEntrega }}</td>
-                                <td>{{ u.status }}</td>
-
-                                <td>
-                                    {% for i in u.responsaveis.all %}
-                                        {{ i }}<br>
-                                    {% endfor %}
-                                </td>
+                                <td>{{ u.Servico }}</td>
+                                <td>{{ u.Data }}C</td>
+                                <td>{{ u.Desconto }}</td>
+                                <td>{{ u.Pagamento }}</td>
+                                <td>{{ u.Servico.valor }}</td>
 
                                 </td>
 
 
                                 <td>
-                                    <a href="{% url 'projeto_edit' u.id %}" data-toggle="modal"
+                                    <a href="{% url 'reuniao_edit' u.id %}" data-toggle="modal"
                                        data-target="#myModal{{ u.id }}">
                                         <button type="button" class="btn btn-xs btn-warning">Editar</button>
                                     </a>
-                                    <a href="{% url 'projeto_delete' u.id %}">
+                                    <a href="{% url 'reuniao_delete' u.id %}">
                                         <button type="button" class="btn btn-xs btn-danger">Apagar</button>
                                     </a>
 
@@ -100,7 +96,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Projeto</h4>
+                    <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Receita</h4>
                 </div>
                 <div class="modal-body">
                     <form method="POST">

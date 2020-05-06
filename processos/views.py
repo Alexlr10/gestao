@@ -313,7 +313,7 @@ def projeto_delete(request, pk):
     return redirect('projeto')
 
 
-######## Projeto
+######## Reuniao
 @login_required
 def reuniao(request):
     reuniao = Reuniao.objects.all()
@@ -358,6 +358,55 @@ def reuniao_delete(request, pk):
     messages.error(request, 'Cadastro removido com sucesso')
 
     return redirect('reuniao')
+
+
+
+######## Receitas
+@login_required
+def receita(request):
+    receita = Receita.objects.all()
+
+    if request.method == 'POST':
+        form = ReceitaForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Receita cadastrada com sucesso')
+            return redirect('receita')
+
+    form = ReceitaForm()
+
+    context = {
+        'form': form,
+        'receita': receita
+    }
+
+    return render(request, 'receita.html', context)
+
+@login_required
+def receita_edit(request, pk):
+    receita = get_object_or_404(Receita, pk=pk)
+
+    form = ReceitaForm(request.POST or None, instance=receita)
+
+    if form.is_valid():
+        form.save()
+        return redirect('receita')
+
+    context = {
+        'form': form,
+        'receita': receita
+    }
+
+    return render(request, 'receita_edit.html', context)
+
+@login_required
+def receita_delete(request, pk):
+    receita = get_object_or_404(Receita,pk=pk)
+    receita.delete()
+    messages.error(request, 'Cadastro removido com sucesso')
+
+    return redirect('receita')
 
 
 

@@ -39,7 +39,10 @@ urlpatterns = [
     path('reuniao_edit/<int:pk>/', views.reuniao_edit, name='reuniao_edit'),
     path('reuniao_delete/<int:pk>/', views.reuniao_delete, name='reuniao_delete'),
 
-
+    # Receita
+    path('receita/', views.receita, name='receita'),
+    path('receita_edit/<int:pk>/', views.receita_edit, name='receita_edit'),
+    path('receita_delete/<int:pk>/', views.receita_delete, name='receita_delete'),
 
 
 

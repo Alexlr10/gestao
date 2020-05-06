@@ -43,6 +43,22 @@ FUNCAO_CHOICE_MESES = (
 
 )
 
+FUNCAO_CHOICE_PARCELAMENTO = (
+    (1,'01-A VISTA'),
+    (2,'02'),
+    (3, '03'),
+    (4, '04'),
+    (5, '05'),
+    (6, '06'),
+    (7, '07'),
+    (8, '08'),
+    (9, '09'),
+    (10, '10'),
+    (11, '11'),
+    (12, '12'),
+
+)
+
 GENERO_CHOICE = (
     ('M', 'Masculino'),
     ('F', 'Feminino'),
@@ -200,7 +216,7 @@ class Projeto(models.Model):
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='Servicos')
     dataEntrega = models.DateField('Entrega', blank=True, null=True)
     status = models.IntegerField('Status', choices=STATUS)
-
+    responsaveis = models.ManyToManyField('Usuario', null=True, blank=True, related_name="responsaveis")
 
 
 
@@ -210,6 +226,23 @@ class Reuniao(models.Model):
     descricaoReuniao = models.TextField('Descrição', null=True, blank=True)
     presenca = models.ManyToManyField('Usuario', null=True, blank=True, related_name="presenca")
     ausencia = models.ManyToManyField('Usuario', null=True, blank=True, related_name="ausencia")
+
+
+
+class Receita(models.Model):
+    Servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='servico')
+    Data = models.DateField('Data',blank=True, null=True)
+    Desconto = models.DecimalField('Desconto',max_digits=6, decimal_places=2)
+    Pagamento = models.IntegerField('Pagamento',choices=FUNCAO_CHOICE_PARCELAMENTO)
+
+
+    class Meta:
+        verbose_name = _("Receita")
+        verbose_name_plural = _("Rerceitas")
+
+
+    def __str__(self):
+        return self.Cliente.nome
 
 
 

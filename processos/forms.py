@@ -184,6 +184,31 @@ class ReuniaoForm(forms.ModelForm):
         }
 
 
+
+class ReceitaForm(forms.ModelForm):
+    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
+
+    class Meta:
+        model = Receita
+        fields = '__all__'
+        # exclude = ['data_cadastro', 'data_atualizacao']
+
+        widgets = {
+            'Data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'Desconto': forms.TextInput(attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 class ProdutoForm(forms.ModelForm):
     # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
 
