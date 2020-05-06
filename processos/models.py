@@ -223,7 +223,6 @@ class Reuniao(models.Model):
 
 
 
-
 class Produto(models.Model):
     nomeproduto = models.CharField(_('Produto'), max_length=30, null=True, blank=True)
     descricao = models.TextField('Descrição', null=True, blank=True)

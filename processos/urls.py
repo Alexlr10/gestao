@@ -36,7 +36,7 @@ urlpatterns = [
 
     # Reuniao
     path('reuniao/', views.reuniao, name='reuniao'),
-    path('reuniaoedit/<int:pk>/', views.reuniao_edit, name='reuniao_edit'),
+    path('reuniao_edit/<int:pk>/', views.reuniao_edit, name='reuniao_edit'),
     path('reuniao_delete/<int:pk>/', views.reuniao_delete, name='reuniao_delete'),
 
 

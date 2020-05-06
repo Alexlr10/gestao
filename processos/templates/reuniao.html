@@ -1,156 +1,161 @@
 {% extends "base.html" %} {% load staticfiles %} {% load bootstrap %} {% block content-header %}
 
-<i class="fa fa-user "> </i> Reunião
-<small>Gerenciar Reunião</small>
+    <i class="fa fa-user "> </i> Reunião
+    <small>Gerenciar Reunião</small>
 
 
 {% endblock content-header %} {% block content-main %}
 
-<div class="col-xs-12">
+    <div class="col-xs-12">
 
-    <!-- /.box -->
-
-
-   <div class="box table-responsive">
-        <div class="box-header">
-
-            <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
-                Reunião
-            </button>
-
-        </div>
+        <!-- /.box -->
 
 
-        <div class="box-header">
-            <h3 class="box-title">Todas as Reuniões cadastradas no sistema</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="table-responsive">
-                <table id="tabela" class="table no-margin table-bordered" style="font-size: 13px">
+        <div class="box table-responsive">
+            <div class="box-header">
 
-                    <thead>
-                    <tr>
-                        <th>Data da Reunião</th>
-                        <th>Reunião</th>
-                        <th>Descrição</th>
-                        <th>Presença</th>
-                        <th>Ausente</th>
-                        <th>Ações</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    {% for u in reuniao %}
-                    <tr>
-                        <td>{{ u.dataReuniao }}</td>
-                        <td>{{ u.tipoReuniao }}</td>
-                        <td>{{ u.descricao }}</td>
-                        <td>{{ u.presenca}}</td>
-                        <td>{{ u.ausencia}}</td>
-
-
-                        </td>
-
-
-
-                        <td>
-                            <a href="{% url 'servico_edit' u.id %}" data-toggle="modal"
-                               data-target="#myModal{{ u.id }}">
-                                <button type="button" class="btn btn-xs btn-warning">Editar</button>
-                            </a>
-                            <a href="{% url 'servico_delete' u.id %}">
-                                <button type="button" class="btn btn-xs btn-danger">Apagar</button>
-                            </a>
-
-                        </td>
-
-
-                    </tr>
-
-
-                    <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    {% endfor %}
-
-
-                    </tfoot>
-                </table>
-            </div>
-            <!-- /.box-body -->
-        </div>
-    </div>
-    <!-- /.col -->
-</div>
-<div class="modal fade" id="exampleModal51" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
+                    Reunião
                 </button>
-                <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Serviço</h4>
-            </div>
-            <div class="modal-body">
-                <form method="POST">
-                    {% csrf_token %} {{ form|bootstrap }}
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Cadastrar</button>
-                </form>
+
             </div>
 
+
+            <div class="box-header">
+                <h3 class="box-title">Todas as Reuniões cadastradas no sistema</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table id="tabela" class="table no-margin table-bordered" style="font-size: 13px">
+
+                        <thead>
+                        <tr>
+                            <th>Data da Reunião</th>
+                            <th>Reunião</th>
+                            <th>Descrição</th>
+                            <th>Presente</th>
+                            <th>Ausente</th>
+                            <th>Ações</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for u in reuniao %}
+                            <tr>
+                                <td>{{ u.dataReuniao }}</td>
+                                <td>{{ u.tipoReuniao }}</td>
+                                <td>{{ u.descricao }}</td>
+                                <td>
+                                    {% for i in u.presenca.all %}
+                                        {{ i }}<br>
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for i in u.ausencia.all %}
+                                        {{ i }}<br>
+                                    {% endfor %}
+                                </td>
+                                </td>
+
+
+                                <td>
+                                    <a href="{% url 'reuniao_edit' u.id %}" data-toggle="modal"
+                                       data-target="#myModal{{ u.id }}">
+                                        <button type="button" class="btn btn-xs btn-warning">Editar</button>
+                                    </a>
+                                    <a href="{% url 'reuniao_delete' u.id %}">
+                                        <button type="button" class="btn btn-xs btn-danger">Apagar</button>
+                                    </a>
+
+                                </td>
+
+
+                            </tr>
+
+
+                            <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        {% endfor %}
+
+
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <div class="modal fade" id="exampleModal51" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Serviço</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        {% csrf_token %} {{ form|bootstrap }}
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                    </form>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
 
 {% endblock content-main %} {% block extraJS %}
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    $(function(){
-	 var campo = $("#id_nomeproduto");
-	 campo.keyup(function(e){
-		 e.preventDefault();
-		 campo.val($(this).val().toUpperCase());
-	 });
- });
-</script>
-
-
-<script>
-
-
-    $(document).ready(function () {
-
-        $('#tabela').DataTable({
-            "language": {
-                "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
-            },
-            stateSave: true,
+        $(function () {
+            var campo = $("#id_nomeproduto");
+            campo.keyup(function (e) {
+                e.preventDefault();
+                campo.val($(this).val().toUpperCase());
+            });
         });
-
-    });
-</script>
+    </script>
 
 
+    <script>
 
-<script type="text/javascript">
-    $("#phone").mask("(00) 0000-0000");
-    $("#cel1").mask("(00) 0 0000-0000");
-    $("#cel2").mask("(00) 0 0000-0000");
-    $("#cpf").mask("000.000.000-00");
 
-</script>
+        $(document).ready(function () {
+
+            $('#tabela').DataTable({
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+                stateSave: true,
+            });
+
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $("#phone").mask("(00) 0000-0000");
+        $("#cel1").mask("(00) 0 0000-0000");
+        $("#cel2").mask("(00) 0 0000-0000");
+        $("#cpf").mask("000.000.000-00");
+
+    </script>
 
 
 {% endblock extraJS %}

@@ -53,20 +53,6 @@ def usuariosEdit(request, pk):
 
 
 def usuarios(request):
-    if request.FILES:
-        from .models import Importacao
-        arquivo = Importacao()
-        arquivo.Usuario = request.user
-        arquivo.Arquivo = request.FILES['arquivo']
-        arquivo.TipoArquivo = 'USUA'
-        arquivo.save()
-        arquivo.ProcessaArquivo()
-        total = d.TotalRegistros
-
-        messages.success(request, f'{total} usuários importados.')
-
-        return redirect('usuarios')
-
     if request.POST:
 
         form = UsuarioCreationForm(request.POST)
@@ -352,7 +338,7 @@ def reuniao(request):
 def reuniao_edit(request, pk):
     reuniao = get_object_or_404(Reuniao, pk=pk)
 
-    form = Reuniao(request.POST or None, instance=reuniao)
+    form = ReuniaoForm(request.POST or None, instance=reuniao)
 
     if form.is_valid():
         form.save()
