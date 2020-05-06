@@ -180,7 +180,7 @@ class ReuniaoForm(forms.ModelForm):
         # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
-
+            'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
 
 

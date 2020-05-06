@@ -327,7 +327,51 @@ def projeto_delete(request, pk):
     return redirect('projeto')
 
 
+######## Projeto
+@login_required
+def reuniao(request):
+    reuniao = Reuniao.objects.all()
+    if request.method == 'POST':
+        form = ReuniaoForm(request.POST)
 
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Reunião cadastrada com sucesso')
+            return redirect('reuniao')
+
+    form = ReuniaoForm()
+
+    context = {
+        'form': form,
+        'reuniao': reuniao
+    }
+
+    return render(request, 'reuniao.html', context)
+
+@login_required
+def reuniao_edit(request, pk):
+    reuniao = get_object_or_404(Reuniao, pk=pk)
+
+    form = Reuniao(request.POST or None, instance=reuniao)
+
+    if form.is_valid():
+        form.save()
+        return redirect('reuniao')
+
+    context = {
+        'form': form,
+        'reuniao': reuniao
+    }
+
+    return render(request, 'reuniao_edit.html', context)
+
+@login_required
+def reuniao_delete(request, pk):
+    reuniao = get_object_or_404(Reuniao,pk=pk)
+    reuniao.delete()
+    messages.error(request, 'Cadastro removido com sucesso')
+
+    return redirect('reuniao')
 
 
 

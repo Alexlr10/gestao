@@ -34,6 +34,14 @@ urlpatterns = [
     path('projeto_edit/<int:pk>/', views.projeto_edit, name='projeto_edit'),
     path('projeto_delete/<int:pk>/', views.projeto_delete, name='projeto_delete'),
 
+    # Reuniao
+    path('reuniao/', views.reuniao, name='reuniao'),
+    path('reuniaoedit/<int:pk>/', views.reuniao_edit, name='reuniao_edit'),
+    path('reuniao_delete/<int:pk>/', views.reuniao_delete, name='reuniao_delete'),
+
+
+
+
 
 
     # Produto
