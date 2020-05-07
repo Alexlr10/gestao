@@ -201,68 +201,6 @@ class ReceitaForm(forms.ModelForm):
 
 
 
-
-
-
-
-
-
-
-
-class ProdutoForm(forms.ModelForm):
-    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
-
-    class Meta:
-        model = Produto
-        fields = '__all__'
-        # exclude = ['data_cadastro', 'data_atualizacao']
-
-        widgets = {
-
-        }
-
-
-class EstoqueForm(forms.ModelForm):
-    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
-
-    class Meta:
-        model = Compra
-        fields = '__all__'
-        # exclude = ['data_cadastro', 'data_atualizacao']
-
-        widgets = {
-
-        }
-
-
-class CompraForm(forms.ModelForm):
-
-    class Meta:
-        model = Compra
-       # fields = ['Cliente','Produto','quantCompra','Desconto','Data']
-        fields = '__all__'
-        widgets = {
-            'Desconto': forms.TextInput(attrs={'type': 'number','step':0.01, 'class': 'form-control', 'value':0.0}),
-            'Data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'nome': forms.TextInput(attrs={'placeholder': 'Nome'}),
-            'quantCompra': forms.TextInput(attrs={'type': 'number', 'class': 'form-control','id':'quantCompra', 'onkeyup':'myFunction()'}),
-            'Produto': forms.Select(attrs={'class': 'form-control','id':'Produto','onchange':'myFunction()'}),
-
-
-        }
-
-
-class LoteForm(forms.ModelForm):
-    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
-
-    class Meta:
-        model = Lote
-        fields = '__all__'
-
-        widgets = {
-
-        }
-
 class DespesasForm(forms.ModelForm):
     # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
 

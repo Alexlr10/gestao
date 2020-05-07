@@ -386,10 +386,11 @@ def receita(request):
 @login_required
 def receita_edit(request, pk):
     receita = get_object_or_404(Receita, pk=pk)
-
+    balanco = Balanco.objects.get(receitas_id=pk)
     form = ReceitaForm(request.POST or None, instance=receita)
 
     if form.is_valid():
+        balanco.delete()
         form.save()
         return redirect('receita')
 
@@ -407,194 +408,6 @@ def receita_delete(request, pk):
     messages.error(request, 'Cadastro removido com sucesso')
 
     return redirect('receita')
-
-
-
-
-
-
-
-
-
-
-
-
-@login_required
-def produto(request):
-    produto = Produto.objects.all()
-    form = ProdutoForm(request.POST)
-
-    print(produto)
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Registrado com sucesso')
-            return redirect('produto')
-
-    context = {
-
-        'form': form,
-        'produto':produto
-    }
-
-    return render(request, 'produto.html', context)
-
-@login_required
-def produto_delete(requestt,pk):
-    produto = get_object_or_404(Produto,pk=pk)
-    produto.delete()
-    return redirect('produto')
-
-@login_required
-def produto_edit(request, pk):
-
-    q = get_object_or_404(Produto, pk=pk)
-
-    form = ProdutoForm(request.POST or None, instance=q)
-
-    if form.is_valid():
-        form.save()
-        return redirect('produto')
-
-    context = {
-        'form': form,
-        'id': pk
-    }
-
-    return render(request, 'produto_edit.html', context)
-
-
-@login_required
-def estoque(request):
-
-    estoque = Compra.objects.raw('''select distinct processos_produto.id,nomeproduto,
-                                (select sum(processos_compra."quantCompra")from processos_compra 
-                                where processos_compra."Produto_id" = processos_produto.id) 
-                                as SomaCompras, (select sum(processos_lote."quantLote")
-                                from processos_lote where processos_produto.id = processos_lote.Produto_id)
-                                as SomaLote ,((select sum(processos_lote."quantLote") from processos_lote
-                                where processos_produto.id = processos_lote.Produto_id) - (select sum(processos_compra."quantCompra")
-                                from processos_compra where processos_compra."Produto_id" = processos_produto.id )  )
-                                as total from processos_produto''')
-
-    form = EstoqueForm(request.POST)
-
-    context = {
-
-        'form': form,
-        'estoque':estoque,
-
-    }
-
-    return render(request, 'estoque.html', context)
-
-
-
-
-@login_required
-def compra(request):
-    compra = Compra.objects.raw('''SELECT processos_compra.id, processos_cliente.nome, 
-                                    processos_compra."Data", processos_produto.nomeproduto, 
-                                    processos_produto.valor as valor, processos_compra."quantCompra",processos_compra."Desconto",
-                                   ((valor*"quantCompra") - processos_compra."Desconto" )as total FROM  public.processos_compra, 
-                                    public.processos_cliente, public.processos_produto WHERE 
-                                    processos_compra."Produto_id" = processos_produto.id AND
-                                    processos_cliente.id = processos_compra."Cliente_id" 
-                                    ORDER BY processos_compra."Data" desc;''')
-
-
-    form = CompraForm(request.POST)
-
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Registrado com sucesso')
-            return redirect('compra')
-
-    context = {
-        'form': form,
-        'compra':compra,
-
-    }
-
-    return render(request, 'compra.html', context)
-
-
-@login_required
-def compra_delete(request,pk):
-    compra = get_object_or_404(Compra,pk=pk)
-    compra.delete()
-    return redirect('compra')
-
-
-@login_required
-def compra_edit(request, pk):
-
-    compra = get_object_or_404(Compra, pk=pk)
-
-    balanco = Balanco.objects.get(compras_id = pk)
-
-    form = CompraForm(request.POST or None, instance=compra)
-
-    if form.is_valid():
-        balanco.delete()
-        form.save()
-        return redirect('compra')
-
-
-    context = {
-        'form': form,
-        'compra': compra
-    }
-
-
-
-    return render(request, 'compra_edit.html', context)
-
-
-
-@login_required
-def lote(request):
-    lote = Lote.objects.all()
-    form = LoteForm(request.POST)
-
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Registrado com sucesso')
-            return redirect('lote')
-
-    context = {
-
-        'form': form,
-        'lote':lote
-    }
-
-    return render(request, 'lote.html', context)
-
-@login_required
-def lote_delete(request,pk):
-    lote = get_object_or_404(Lote,pk=pk)
-    lote.delete()
-    return redirect('lote')
-
-@login_required
-def lote_edit(request, pk):
-
-    lote = get_object_or_404(Lote, pk=pk)
-
-    form = LoteForm(request.POST or None, instance=lote)
-
-    if form.is_valid():
-        form.save()
-        return redirect('lote')
-
-    context = {
-        'form': form,
-        'lote': lote
-    }
-
-    return render(request, 'lote_edit.html', context)
 
 
 @login_required
@@ -626,7 +439,6 @@ def despesa_delete(request,pk):
 def despesa_edit(request, pk):
 
     despesa = get_object_or_404(Despesas, pk=pk)
-
     balanco = Balanco.objects.get(despesa_id=pk)
     form = DespesasForm(request.POST or None, instance=despesa)
 
@@ -644,15 +456,12 @@ def despesa_edit(request, pk):
 
 @login_required
 def balanco(request):
-
-    balanco = Balanco.objects.raw('''SELECT 1 as id,to_char(processos_balanco."datas", 'MM-YYYY') as periodo, 
-                                    sum(compra) as rendimento, sum(despesa) as despesa, (sum(compra) - sum(despesa)) as total
-                                      FROM public.processos_balanco GROUP BY to_char(processos_balanco."datas", 'MM-YYYY') ''')
+    balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_char(processos_balanco."datas", 'MM-YYYY') as periodo,
+                                    sum(receita) as rendimento,  sum(despesa) as despesa,
+                                      (sum(receita) - sum(despesa)) as total FROM 
+                                        public.processos_balanco GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')''')
 
     balancoCompleto = Balanco.objects.all().order_by('-datas')
-
-
-
     form = BalancoForm(request.POST)
 
     if request.method == 'POST':
@@ -664,7 +473,7 @@ def balanco(request):
     context = {
 
         'form': form,
-        'balanco':balanco,
+        'balanco': balanco,
         'balancoCompleto':balancoCompleto,
 
     }

@@ -34,7 +34,6 @@
                             <th>Serviço/Cliente</th>
                             <th>Data</th>
                             <th>Desconto</th>
-                            <th>Pagamento(X)</th>
                             <th>Valor Total</th>
                             <th>Ações</th>
 
@@ -45,20 +44,19 @@
                         {% for u in receita %}
                             <tr>
                                 <td>{{ u.Servico }}</td>
-                                <td>{{ u.Data }}C</td>
+                                <td>{{ u.Data }}</td>
                                 <td>{{ u.Desconto }}</td>
-                                <td>{{ u.Pagamento }}</td>
-                                <td>{{ u.Servico.valor }}</td>
+                                <td>{{ u.valorFinal }}</td>
 
                                 </td>
 
 
                                 <td>
-                                    <a href="{% url 'reuniao_edit' u.id %}" data-toggle="modal"
+                                    <a href="{% url 'receita_edit' u.id %}" data-toggle="modal"
                                        data-target="#myModal{{ u.id }}">
                                         <button type="button" class="btn btn-xs btn-warning">Editar</button>
                                     </a>
-                                    <a href="{% url 'reuniao_delete' u.id %}">
+                                    <a href="{% url 'receita_delete' u.id %}">
                                         <button type="button" class="btn btn-xs btn-danger">Apagar</button>
                                     </a>
 

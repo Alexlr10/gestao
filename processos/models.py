@@ -20,11 +20,12 @@ FUNCAO_CHOICE = (
 )
 
 FUNCAO_CHOICE_DESPESA = (
-    ('ICMS','ICMS'),
+    ('DOM','Domínio'),
     ('SN','Simples-Nacional'),
-    ('GAS', 'Gasolina'),
-    ('SER', 'Serviços'),
-    ('INSS', 'INSS'),
+    ('HOSP', 'Hospedagem'),
+    ('ISS', 'ISS'),
+    ('MUL', 'Multa'),
+    ('OUT', 'Outros'),
 )
 
 FUNCAO_CHOICE_MESES = (
@@ -212,6 +213,9 @@ class Servico(models.Model):
     def __str__(self):
         return self.nomeServico + ' - ' + str(self.cliente)
 
+    def soma(self):
+        return str(self.valor - 50)
+
 class Projeto(models.Model):
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='Servicos')
     dataEntrega = models.DateField('Entrega', blank=True, null=True)
@@ -233,71 +237,16 @@ class Receita(models.Model):
     Servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='servico')
     Data = models.DateField('Data',blank=True, null=True)
     Desconto = models.DecimalField('Desconto',max_digits=6, decimal_places=2)
-    Pagamento = models.IntegerField('Pagamento',choices=FUNCAO_CHOICE_PARCELAMENTO)
-
 
     class Meta:
         verbose_name = _("Receita")
         verbose_name_plural = _("Rerceitas")
 
+    def valorFinal(self):
+        return str(self.Servico.valor - self.Desconto )
 
     def __str__(self):
         return self.Cliente.nome
-
-
-
-
-
-
-
-
-
-
-
-
-
-class Produto(models.Model):
-    nomeproduto = models.CharField(_('Produto'), max_length=30, null=True, blank=True)
-    descricao = models.TextField('Descrição', null=True, blank=True)
-    valor = models.DecimalField('Valor', max_digits=6, decimal_places=2)
-
-
-    class Meta:
-        verbose_name = _("Produto")
-        verbose_name_plural = _("Produtos")
-
-    def __str__(self):
-        return self.nomeproduto.upper()
-
-
-class Lote(models.Model):
-    numeroLote = models.IntegerField('Nº do lote', blank=True, null=True)
-    produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='produto')
-    quantLote = models.IntegerField('Quantidade', blank=True, null=True)
-
-    class Meta:
-        verbose_name = _("Lote")
-        verbose_name_plural = _("Lotes")
-
-    def __str__(self):
-        return self.produto.nomeproduto
-
-
-class Compra(models.Model):
-    Cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='Clientes')
-    Produto = models.ForeignKey(Produto, on_delete=models.CASCADE, related_name='Produtos')
-    quantCompra = models.IntegerField('Quantidade', blank=True, null=True)
-    Data = models.DateField('Data',blank=True, null=True)
-    Desconto = models.DecimalField('Desconto',max_digits=6, decimal_places=2)
-
-
-    class Meta:
-        verbose_name = _("Compra")
-        verbose_name_plural = _("Compras")
-
-
-    def __str__(self):
-        return self.Cliente.nome +" "+ self.Produto.nomeproduto +" "+ str(self.quantCompra)
 
 
 class Despesas(models.Model):
@@ -311,9 +260,9 @@ class Despesas(models.Model):
 
 
 class Balanco(models.Model):
-    compras_id = models.IntegerField('compras_id', blank=True, null=True)
+    receitas_id = models.IntegerField('receitas_id', blank=True, null=True)
     despesa_id = models.IntegerField('despesa_id', blank=True, null=True)
-    compra = models.DecimalField('compra', max_digits=6, decimal_places=2,blank=True, null=True)
+    receita = models.DecimalField('compra', max_digits=6, decimal_places=2,blank=True, null=True)
     despesa = models.DecimalField('despesa', max_digits=6, decimal_places=2,blank=True, null=True)
     datas = models.DateField('datas', blank=True, null=True)
 
@@ -321,13 +270,13 @@ class Balanco(models.Model):
         verbose_name = _("Balanco")
         verbose_name_plural = _("Balanco")
 
-    @receiver(post_save,sender=Compra)
+    @receiver(post_save,sender=Receita)
     def salvar_rendimento(sender,instance,created, **kwargs):
-        compra = Balanco()
-        compra.compras_id = instance.pk
-        compra.datas = instance.Data
-        compra.compra = ((instance.quantCompra * instance.Produto.valor) - instance.Desconto)
-        compra.save()
+        receita = Balanco()
+        receita.receitas_id = instance.pk
+        receita.datas = instance.Data
+        receita.receita = ((instance.Servico.valor) - instance.Desconto)
+        receita.save()
 
     @receiver(post_save,sender=Despesas)
     def salvar_despesa(sender,instance,created, **kwargs):
