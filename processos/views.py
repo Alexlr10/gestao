@@ -362,6 +362,52 @@ def reuniao_delete(request, pk):
     return redirect('reuniao')
 
 
+######## Ata
+@login_required
+def ata(request):
+    ata = Ata.objects.all()
+    if request.method == 'POST':
+        form = AtaForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Ata cadastrada com sucesso')
+            return redirect('ata')
+
+    form = AtaForm()
+
+    context = {
+        'form': form,
+        'ata': ata
+    }
+
+    return render(request, 'ata.html', context)
+
+@login_required
+def ata_edit(request, pk):
+    ata = get_object_or_404(Ata, pk=pk)
+
+    form = AtaForm(request.POST or None, instance=ata)
+
+    if form.is_valid():
+        form.save()
+        return redirect('ata')
+
+    context = {
+        'form': form,
+        'ata': ata
+    }
+
+    return render(request, 'ata_edit.html', context)
+
+@login_required
+def ata_delete(request, pk):
+    ata = get_object_or_404(Ata,pk=pk)
+    ata.delete()
+    messages.error(request, 'Cadastro removido com sucesso')
+
+    return redirect('ata')
+
 
 ######## Receitas
 @login_required

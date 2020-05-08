@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save, post_delete
 from django.db.models import Sum
-
+from ckeditor.fields import RichTextField
 
 FUNCAO_CHOICE = (
     ('PROP','Proprietario'),
@@ -231,7 +231,19 @@ class Reuniao(models.Model):
     presenca = models.ManyToManyField('Usuario', null=True, blank=True, related_name="presenca")
     ausencia = models.ManyToManyField('Usuario', null=True, blank=True, related_name="ausencia")
 
+    def __str__(self):
+        if self.tipoReuniao == 'GER':
+            return 'GERAL - ' + str(self.dataReuniao.strftime("%d/%m/%Y"))
+        else:
+            return 'DIRETORIA - ' + str(self.dataReuniao.strftime("%d/%m/%Y"))
 
+
+
+
+class Ata(models.Model):
+    Reuniao = models.ForeignKey(Reuniao, on_delete=models.CASCADE, related_name='Reuniao')
+    texto = RichTextField(null=True, blank=True)
+    
 
 class Receita(models.Model):
     Servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='servico')

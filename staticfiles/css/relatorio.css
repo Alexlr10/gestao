@@ -1,0 +1,24 @@
+
+.circulo-red,
+.circulo-green,
+.circulo-yellow {
+    display: inline-block;
+    overflow: hidden;
+    width: 17px;
+    height: 17px;
+    margin-bottom: -4px;
+    margin-left: 10px;
+    float: right;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+.circulo-red {
+    background: #D90000;
+}
+.circulo-green {
+    background: #86CE9A;
+}
+.circulo-yellow {
+    background: #F5D76E;
+}

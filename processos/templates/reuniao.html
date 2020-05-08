@@ -45,7 +45,12 @@
                         {% for u in reuniao %}
                             <tr>
                                 <td>{{ u.dataReuniao }}</td>
-                                <td>{{ u.tipoReuniao }}</td>
+                                 {% if u.tipoReuniao == 'GER' %}
+                                <td>GERAL</td>
+                                {% else %}
+                                  <td>DIRETORIA</td>
+                                {% endif %}
+
                                 <td>{{ u.descricao }}</td>
                                 <td>
                                     {% for i in u.presenca.all %}
