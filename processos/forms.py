@@ -192,7 +192,7 @@ class AtaForm(forms.ModelForm):
         # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
-
+            'dataPublicacao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
 
 

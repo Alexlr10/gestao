@@ -6,7 +6,6 @@
 
 {% endblock content-header %} {% block content-main %}
 
-
     <div class="col-xs-12">
 
         <!-- /.box -->
@@ -33,7 +32,7 @@
                         <thead>
                         <tr>
                             <th>Reunião</th>
-                            <th>Ata</th>
+                            <th>Data da Publicação</th>
 
                             <th>Ações</th>
 
@@ -50,7 +49,7 @@
                                   <td>DIRETORIA</td>
                                 {% endif %}
 
-                                <td>{{ u.texto|safe }}</td>
+                                <td>{{ u.dataPublicacao }} </td>
 
 
                                 </td>

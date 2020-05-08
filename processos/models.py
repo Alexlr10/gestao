@@ -238,12 +238,10 @@ class Reuniao(models.Model):
             return 'DIRETORIA - ' + str(self.dataReuniao.strftime("%d/%m/%Y"))
 
 
-
-
 class Ata(models.Model):
     Reuniao = models.ForeignKey(Reuniao, on_delete=models.CASCADE, related_name='Reuniao')
+    dataPublicacao = models.DateField('data', blank=True, null=True)
     texto = RichTextField(null=True, blank=True)
-    
 
 class Receita(models.Model):
     Servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='servico')

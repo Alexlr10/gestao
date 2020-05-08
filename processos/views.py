@@ -168,6 +168,34 @@ def home(request):
     return render(request,'home.html',context)
 
 
+def grafico(request):
+    balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_char(processos_balanco."datas", 'MM-YYYY') as periodo,
+                                       sum(receita) as rendimento,  sum(despesa) as despesa,
+                                         (sum(receita) - sum(despesa)) as total FROM 
+                                           public.processos_balanco GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')''')
+
+
+    total = [obj.total for obj in balanco]
+
+    datas = [obj.periodo for obj in balanco]
+    datas.sort()
+    balancos = [obj.total for obj in balanco]
+
+    rendimentos = [obj.rendimento for obj in balanco]
+
+    context = {
+        'total': json.dumps(total, default=decimal_default),
+
+        'datas': json.dumps(datas),
+        'balancos': json.dumps(balancos, default=decimal_default),
+
+        'rendimentos': json.dumps(rendimentos, default=decimal_default),
+
+    }
+
+
+    return render(request, 'graficos.html', context)
+
 ######## Cliente
 @login_required
 def cliente(request):
