@@ -101,7 +101,7 @@ def editar_meus_dados(request):
         usuario.Celular = request.POST.get('celularUsuario')
         usuario.CPF = request.POST.get('cpfUsuario')
         usuario.RG = request.POST.get('rgUsuario')
-        usuario.Senha = request.POST.get('usuarioSenha')
+        usuario.set_password(request.POST.get('usuarioSenha'))
         usuario.save()
 
         messages.success(request, 'Dados alterados com sucesso')
