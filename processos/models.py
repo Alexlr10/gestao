@@ -300,3 +300,7 @@ class Balanco(models.Model):
 
     def __str__(self):
         return str(self.datas)
+
+class Ouvidoria(models.Model):
+    data = models.DateField('data', blank=True, null=True)
+    texto = RichTextField(null=True, blank=True)

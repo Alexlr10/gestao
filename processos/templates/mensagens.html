@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load staticfiles %} {% load bootstrap %} {% block content-header %}
 
-    <i class="fa fa-user "> </i> Ata
-    <small>Gerenciar Atas</small>
+    <i class="fa fa-user "> </i> Reclamações
+    <small>Gerenciar Reclamações</small>
 
 
 {% endblock content-header %} {% block content-main %}
@@ -17,15 +17,12 @@
         <div class="box table-responsive">
             <div class="box-header">
 
-                <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
-                    Atas
-                </button>
 
             </div>
 
 
             <div class="box-header">
-                <h3 class="box-title">Todos as Atas cadastradas no sistema</h3>
+                <h3 class="box-title">Reclamações</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -34,40 +31,22 @@
 
                         <thead>
                         <tr>
-                            <th>Reunião</th>
-                            <th>Data da Publicação</th>
+                            <th>Data</th>
+                            <th>Mensagem</th>
 
-                            <th>Ações</th>
 
                         </tr>
                         </thead>
                         <tbody>
 
-                        {% for u in ata %}
+                        {% for u in ouvidoria %}
                             <tr>
 
-                                {% if u.Reuniao.tipoReuniao == 'GER' %}
-                                    <td>GERAL</td>
-                                {% else %}
-                                    <td>DIRETORIA</td>
-                                {% endif %}
-
-                                <td>{{ u.dataPublicacao }} </td>
+                                <td>{{ u.texto|safe  }} </td>
 
 
-                                </td>
 
 
-                                <td>
-                                    <a href="{% url 'ata_edit' u.id %}" data-toggle="modal"
-                                       data-target="#myModal{{ u.id }}">
-                                        <button type="button" class="btn btn-xs btn-warning">Editar</button>
-                                    </a>
-                                    <a href="{% url 'ata_delete' u.id %}">
-                                        <button type="button" class="btn btn-xs btn-danger">Apagar</button>
-                                    </a>
-
-                                </td>
 
 
                             </tr>
@@ -103,7 +82,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Serviço</h4>
+                    <h4 class="modal-title" id="exampleModalLabel"> Enviar Mensagem a NextStep</h4>
                 </div>
                 <div class="modal-body">
                     <form method="POST">

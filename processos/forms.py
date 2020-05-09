@@ -245,15 +245,14 @@ class BalancoForm(forms.ModelForm):
         }
 
 
-class HistoricoForm(forms.ModelForm):
-
+class OuvidoriaForm(forms.ModelForm):
 
     class Meta:
-        model = Balanco
+        model = Ouvidoria
         fields = '__all__'
 
         widgets = {
 
-
+            'data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
 

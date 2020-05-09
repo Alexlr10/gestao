@@ -62,6 +62,7 @@ urlpatterns = [
 
     # Graficos
     path('grafico/', views.grafico, name='grafico'),
-    path('historicoMembros/', views.historico_membros, name='historicoMembros'),
+    
+    path('mensagem/', views.mensagem, name='mensagem'),
 ]
 

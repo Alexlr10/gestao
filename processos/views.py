@@ -125,50 +125,49 @@ def decimal_default(obj):
 
 
 
+# @login_required
+# def home(request):
+#     ouvidoria = Ouvidoria.objects.all()
+#
+#
+#     context = {
+#        'ouvidoria':ouvidoria
+#     }
+#     return render(request,'home.html',context)
+
 @login_required
 def home(request):
-    #
-    # estoque = Compra.objects.raw('''select distinct processos_produto.id,nomeproduto,
-    #                                (select sum(processos_compra."quantCompra")from processos_compra
-    #                                where processos_compra."Produto_id" = processos_produto.id)
-    #                                as SomaCompras, (select sum(processos_lote."quantLote")
-    #                                from processos_lote where processos_produto.id = processos_lote.Produto_id)
-    #                                as SomaLote ,((select sum(processos_lote."quantLote") from processos_lote
-    #                                where processos_produto.id = processos_lote.Produto_id) - (select sum(processos_compra."quantCompra")
-    #                                from processos_compra where processos_compra."Produto_id" = processos_produto.id )  )
-    #                                as total from processos_produto''')
-    #
-    # balanco = Balanco.objects.raw('''SELECT 1 as id,to_char(processos_balanco."datas", 'MM-YYYY') as periodo,
-    #                                    sum(compra) as rendimento, sum(despesa) as despesa, (sum(compra) - sum(despesa)) as total
-    #                                      FROM public.processos_balanco GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')
-    #                                       ORDER BY to_char(processos_balanco."datas", 'MM-YYYY')''')
+    ouvidoria = Ouvidoria.objects.all()
+    if request.method == 'POST':
+        form = OuvidoriaForm(request.POST)
 
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Menssagem enviada com sucesso')
+            return redirect('home')
 
-    # estoque = Estoque.objects.all()
-    # balanco = Balanco.objects.all()
-    #
-    # nomes = [obj.nomeproduto for obj in estoque]
-    # total = [obj.total for obj in estoque]
-    #
-    # datas = [obj.periodo for obj in balanco]
-    # balancos = [obj.total for obj in balanco]
-    #
-    # rendimentos = [obj.rendimento for obj in balanco]
-
-
+    form = OuvidoriaForm()
 
     context = {
-        # 'nomes': json.dumps(nomes),
-        # 'total': json.dumps(total),
-        #
-        # 'datas': json.dumps(datas),
-        # 'balancos': json.dumps(balancos, default=decimal_default),
-        #
-        # 'rendimentos': json.dumps(rendimentos, default=decimal_default),
-
+        'form': form,
+        'ouvidoria': ouvidoria
     }
+
     return render(request,'home.html',context)
 
+
+@login_required
+def mensagem(request):
+    ouvidoria = Ouvidoria.objects.all()
+
+    form = OuvidoriaForm()
+
+    context = {
+        'form': form,
+        'ouvidoria': ouvidoria
+    }
+
+    return render(request,'mensagens.html',context)
 
 def grafico(request):
     balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_char(processos_balanco."datas", 'MM-YYYY') as periodo,
