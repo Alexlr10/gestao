@@ -10,9 +10,8 @@ from . import models
 class UsuarioCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    password1 = forms.CharField(label=_('Senha'), widget=forms.PasswordInput)
-    password2 = forms.CharField(
-        label=_('Confirmação da senha'), widget=forms.PasswordInput)
+    password1 = forms.CharField(label=_('Senha'), widget=forms.TextInput(attrs={'type': 'password','id': 'password1'}))
+    password2 = forms.CharField(label=_('Confirmação da senha'), widget=forms.TextInput(attrs={'type': 'password','id': 'password2'}))
 
     class Meta:
         model = Usuario
@@ -29,6 +28,13 @@ class UsuarioCreationForm(forms.ModelForm):
                   'password1',
                   'password2',
                   )
+
+        widgets = {
+            'Nome': forms.TextInput(attrs={'id':'Nome','placeholder': 'Nome'}),
+            'Situacao': forms.CheckboxInput(attrs={'id': 'situacao', 'onclick': 'myFunction()'}),
+
+
+        }
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -110,7 +116,7 @@ class UsuarioChangeForm(forms.ModelForm):
         return self.initial["password"]
 
 
-class UsuariosForm(forms.ModelForm):
+class UsuarioForm(forms.ModelForm):
     """Form definition for Filial."""
 
     class Meta:
@@ -120,7 +126,8 @@ class UsuariosForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-            # 'DataIni': forms.DateInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date', 'required':'required'}),
+            'Nome': forms.TextInput(attrs={'placeholder': 'Nome'}),
+            'Situacao': forms.TextInput(attrs={'type': 'checkbox', 'class': 'form-control','id':'situacao', 'onclick':'myFunction()'}),
 
         }
 
@@ -238,5 +245,15 @@ class BalancoForm(forms.ModelForm):
         }
 
 
+class HistoricoForm(forms.ModelForm):
 
+
+    class Meta:
+        model = Balanco
+        fields = '__all__'
+
+        widgets = {
+
+
+        }
 

@@ -135,6 +135,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     Situacao = models.BooleanField('Ativo', default=True)
     CPF = models.CharField('CPF', max_length=20)
     RG = models.CharField('RG', max_length=20, blank=True, null=True)
+    Bairro = models.CharField('Bairro', max_length=100, blank=True, null=True)
     Rua = models.CharField('Rua', max_length=100, blank=True, null=True)
     N = models.CharField('Número', max_length=10, blank=True, null=True)
     CEP = models.CharField('CEP', max_length=50, blank=True, null=True)
@@ -299,6 +300,3 @@ class Balanco(models.Model):
 
     def __str__(self):
         return str(self.datas)
-
-
-

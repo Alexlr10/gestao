@@ -1,6 +1,4 @@
-import datetime
 import decimal
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
@@ -25,7 +23,7 @@ class usuariosUpdate(UpdateView):
               'Funcao',
               )
     success_url = reverse_lazy('usuarios')
-    template_name = 'usuarios_edit.html'
+    template_name = 'usuario_edit.html'
 
 
 class usuariosDelete(DeleteView):
@@ -34,9 +32,8 @@ class usuariosDelete(DeleteView):
     template_name = 'usuarios_delete.html'
 
 @login_required
-def usuariosEdit(request, pk):
+def usuario_edit(request, pk):
     usuario = get_object_or_404(Usuario, pk=pk)
-
     form = UsuarioCreationForm(request.POST or None, instance=usuario)
 
     if form.is_valid():
@@ -45,37 +42,44 @@ def usuariosEdit(request, pk):
 
     context = {
         'form': form,
-        'usuario': usuario.id
+        'usuario': usuario
     }
 
-    return render(request, 'usuarios_edit.html', context)
+    return render(request, 'usuario_edit.html', context)
 
+@login_required
+def usuario_delete(request, pk):
+    usuario = Usuario.objects.get(pk=pk)
+    usuario.delete()
+    messages.error(request, 'Cadastro removido com sucesso')
+
+    return redirect('usuarios')
 
 
 def usuarios(request):
     if request.POST:
-
+        usuario = Usuario.objects.all()
         form = UsuarioCreationForm(request.POST)
 
         if form.is_valid():
             form.save()
             return redirect('usuarios')
         context = {
-            'Usuarios': q,
-            'formusuario': form
+            'usuario': usuario,
+            'form': form
         }
 
         return render(request, 'usuarios.html', context)
 
     form = UsuarioCreationForm()
 
-    q = Usuario.objects.all().order_by('-id')[:100]  # ORM do Django
+    usuario = Usuario.objects.all().order_by('-id')[:100]  # ORM do Django
 
     ultima_imp = Usuario.objects.all().order_by('-id')[:1]
 
     context = {
-        'Usuarios': q,
-        'formusuario': form,
+        'usuario': usuario,
+        'form': form,
         'ultima_imp': ultima_imp
         # 'Filial': i,
 
@@ -88,7 +92,6 @@ def usuarios(request):
 def editar_meus_dados(request):
     if request.method == 'POST' and request.POST.get('usuarioSenha') != None:
         usuario = get_object_or_404(Usuario, pk=request.user.id)
-       # email_usuario = request.user.Email.lower()
 
         if request.FILES.get('usuarioFoto') != None:
             usuario.Foto = request.FILES.get('usuarioFoto')
@@ -100,8 +103,7 @@ def editar_meus_dados(request):
         usuario.RG = request.POST.get('rgUsuario')
         usuario.Senha = request.POST.get('usuarioSenha')
         usuario.save()
-        print(usuario.Nome)
-        print(usuario.Email)
+
         messages.success(request, 'Dados alterados com sucesso')
 
         return redirect(reverse('meusdados'))
@@ -580,3 +582,14 @@ def balanco_edit(request, pk):
 
     return render(request, 'balanco_edit.html', context)
 
+@login_required
+def historico_membros(request):
+    historico = HistoricoMembros.objects.all()
+
+    form = HistoricoForm()
+    context = {
+        'historico': historico,
+        'form': form
+    }
+
+    return render(request, 'historicoMembros.html', context)

@@ -15,7 +15,7 @@ urlpatterns = [
 
     # USUARIO
     path('usuarios/', views.usuarios, name='usuarios'),
-    path('updateusuarios/<int:pk>/', views.usuariosEdit, name='usuarios_edit'),
+    path('usuario_edit/<int:pk>/', views.usuario_edit, name='usuario_edit'),
     path('usuarios_delete/<pk>',usuariosDelete.as_view(), name='usuarios_delete'),
     path('meus_dados/', views.editar_meus_dados, name='meusdados'),
 
@@ -62,5 +62,6 @@ urlpatterns = [
 
     # Graficos
     path('grafico/', views.grafico, name='grafico'),
+    path('historicoMembros/', views.historico_membros, name='historicoMembros'),
 ]
 
