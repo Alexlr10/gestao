@@ -1,7 +1,7 @@
 {% load staticfiles %}
 {% load bootstrap %}
 
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg"  role="document" >
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -9,7 +9,7 @@
                 <h4 class="modal-title" id="exampleModalLabel">Editar Cadastro</h4>
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body" >
 
                 <form method="POST" action="{% url 'ata_edit' ata.id %}">
                     {% csrf_token %}

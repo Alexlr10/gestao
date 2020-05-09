@@ -6,6 +6,12 @@
 
 {% endblock content-header %} {% block content-main %}
 
+    <style>
+
+
+  </style>
+
+
     <div class="col-xs-12">
 
         <!-- /.box -->
@@ -43,10 +49,10 @@
                         {% for u in ata %}
                             <tr>
 
-                            {% if u.Reuniao.tipoReuniao == 'GER' %}
-                                <td>GERAL</td>
+                                {% if u.Reuniao.tipoReuniao == 'GER' %}
+                                    <td>GERAL</td>
                                 {% else %}
-                                  <td>DIRETORIA</td>
+                                    <td>DIRETORIA</td>
                                 {% endif %}
 
                                 <td>{{ u.dataPublicacao }} </td>
@@ -70,9 +76,10 @@
                             </tr>
 
 
-                            <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade" data-backdrop="static" id="myModal{{ u.id }}" tabindex="-1"
+                                 role="dialog"
                                  aria-labelledby="exampleModalLabel">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog modal-lg" role="document">
                                     <div class="modal-content">
 
                                     </div>
@@ -91,7 +98,8 @@
         </div>
         <!-- /.col -->
     </div>
-    <div class="modal fade" id="exampleModal51" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal fade" data-backdrop="static" id="exampleModal51" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
