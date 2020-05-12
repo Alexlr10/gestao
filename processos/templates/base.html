@@ -134,10 +134,14 @@
                     </span>
                     </a>
                     <ul class="treeview-menu">
-                         <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a></li>
+                        <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a></li>
                         <li><a href="{% url 'usuarios' %}"><i class="fa fa-user-plus"></i><span>Usuários</span></a></li>
                         <li><a href="{% url 'reuniao' %}"><i class="fa  fa-calendar"></i> <span>Reuniao</span></a></li>
-                        <li><a href="{% url 'mensagem' %}"><i class="fa  fa-calendar"></i> <span>Reclamações</span></a></li>
+                        <li><a href="{% url 'mensagem' %}"><i class="fa  fa-registered"></i>
+                            <span>Reclamações</span></a></li>
+                        <li><a href="#"
+                               onCLick="window.open('https://trello.com/b/dK86RFrm/equipe-de-recursos-humanos','_blank');"><i
+                                class="fa  fa-trello"></i> <span>Trello</span></a></li>
                     </ul>
 
                 </li>
@@ -150,17 +154,23 @@
                     </span>
                     </a>
                     <ul class="treeview-menu">
-                         <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a></li>
+                        <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a></li>
                         <li><a href="{% url 'receita' %}"><i class="fa  fa-money"></i> <span>Receita</span></a></li>
-                        <li><a href="{% url 'despesa' %}"><i class="fa fa-credit-card"></i><span>Despesas</span></a> </li>
-                        <li><a href="{% url 'balanco' %}"><i class="fa fa-balance-scale"></i><span>Balanço</span></a> </li>
-                        <li><a href="{% url 'ata' %}"><i class="fa fa-book"></i><span>Atas</span></a> </li>
-                        <li><a href="{% url 'grafico' %}"><i class="fa fa-bar-chart-o"></i><span>Graficos</span></a> </li>
+                        <li><a href="{% url 'despesa' %}"><i class="fa fa-credit-card"></i><span>Despesas</span></a>
+                        </li>
+                        <li><a href="{% url 'balanco' %}"><i class="fa fa-balance-scale"></i><span>Balanço</span></a>
+                        </li>
+                        <li><a href="{% url 'ata' %}"><i class="fa fa-book"></i><span>Atas</span></a></li>
+                        <li><a href="{% url 'grafico' %}"><i class="fa fa-bar-chart-o"></i><span>Graficos</span></a>
+                        <li><a href="#"
+                               onCLick="window.open('https://trello.com/b/dsS6gj0k/equipe-administrativa-financeira','_blank');"><i
+                                class="fa  fa-trello"></i> <span>Trello</span></a></li>
+                        </li>
                     </ul>
 
                 </li>
 
-                   <li class="treeview">
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-camera"></i>
                         <span>Marketing</span>
@@ -170,13 +180,37 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a></li>
-                         <li><a href="{% url 'servico' %}"><i class="fa  fa-wrench"></i> <span>Serviços</span></a></li>
+                        <li><a href="{% url 'servico' %}"><i class="fa  fa-wrench"></i> <span>Serviços</span></a></li>
                         <li><a href="{% url 'projeto' %}"><i class="fa  fa-coffee"></i> <span>Projeto</span></a></li>
+                        <li><a href="#"
+                               onCLick="window.open('https://trello.com/b/dJi21xt6/equipe-de-marketing','_blank');"><i
+                                class="fa  fa-trello"></i> <span>Trello</span></a></li>
+                        <li><a href="{% url 'projeto' %}"><i class="fa  fa-coffee"></i> <span>Projeto</span></a></li>
+
                     </ul>
 
                 </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa  fa-check-square"></i>
+                        <span>Qualidade</span>
+                        <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"
+                               onCLick="window.open('https://trello.com/b/dJi21xt6/equipe-de-marketing','_blank');"><i
+                                class="fa  fa-trello"></i> <span>Trello</span></a></li>
+                        <li><a href="#"
+                               onCLick="window.open('https://trello.com/b/vtmGZ5Ww/lapidando','_blank');"><i
+                                class="fa  fa-trello"></i> <span>Lapidando</span></a></li>
+                    </ul>
 
-                       <li class="treeview">
+
+                </li>
+
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-coffee"></i>
                         <span>Projetos</span>
@@ -188,10 +222,29 @@
                         <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a></li>
                         <li><a href="{% url 'servico' %}"><i class="fa  fa-wrench"></i> <span>Serviços</span></a></li>
                         <li><a href="{% url 'projeto' %}"><i class="fa  fa-coffee"></i> <span>Projeto</span></a></li>
+                        <li><a href="#" onCLick="window.open('https://github.com/nextstepsi','_blank');"><i
+                                class="fa  fa-github"></i> <span>GitHub</span></a></li>
+                        <li><a href="#"
+                               onCLick="window.open('https://trello.com/b/w8MmLcEi/equipe-de-projetos','_blank');"><i
+                                class="fa  fa-trello"></i> <span>Trello</span></a></li>
+
                     </ul>
-                 <li><a data-toggle="modal" data-target="#exampleModal51"><i class="fa fa-comment-o"></i> <span>Ouvidoria</span></a></li>
+
+                <li><a href="#" onCLick="window.open('https://app.slack.com/client/T0108MUDHV1/C010A4FG8PK','_blank');"><i
+                        class="fa  fa-slack"></i> <span>Slack</span></a></li>
 
                 </li>
+                <li><a href="#"
+                       onCLick="window.open('https://www.instagram.com/nextstepsi/','_blank');"><i
+                        class="fa  fa-instagram"></i> <span>Instagran</span></a></li>
+
+                <li><a href="#"
+                       onCLick="window.open('https://mega.nz/fm/za4DjByI/','_blank');"><i
+                        class="fa  fa-cloud"></i> <span>Mega</span></a></li>
+                  <li><a href="{% url 'contas' %}"><i class="fa  fa-share-alt"></i> <span>Contas</span></a></li>
+
+                <li><a href="#" data-toggle="modal" data-target="#exampleModal51"><i
+                        class="fa fa-comment-o"></i><span>Ouvidoria</span></a></li>
 
                 {#            <li><a href="{% url 'produto' %}"><i class="fa fa-check"></i><span>Produtos</span></a></li>#}
                 {#            <li><a href="{% url 'estoque' %}"><i class="fa  fa-check-square"></i><span>Estoque</span></a></li>#}

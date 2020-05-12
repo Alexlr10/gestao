@@ -23,6 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
@@ -96,16 +97,16 @@ DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dbur
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'gestao_interna',
-#         'USER': 'postgres',
-#         'PASSWORD': '91851007',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'gestao_interna',
+        'USER': 'postgres',
+        'PASSWORD': '91851007',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -168,5 +169,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-
-
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True

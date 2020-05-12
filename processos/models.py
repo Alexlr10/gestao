@@ -8,6 +8,7 @@ from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save, post_delete
 from django.db.models import Sum
 from ckeditor.fields import RichTextField
+from django.core.mail import send_mail
 
 FUNCAO_CHOICE = (
     ('PROP','Proprietario'),
@@ -180,9 +181,24 @@ def post_usuario(self, instance, *args, **kwargs):
         verbose_name = 'Usuário'
         verbose_name_plural = 'Usuários'
 
+    def save(self, *arqs, **kwargs):
+        super(Usuario, self).save(*arqs, **kwargs)
+        mensagem =  str('Parabens!!! Você agora é um novo membro Next Step!\n Usuario: '+ self.Login+'Senha: 010101')
+        send_mail(
+            'Next Step',
+             mensagem,
+            '',
+            [self.Email],
+            fail_silently=False,
+        )
+
+    def email(self):
+        """Unicode representation of Usuario."""
+        return self.Email
+
     def __str__(self):
         """Unicode representation of Usuario."""
-        return self.Nome
+        return str(self.Email)
 
 
 
@@ -202,6 +218,7 @@ class Cliente(models.Model):
         verbose_name = _("Cliente")
         verbose_name_plural = _("processos")
 
+
     def __str__(self):
         return self.nome
 
@@ -214,8 +231,6 @@ class Servico(models.Model):
     def __str__(self):
         return self.nomeServico + ' - ' + str(self.cliente)
 
-    def soma(self):
-        return str(self.valor - 50)
 
 class Projeto(models.Model):
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='Servicos')
@@ -233,10 +248,16 @@ class Reuniao(models.Model):
     ausencia = models.ManyToManyField('Usuario', null=True, blank=True, related_name="ausencia")
 
     def __str__(self):
-        if self.tipoReuniao == 'GER':
-            return 'GERAL - ' + str(self.dataReuniao.strftime("%d/%m/%Y"))
-        else:
-            return 'DIRETORIA - ' + str(self.dataReuniao.strftime("%d/%m/%Y"))
+        return ", ".join([str (u) for u in self.presenca.all()])
+
+
+    # def reuniao(self):
+    #     if self.tipoReuniao == 'GER':
+    #         return 'GERAL - ' #+ str(self.dataReuniao.strftime("%d/%m/%Y"))
+    #     else:
+    #         return 'DIRETORIA - '# + str(self.dataReuniao.strftime("%d/%m/%Y"))
+
+
 
 
 class Ata(models.Model):

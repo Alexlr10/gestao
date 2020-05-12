@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% load staticfiles %}
+{% load static %}
+
+{% load l10n %}
+
+
+{% block content-header %}
+
+    Gestão
+
+
+{% endblock content-header %}
+
+{% block content-main %}
+
+    <h4>*Gmail*</h4>
+    <b><li>E-mail: diretorianextstepsi@gmail.com</li></b>
+<b><li>senha: nxstep10</li></b>
+
+    <h4>*Gmail Institucional*</h4>
+    <b><li>E-mail: nextstephost@gmail.com</li></b>
+    <b><li>senha: nxstep10</li></b>
+
+    <h4>*Hospedagem Hostinger*</h4>
+    <b><li>E-mail: nextstephost@gmail.com</li></b>
+    <b><li>senha: nxstep10</li></b>
+
+    <h4>*Cursos UDEMY*</h4>
+    <b><li>E-mail: cursos.nextstep@gmail.com</li></b>
+    <b><li>Senha: nextstepsi18</li></b>
+
+    <h4>*Latex*</h4>
+    <b><li>link: https://pt.overleaf.com</li>
+    <b><li>E-mail: contato@nextstepsi.com.br</li>
+    <b><li>senha: nxstepsi19</li></b>
+
+    <h4>*Mega*</h4>
+    <b><li>Link: mega.nz</li></b>
+    <b><li>E-mail: diretorianextstepsi@gmail.com</li></b>
+    <b><li>Senha: nxstep10</li></b>
+
+        <h4>*Doodle*</h4></b>
+    L<b><li>ink: https://doodle.com/pt_BR/</li></b>
+    <b><li>E-mail: diretorianextstepsi@gmail.com</li></b>
+    <b><li>senha: nxstep10</li></b>
+
+
+    <h4>*Discord*</h4>
+    <b><li>login: diretorianextstepsi@gmail.com</li></b>
+    <b><li>senha: nxstep10</li></b>
+
+        <h4>*Slack*</h4></b>
+    <b><li>login: diretorianextstepsi@gmail.com</li></b>
+    <b><li>senha: nxstep10</li></b>
+
+    <h4>*YouTube*</h4>
+    <b><li>E-mail: marketing.nextstepsi@gmail.com</li></b>
+    <b><li>senha: nxstepsi18</li></b>
+
+
+
+{% endblock content-main %} {% block extraJS %}
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#tabela').DataTable({
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+                stateSave: true,
+            });
+
+        });
+    </script>
+
+
+
+{% endblock extraJS %}

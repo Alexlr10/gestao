@@ -30,7 +30,7 @@ class UsuarioCreationForm(forms.ModelForm):
                   )
 
         widgets = {
-            'Nome': forms.TextInput(attrs={'id':'Nome','placeholder': 'Nome'}),
+
             'Situacao': forms.CheckboxInput(attrs={'id': 'situacao', 'onclick': 'myFunction()'}),
 
 
@@ -127,6 +127,8 @@ class UsuarioForm(forms.ModelForm):
 
         widgets = {
             'Nome': forms.TextInput(attrs={'placeholder': 'Nome'}),
+            'Login': forms.TextInput(attrs={'class': 'form-control','id':'Login'}),
+            'Password': forms.TextInput(attrs={'class': 'form-control','id':'Password'}),
             'Situacao': forms.TextInput(attrs={'type': 'checkbox', 'class': 'form-control','id':'situacao', 'onclick':'myFunction()'}),
 
         }
@@ -187,6 +189,7 @@ class ReuniaoForm(forms.ModelForm):
         # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
+            'descricaoReuniao': forms.Textarea(attrs={'class': 'form-control', 'id': 'descricaoReuniao'}),
             'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
 
