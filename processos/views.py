@@ -187,6 +187,19 @@ def mensagem(request):
 
     return render(request,'mensagens.html',context)
 
+@login_required
+def ouvidoria(request):
+    ouvidoria = Ouvidoria.objects.all()
+
+    form = OuvidoriaForm()
+
+    context = {
+        'form': form,
+        'ouvidoria': ouvidoria
+    }
+
+    return render(request,'ouvidoria.html',context)
+
 def grafico(request):
     balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_char(processos_balanco."datas", 'MM-YYYY') as periodo,
                                        sum(receita) as rendimento,  sum(despesa) as despesa,

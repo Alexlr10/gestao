@@ -134,6 +134,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     Foto = models.ImageField('Foto', upload_to='profile', default=None)
     Login = models.CharField('Login', max_length=50, unique=True)
     password = models.CharField('Senha', max_length=128)
+    Matricula = models.CharField('Matricula', max_length=128)
     Situacao = models.BooleanField('Ativo', default=True)
     CPF = models.CharField('CPF', max_length=20)
     RG = models.CharField('RG', max_length=20, blank=True, null=True)

@@ -20,6 +20,7 @@ class UsuarioCreationForm(forms.ModelForm):
                   'Login',
                   'Situacao',
                   'CPF',
+                  'Matricula',
                   'Email',
                   'Facebook',
                   'Instagram',
