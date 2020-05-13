@@ -372,25 +372,25 @@ def reuniao(request):
         if form.is_valid():
             form.save()
             dataReuniao = request.POST.get('dataReuniao')
-            tipoReuniao = request.POST.get('dataReuniao')
+            tipoReuniao = request.POST.get('tipoReuniao')
             data = dataReuniao.split('-')
             pauta = request.POST.get('descricaoReuniao')
 
             if tipoReuniao == 'GER':
-                mensagem = str('A Next terá uma reuniao GERAL dia '+ data[2] + ' do '+  data[1] + ' com as seguintes paltas: \n' + pauta)
-            else:
-                mensagem = str('A Next terá uma reuniao de DIRETORIA dia '+ data[2] + ' do '+  data[1] + ' com as seguintes paltas: \n' + pauta)
+                mensagem = str('A Next terá uma reunião GERAL dia '+ data[2] + ' do '+  data[1] + ' com as seguintes paltas: \n' + pauta)
+            elif tipoReuniao == 'DIR':
+                mensagem = str('A Next terá uma reunião de DIRETORIA dia '+ data[2] + ' do '+  data[1] + ' com as seguintes paltas: \n' + pauta)
+            elif tipoReuniao == 'PRO':
+                mensagem = str('A Next terá uma reunião da equipe de PROJETOS dia '+ data[2] + ' do '+  data[1] + ' com as seguintes paltas: \n' + pauta)
 
 
-            print(mensagem)
-            email = []
             reu = Reuniao.objects.last()
-           # print(reu)
-            email.append(str(reu))
-          #  print(email)
+            membros = str(reu)
+            email = membros.split(',')
+            print(email)
 
             send_mail(
-                'NextStep - Atualização',
+                'NextStep - REUNIÃO',
                  mensagem,
                 'sistemanextstepsi@gmail.com',
                  email,

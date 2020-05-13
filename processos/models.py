@@ -93,6 +93,7 @@ FUNCAO_CHOICE_SERVICO = (
 FUNCAO_CHOICE_REUNIAO = (
     ('GER', 'GERAL'),
     ('DIR', 'DIRETORIA'),
+    ('PRO', 'PROJETOS'),
 )
 
 
@@ -183,7 +184,7 @@ def post_usuario(self, instance, *args, **kwargs):
 
     def save(self, *arqs, **kwargs):
         super(Usuario, self).save(*arqs, **kwargs)
-        mensagem =  str('Parabens!!! Você agora é um novo membro Next Step!\n Usuario: '+ self.Login+'Senha: 010101')
+        mensagem =  str('Parabens!!! Você agora é um novo membro Next Step!\n Usuario: '+ self.Login+'\nSenha: 010101')
         send_mail(
             'Next Step',
              mensagem,
@@ -248,8 +249,10 @@ class Reuniao(models.Model):
     ausencia = models.ManyToManyField('Usuario', null=True, blank=True, related_name="ausencia")
 
     def __str__(self):
-        return ", ".join([str (u) for u in self.presenca.all()])
+        return ",".join([str (u) for u in self.presenca.all()])
 
+    # def __str__(self):
+    #     return "".join([str (u) for u in self.presenca.all()])
 
     # def reuniao(self):
     #     if self.tipoReuniao == 'GER':

@@ -47,8 +47,10 @@
                                 <td>{{ u.dataReuniao }}</td>
                                  {% if u.tipoReuniao == 'GER' %}
                                 <td>GERAL</td>
-                                {% else %}
+                                 {% elif u.tipoReuniao == 'DIR' %}
                                   <td>DIRETORIA</td>
+                                      {% elif u.tipoReuniao == 'PRO' %}
+                                  <td>PROJETOS</td>
                                 {% endif %}
 
                                 <td>{{ u.descricaoReuniao }}</td>
