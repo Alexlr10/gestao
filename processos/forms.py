@@ -190,7 +190,8 @@ class ReuniaoForm(forms.ModelForm):
 
         widgets = {
             'descricaoReuniao': forms.Textarea(attrs={'class': 'form-control', 'id': 'descricaoReuniao'}),
-            'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control','id': 'dataReuniao'}),
+            'tipoReuniao': forms.Select(attrs={'id': 'descricaoReuniao'}),
         }
 
 class AtaForm(forms.ModelForm):

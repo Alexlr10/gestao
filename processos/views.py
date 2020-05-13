@@ -1,6 +1,8 @@
 import decimal
+from time import strptime
+
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils.datetime_safe import strftime
+from django.utils.datetime_safe import strftime, datetime
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from django.core.mail import send_mail, send_mass_mail
@@ -113,7 +115,7 @@ def editar_meus_dados(request):
         send_mail(
             'NextStep - Atualização',
             'Você atualizou as informações do seu perfil',
-            '',
+            'diretorianextstepsi@gmail.com',
              [usuario.Email],
             fail_silently=False,
         )
@@ -369,22 +371,28 @@ def reuniao(request):
 
         if form.is_valid():
             form.save()
+            dataReuniao = request.POST.get('dataReuniao')
+            tipoReuniao = request.POST.get('dataReuniao')
+            data = dataReuniao.split('-')
             pauta = request.POST.get('descricaoReuniao')
-            mensagem = str('A Next terá uma reuniao com as seguintes paltas: \n' + pauta)
 
+            if tipoReuniao == 'GER':
+                mensagem = str('A Next terá uma reuniao GERAL dia '+ data[2] + ' do '+  data[1] + ' com as seguintes paltas: \n' + pauta)
+            else:
+                mensagem = str('A Next terá uma reuniao de DIRETORIA dia '+ data[2] + ' do '+  data[1] + ' com as seguintes paltas: \n' + pauta)
+
+
+            print(mensagem)
             email = []
-
             reu = Reuniao.objects.last()
-
-            print(reu)
-
+           # print(reu)
             email.append(str(reu))
-            print(email)
+          #  print(email)
 
             send_mail(
                 'NextStep - Atualização',
                  mensagem,
-                '',
+                'diretorianextstepsi@gmail.com',
                  email,
                 fail_silently=False,
             )

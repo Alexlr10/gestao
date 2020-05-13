@@ -1,4 +1,4 @@
-asgiref==3.2.5
+asgiref==3.2.7
 cheroot==8.3.0
 dj-database-url==0.5.0
 dj-static==0.0.6
@@ -13,10 +13,9 @@ jaraco.functools==3.0.0
 Markdown==3.1.1
 more-itertools==8.2.0
 Pillow==7.0.0
-psycopg2-binary==2.8.2
 pypi==2.1
 python-decouple==3.1
-pytz==2018.9
+pytz==2020.1
 six==1.14.0
 sqlparse==0.3.1
 static3==0.7.0
