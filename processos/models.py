@@ -187,7 +187,7 @@ def post_usuario(self, instance, *args, **kwargs):
         send_mail(
             'Next Step',
              mensagem,
-            'diretorianextstepsi@gmail.com',
+            'sistemanextstepsi@gmail.com',
             [self.Email],
             fail_silently=False,
         )

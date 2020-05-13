@@ -115,7 +115,7 @@ def editar_meus_dados(request):
         send_mail(
             'NextStep - Atualização',
             'Você atualizou as informações do seu perfil',
-            'diretorianextstepsi@gmail.com',
+            'sistemanextstepsi@gmail.com',
              [usuario.Email],
             fail_silently=False,
         )
@@ -392,7 +392,7 @@ def reuniao(request):
             send_mail(
                 'NextStep - Atualização',
                  mensagem,
-                'diretorianextstepsi@gmail.com',
+                'sistemanextstepsi@gmail.com',
                  email,
                 fail_silently=False,
             )
