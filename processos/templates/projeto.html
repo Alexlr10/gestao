@@ -46,7 +46,15 @@
                             <tr>
                                 <td>{{ u.servico }}</td>
                                 <td>{{ u.dataEntrega }}</td>
-                                <td>{{ u.status }}</td>
+                            {% if u.status  == 0 %}
+                                <td>Iniciado</td>
+                             {% elif u.status  == 1 %}
+                                <td>Em andamento</td>
+                             {% elif u.status  == 2 %}
+                                <td>Pendente</td>
+                               {% elif u.status  == 3 %}
+                                <td>Finalizado</td>
+                            {% endif %}
 
                                 <td>
                                     {% for i in u.responsaveis.all %}

@@ -74,6 +74,141 @@
     <!-- /.col -->
 </div>
 
+
+
+
+
+<div class="col-xs-12"class="box table-responsive">
+
+ <div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Resultado 1º Semestre</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="table-responsive">
+                <table id="tabela2" class="table no-margin table-bordered" style="font-size: 13px">
+
+                    <thead>
+                    <tr>
+                        <th>Ano</th>
+                        <th>Rendimentos (R$)</th>
+                        <th>Despesas  (R$)</th>
+                        <th>Balanco  (R$)</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    {% for u in balancoPrimeiroSemestre %}
+                    <tr>
+
+                       <td>{{ u.ano }}</td>
+                       <td>{{ u.rendimento }}</td>
+                        <td>{{ u.despesa }}</td>
+                        <td>{{ u.total}}</td>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+
+
+
+
+
+<div class="col-xs-12"class="box table-responsive">
+
+ <div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Resultado 2º Semestre</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+
+
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="table-responsive">
+                <table id="tabela3" class="table no-margin table-bordered" style="font-size: 13px">
+
+                    <thead>
+                    <tr>
+                        <th>Ano</th>
+                        <th>Rendimentos (R$)</th>
+                        <th>Despesas  (R$)</th>
+                        <th>Balanco  (R$)</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    {% for u in balancoSegundoSemestre %}
+                    <tr>
+
+                       <td>{{ u.ano }}</td>
+                       <td>{{ u.rendimento }}</td>
+                        <td>{{ u.despesa }}</td>
+                        <td>{{ u.total}}</td>
+
+                        </td>
+
+                    </tr>
+
+
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <!-- /.col -->
+</div>
+
+
+
+
+
+
 <div class="col-xs-12"class="box table-responsive">
 
  <div class="row">
@@ -92,7 +227,7 @@
         <!-- /.box-header -->
         <div class="box-body">
             <div class="table-responsive">
-                <table id="tabela2" class="table no-margin table-bordered" style="font-size: 13px">
+                <table id="tabela4" class="table no-margin table-bordered" style="font-size: 13px">
 
                     <thead>
                     <tr>
@@ -192,7 +327,30 @@
       'info'        : true,
       'autoWidth'   : true
     })
-  })
+  });
+
+          $(function () {
+    $('#tabela3').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : false,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  });
+
+               $(function () {
+    $('#tabela4').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : false,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  });
+
 </script>
 
 

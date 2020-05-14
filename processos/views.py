@@ -461,7 +461,7 @@ def reuniao_delete(request, pk):
 ######## Ata
 @login_required
 def ata(request):
-    ata = Ata.objects.all()
+    ata = Ata.objects.all().order_by('-dataPublicacao')
     if request.method == 'POST':
         form = AtaForm(request.POST)
 
@@ -508,7 +508,7 @@ def ata_delete(request, pk):
 ######## Receitas
 @login_required
 def receita(request):
-    receita = Receita.objects.all()
+    receita = Receita.objects.all().order_by('-Data')
 
     if request.method == 'POST':
         form = ReceitaForm(request.POST)
@@ -556,7 +556,7 @@ def receita_delete(request, pk):
 
 @login_required
 def despesa(request):
-    despesa = Despesas.objects.all()
+    despesa = Despesas.objects.all().order_by('-data')
     form = DespesasForm(request.POST)
 
     if request.method == 'POST':
@@ -605,7 +605,34 @@ def balanco(request):
                                       (sum(receita) - sum(despesa)) as total FROM 
                                         public.processos_balanco GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')''')
 
+    balancoPrimeiroSemestre = Balanco.objects.raw('''SELECT DISTINCT 1 as id,to_char(processos_balanco."datas", 'YYYY') as ano,
+                                                    sum(receita) as rendimento,
+                                                    sum(despesa) as despesa, (sum(receita) - sum(despesa)) as total 
+                                                    FROM public.processos_balanco  where 
+                                                    to_char(processos_balanco."datas", 'MM') = '01' 
+                                                    or to_char(processos_balanco."datas", 'MM') = '02' or 
+                                                    to_char(processos_balanco."datas", 'MM') = '03' or
+                                                     to_char(processos_balanco."datas", 'MM') = '04' or 
+                                                     to_char(processos_balanco."datas", 'MM') = '05' or 
+                                                     to_char(processos_balanco."datas", 'MM') = '06'
+                                                      GROUP BY to_char(processos_balanco."datas", 'YYYY') ''')
+
+    balancoSegundoSemestre = Balanco.objects.raw('''SELECT DISTINCT 1 as id,to_char(processos_balanco."datas", 'YYYY') as ano,
+                                                        sum(receita) as rendimento,
+                                                        sum(despesa) as despesa, (sum(receita) - sum(despesa)) as total 
+                                                        FROM public.processos_balanco  where 
+                                                        to_char(processos_balanco."datas", 'MM') = '07' 
+                                                        or to_char(processos_balanco."datas", 'MM') = '08' or 
+                                                        to_char(processos_balanco."datas", 'MM') = '09' or
+                                                         to_char(processos_balanco."datas", 'MM') = '10' or 
+                                                         to_char(processos_balanco."datas", 'MM') = '11' or 
+                                                         to_char(processos_balanco."datas", 'MM') = '12'
+                                                          GROUP BY to_char(processos_balanco."datas", 'YYYY') ''')
+
     balancoCompleto = Balanco.objects.all().order_by('-datas')
+
+
+
     form = BalancoForm(request.POST)
 
     if request.method == 'POST':
@@ -619,6 +646,8 @@ def balanco(request):
         'form': form,
         'balanco': balanco,
         'balancoCompleto':balancoCompleto,
+        'balancoPrimeiroSemestre':balancoPrimeiroSemestre,
+        'balancoSegundoSemestre':balancoSegundoSemestre,
 
     }
 
@@ -648,14 +677,3 @@ def balanco_edit(request, pk):
 
     return render(request, 'balanco_edit.html', context)
 
-@login_required
-def historico_membros(request):
-    historico = HistoricoMembros.objects.all()
-
-    form = HistoricoForm()
-    context = {
-        'historico': historico,
-        'form': form
-    }
-
-    return render(request, 'historicoMembros.html', context)
