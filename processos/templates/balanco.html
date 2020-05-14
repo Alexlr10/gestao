@@ -172,28 +172,27 @@
 
 <script>
 
+ $(function () {
+    $('#tabela').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : false,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  });
 
-    $(document).ready(function () {
-
-        $('#tabela').DataTable({
-            "language": {
-                "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
-            },
-            stateSave: true,
-        });
-
-    });
-
-      $(document).ready(function () {
-
-        $('#tabela2').DataTable({
-            "language": {
-                "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
-            },
-            stateSave: true,
-        });
-
-    });
+     $(function () {
+    $('#tabela2').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : false,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
 </script>
 
 

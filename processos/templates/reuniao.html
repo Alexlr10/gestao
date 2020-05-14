@@ -127,42 +127,24 @@
 {% endblock content-main %} {% block extraJS %}
 
 
-    <script type="text/javascript">
-
-        $(function () {
-            var campo = $("#id_nomeproduto");
-            campo.keyup(function (e) {
-                e.preventDefault();
-                campo.val($(this).val().toUpperCase());
-            });
-        });
-    </script>
-
 
     <script>
 
-
-        $(document).ready(function () {
-
-            $('#tabela').DataTable({
-                "language": {
-                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
-                },
-                stateSave: true,
-            });
-
-        });
+ $(function () {
+    $('#tabela').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : false,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  });
     </script>
 
 
 
-    <script type="text/javascript">
-        $("#phone").mask("(00) 0000-0000");
-        $("#cel1").mask("(00) 0 0000-0000");
-        $("#cel2").mask("(00) 0 0000-0000");
-        $("#cpf").mask("000.000.000-00");
 
-    </script>
 
 
 {% endblock extraJS %}

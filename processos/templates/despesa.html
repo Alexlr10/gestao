@@ -128,16 +128,16 @@
 <script>
 
 
-    $(document).ready(function () {
-
-        $('#tabela').DataTable({
-            "language": {
-                "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
-            },
-            stateSave: true,
-        });
-
-    });
+ $(function () {
+    $('#tabela').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : false,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
 </script>
 
 

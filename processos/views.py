@@ -176,7 +176,8 @@ def contas(request):
 
 @login_required
 def mensagem(request):
-    ouvidoria = Ouvidoria.objects.all()
+    ouvidoria = Ouvidoria.objects.all().order_by('data')
+    print(ouvidoria)
 
     form = OuvidoriaForm()
 
@@ -190,6 +191,7 @@ def mensagem(request):
 @login_required
 def ouvidoria(request):
     ouvidoria = Ouvidoria.objects.all()
+    ouvidoria.sort()
     if request.method == 'POST':
         form = OuvidoriaForm(request.POST)
 
@@ -385,7 +387,7 @@ def projeto_delete(request, pk):
 ######## Reuniao
 @login_required
 def reuniao(request):
-    reuniao = Reuniao.objects.all()
+    reuniao = Reuniao.objects.all().order_by('-dataReuniao')
     if request.method == 'POST':
         form = ReuniaoForm(request.POST)
 
@@ -405,7 +407,7 @@ def reuniao(request):
 
 
             reu = Reuniao.objects.last()
-            membros = str(reu)
+            membros = ",".join([str (u) for u in reu.presenca.all()])
             email = membros.split(',')
             print(email)
 
