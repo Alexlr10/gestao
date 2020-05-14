@@ -190,6 +190,13 @@ def mensagem(request):
 @login_required
 def ouvidoria(request):
     ouvidoria = Ouvidoria.objects.all()
+    if request.method == 'POST':
+        form = OuvidoriaForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Menssagem enviada com sucesso')
+            return redirect('ouvidoria')
 
     form = OuvidoriaForm()
 
