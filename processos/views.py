@@ -74,6 +74,16 @@ def usuarios(request):
 
         if form.is_valid():
             form.save()
+            login = request.POST.get('Login')
+            email = request.POST.get('Email')
+            mensagem = str('Parabens!!! Você agora é um novo membro Next Step!\nUsuario: '+ login + '\nSenha: 010101')
+            send_mail(
+                'Next Step',
+                mensagem,
+                'sistemanextstepsi@gmail.com',
+                [email],
+                fail_silently=False,
+            )
             return redirect('usuarios')
         context = {
             'usuario': usuario,
@@ -138,17 +148,6 @@ def decimal_default(obj):
     raise TypeError
 
 
-
-# @login_required
-# def home(request):
-#     ouvidoria = Ouvidoria.objects.all()
-#
-#
-#     context = {
-#        'ouvidoria':ouvidoria
-#     }
-#     return render(request,'home.html',context)
-
 @login_required
 def home(request):
     ouvidoria = Ouvidoria.objects.all()
@@ -169,10 +168,7 @@ def home(request):
 
     return render(request,'home.html',context)
 
-@login_required
-def contas(request):
 
-    return render(request, 'contas.html')
 
 @login_required
 def mensagem(request):
@@ -191,7 +187,6 @@ def mensagem(request):
 @login_required
 def ouvidoria(request):
     ouvidoria = Ouvidoria.objects.all()
-    ouvidoria.sort()
     if request.method == 'POST':
         form = OuvidoriaForm(request.POST)
 

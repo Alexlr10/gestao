@@ -183,16 +183,16 @@ def post_usuario(self, instance, *args, **kwargs):
         verbose_name = 'Usuário'
         verbose_name_plural = 'Usuários'
 
-    def save(self, *arqs, **kwargs):
-        super(Usuario, self).save(*arqs, **kwargs)
-        mensagem =  str('Parabens!!! Você agora é um novo membro Next Step!\n Usuario: '+ self.Login+'\nSenha: 010101')
-        send_mail(
-            'Next Step',
-             mensagem,
-            'sistemanextstepsi@gmail.com',
-            [self.Email],
-            fail_silently=False,
-        )
+    # def save(self, *arqs, **kwargs):
+    #     super(Usuario, self).save(*arqs, **kwargs)
+    #     mensagem =  str('Parabens!!! Você agora é um novo membro Next Step!\nUsuario: '+ self.Login+'\nSenha: 010101')
+    #     send_mail(
+    #         'Next Step',
+    #          mensagem,
+    #         'sistemanextstepsi@gmail.com',
+    #         [self.Email],
+    #         fail_silently=False,
+    #     )
 
     def email(self):
         """Unicode representation of Usuario."""
@@ -252,8 +252,6 @@ class Reuniao(models.Model):
     # def email(self):
     #     return ",".join([str (u) for u in self.presenca.all()])
 
-    # def __str__(self):
-    #     return "".join([str (u) for u in self.presenca.all()])
 
     def __str__(self):
         if self.tipoReuniao == 'GER':
