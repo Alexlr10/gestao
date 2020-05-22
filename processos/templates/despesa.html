@@ -1,150 +1,152 @@
 {% extends "base.html" %} {% load staticfiles %} {% load bootstrap %} {% block content-header %}
 
-<i class="fa fa-user "> </i> Despesas
-<small>Gerenciar Despesa</small>
+    <i class="fa fa-user "> </i> Despesas
+    <small>Gerenciar Despesa</small>
 
 
 {% endblock content-header %} {% block content-main %}
 
-<div class="col-xs-12">
+    <div class="col-xs-12">
 
-    <!-- /.box -->
-
-
-   <div class="box table-responsive">
-        <div class="box-header">
-
-            <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
-                Despesas
-            </button>
-
-        </div>
+        <!-- /.box -->
 
 
-        <div class="box-header">
-            <h3 class="box-title">Todas os despesas cadastradas no sistema</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="table-responsive">
-                <table id="tabela" class="table no-margin table-bordered" style="font-size: 13px">
+        <div class="box table-responsive">
+            <div class="box-header">
 
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Data</th>
-                        <th>Valor</th>
-                        <th>Pagamento</th>
+                <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
+                    Despesas
+                </button>
+
+            </div>
 
 
-                        <th>Ações</th>
+            <div class="box-header">
+                <h3 class="box-title">Todas os despesas cadastradas no sistema</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table id="tabela" class="table no-margin table-bordered" style="font-size: 13px">
 
-                    </tr>
-                    </thead>
-                    <tbody>
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Data</th>
+                            <th>Valor</th>
+                            <th>Pagamento</th>
 
-                    {% for u in despesa %}
-                    <tr>
-                        <td>{{ u.despesa }}</td>
-                        <td>{{ u.data }}</td>
-                          {% if u.Pagamento == 1 %}
+
+                            <th>Ações</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for u in despesa %}
+                            <tr>
+                                <td>{{ u.despesa }}</td>
+                                <td>{{ u.data }}</td>
+                                {% if u.Pagamento == 1 %}
                                     <td>Efetuado</td>
                                 {% else %}
                                     <td>À efetuar</td>
                                 {% endif %}
-                        <td>{{ u.valor}}</td>
+                                <td>{{ u.valor }}</td>
 
 
-                        </td>
+                                </td>
 
 
+                                <td>
+                                    <a href="{% url 'despesa_edit' u.id %}" data-toggle="modal"
+                                       data-target="#myModal{{ u.id }}">
+                                        <button type="button" class="btn btn-xs btn-warning">Editar</button>
+                                    </a>
+                                    <a href="{% url 'despesa_delete' u.id %}">
+                                        <button type="button" class="btn btn-xs btn-danger">Apagar</button>
+                                    </a>
 
-                        <td>
-                            <a href="{% url 'despesa_edit' u.id %}" data-toggle="modal"
-                               data-target="#myModal{{ u.id }}">
-                                <button type="button" class="btn btn-xs btn-warning">Editar</button>
-                            </a>
-                            <a href="{% url 'despesa_delete' u.id %}">
-                                <button type="button" class="btn btn-xs btn-danger">Apagar</button>
-                            </a>
-
-                        </td>
-
-
-                    </tr>
+                                </td>
 
 
-                    <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
+                            </tr>
 
+
+                            <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
 
-                    {% endfor %}
+                        {% endfor %}
 
 
-                    </tfoot>
-                </table>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
             </div>
-            <!-- /.box-body -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <div class="modal fade" id="exampleModal51" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Despesa</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        {% csrf_token %} {{ form|bootstrap }}
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                    </form>
+                </div>
+
+            </div>
         </div>
     </div>
-    <!-- /.col -->
-</div>
-<div class="modal fade" id="exampleModal51" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Despesa</h4>
-            </div>
-            <div class="modal-body">
-                <form method="POST">
-                    {% csrf_token %} {{ form|bootstrap }}
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Cadastrar</button>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 {% endblock content-main %} {% block extraJS %}
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    $(function(){
-	 var campo = $("#despesa");
-	 campo.keyup(function(e){
-		 e.preventDefault();
-		 campo.val($(this).val().toUpperCase());
-	 });
- });
-</script>
-
-
-<script>
+        $(function () {
+            var campo = $("#despesa");
+            campo.keyup(function (e) {
+                e.preventDefault();
+                campo.val($(this).val().toUpperCase());
+            });
+        });
+    </script>
 
 
- $(function () {
-    $('#tabela').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : false,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  })
-</script>
+    <script>
+
+
+        $(function () {
+            $('#tabela').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+            })
+        })
+    </script>
 
 
 

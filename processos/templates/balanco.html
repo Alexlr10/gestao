@@ -1,363 +1,368 @@
 {% extends "base.html" %} {% load staticfiles %} {% load bootstrap %} {% block content-header %}
 
-<i class="fa fa-user "> </i> Balanço
-<small>Gerenciar Balanço</small>
+    <i class="fa fa-user "> </i> Balanço
+    <small>Gerenciar Balanço</small>
 
 
 {% endblock content-header %} {% block content-main %}
 
-<div class="col-xs-12">
+    <div class="col-xs-12">
 
-    <!-- /.box -->
-
-
-   <div class="box table-responsive">
-        <div class="box-header">
+        <!-- /.box -->
 
 
-
-        </div>
-
-
-        <div class="box-header">
-            <h3 class="box-title">Balanço mensal das receitas e despesas</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="table-responsive">
-                <table id="tabela" class="table no-margin table-bordered" style="font-size: 13px">
-
-                    <thead>
-                    <tr>
-                        <th>Periodo</th>
-                        <th>Rendimentos (R$)</th>
-                        <th>Despesas  (R$)</th>
-                        <th>Balanco  (R$)</th>
+        <div class="box table-responsive">
+            <div class="box-header">
 
 
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    {% for u in balanco %}
-                    <tr>
-
-                        <td>{{ u.periodo }}</td>
-                       <td>{{ u.rendimento }}</td>
-                        <td>{{ u.despesa }}</td>
-                        <td>{{ u.total}}</td>
-
-                        </td>
-
-                    </tr>
+            </div>
 
 
-                    <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
+            <div class="box-header">
+                <h3 class="box-title">Balanço mensal das receitas e despesas</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table id="tabela" class="table no-margin table-bordered" style="font-size: 13px">
 
+                        <thead>
+                        <tr>
+                            <th>Periodo</th>
+                            <th>Rendimentos (R$)</th>
+                            <th>Despesas (R$)</th>
+                            <th>Balanco (R$)</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for u in balanco %}
+                            <tr>
+
+                                <td>{{ u.periodo }}</td>
+                                <td>{{ u.rendimento }}</td>
+                                <td>{{ u.despesa }}</td>
+                                <td>{{ u.total }}</td>
+
+                                </td>
+
+                            </tr>
+
+
+                            <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
 
-                    {% endfor %}
+                        {% endfor %}
 
 
-                    </tfoot>
-                </table>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
             </div>
-            <!-- /.box-body -->
-        </div>
-    </div>
-    <!-- /.col -->
-</div>
-
-
-
-
-
-<div class="col-xs-12"class="box table-responsive">
-
- <div class="row">
-        <div class="col-md-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">Resultado 1º Semestre</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-
-
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="table-responsive">
-                <table id="tabela2" class="table no-margin table-bordered" style="font-size: 13px">
-
-                    <thead>
-                    <tr>
-                        <th>Ano</th>
-                        <th>Rendimentos (R$)</th>
-                        <th>Despesas  (R$)</th>
-                        <th>Balanco  (R$)</th>
-
-
-                    </tr>
-                    </thead>
-                    <tbody>
-
-
-                    {% for u in balancoPrimeiroSemestre %}
-                    <tr>
-
-                       <td>{{ u.ano }}</td>
-                       <td>{{ u.rendimento }}</td>
-                        <td>{{ u.despesa }}</td>
-                        <td>{{ u.total}}</td>
-
-                        </td>
-
-                    </tr>
-
-
-
-                    </tr>
-
-                    {% endfor %}
-
-
-                    </tfoot>
-                </table>
-            </div>
-            <!-- /.box-body -->
-        </div>
-    </div>
-    <!-- /.col -->
-</div>
-
-
-
-
-
-<div class="col-xs-12"class="box table-responsive">
-
- <div class="row">
-        <div class="col-md-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">Resultado 2º Semestre</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-
-
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="table-responsive">
-                <table id="tabela3" class="table no-margin table-bordered" style="font-size: 13px">
-
-                    <thead>
-                    <tr>
-                        <th>Ano</th>
-                        <th>Rendimentos (R$)</th>
-                        <th>Despesas  (R$)</th>
-                        <th>Balanco  (R$)</th>
-
-
-                    </tr>
-                    </thead>
-                    <tbody>
-
-{#    <span class="badge bg-red"></span>#}
-                    {% for u in balancoSegundoSemestre %}
-                    <tr>
-
-                       <td>{{ u.ano }}</td>
-                       <td>{{ u.rendimento }}</td>
-                        <td>{{ u.despesa }}</td>
-                        <td>{{ u.total}}</td>
-
-                        </td>
-
-                    </tr>
-
-
-
-                    </tr>
-
-                    {% endfor %}
-
-
-                    </tfoot>
-                </table>
-            </div>
-            <!-- /.box-body -->
-        </div>
-    </div>
-    <!-- /.col -->
-</div>
-
-
-
-
-
-
-<div class="col-xs-12"class="box table-responsive">
-
- <div class="row">
-        <div class="col-md-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">Giro de Caixa</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-            </div>
-
-
-        <!-- /.box-header -->
-        <div class="box-body">
-            <div class="table-responsive">
-                <table id="tabela4" class="table no-margin table-bordered" style="font-size: 13px">
-
-                    <thead>
-                    <tr>
-                        <th>Periodo</th>
-                        <th>Pagamento</th>
-                        <th>Rendimentos (R$)</th>
-                        <th>Despesas  (R$)</th>
-
-
-
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    {% for u in balancoCompleto %}
-                    <tr>
-
-                        <td>{{ u.datas }}</td>
-                        {% if u.Pagamento == 1 %}
-                                    <td>Efetuado</td>
-                                {% else %}
-                                    <td>À efetuar</td>
-                                {% endif %}
-                       <td>{{ u.receita }}</td>
-                        <td>{{ u.despesa }}</td>
-
-
-                         </td>
-
-
-
-
-
-                    </tr>
-
-
-                    <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    {% endfor %}
-
-
-                    </tfoot>
-                </table>
-            </div>
-            <!-- /.box-body -->
-        </div>
-    </div>
-    <!-- /.col -->
-</div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
         </div>
         <!-- /.col -->
-      </div>
-      <!-- /.row -->
+    </div>
+
+
+
+
+
+    <div class="col-xs-12" class="box table-responsive">
+
+    <div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Resultado 1º Semestre</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table id="tabela2" class="table no-margin table-bordered" style="font-size: 13px">
+
+                        <thead>
+                        <tr>
+                            <th>Ano</th>
+                            <th>Rendimentos (R$)</th>
+                            <th>Despesas (R$)</th>
+                            <th>Balanco (R$)</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        {% for u in balancoPrimeiroSemestre %}
+                            <tr>
+
+                                <td>{{ u.ano }}</td>
+                                <td>{{ u.rendimento }}</td>
+                                <td>{{ u.despesa }}</td>
+                                <td>{{ u.total }}</td>
+
+                                </td>
+
+                            </tr>
+
+
+
+                            </tr>
+
+                        {% endfor %}
+
+
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+
+
+
+
+
+    <div class="col-xs-12" class="box table-responsive">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Resultado 2º Semestre</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table id="tabela3" class="table no-margin table-bordered" style="font-size: 13px">
+
+                                <thead>
+                                <tr>
+                                    <th>Ano</th>
+                                    <th>Rendimentos (R$)</th>
+                                    <th>Despesas (R$)</th>
+                                    <th>Balanco (R$)</th>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {#    <span class="badge bg-red"></span>#}
+                                {% for u in balancoSegundoSemestre %}
+                                    <tr>
+
+                                        <td>{{ u.ano }}</td>
+                                        <td>{{ u.rendimento }}</td>
+                                        <td>{{ u.despesa }}</td>
+                                        <td>{{ u.total }}</td>
+
+                                        </td>
+
+                                    </tr>
+
+
+
+                                    </tr>
+
+                                {% endfor %}
+
+
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+
+
+            <div class="col-xs-12" class="box table-responsive">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Giro de Caixa</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                            class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="table-responsive">
+                                    <table id="tabela4" class="table no-margin table-bordered" style="font-size: 13px">
+
+                                        <thead>
+                                        <tr>
+                                            <th>Periodo</th>
+                                            <th>Pagamento</th>
+                                            <th>Rendimentos (R$)</th>
+                                            <th>Despesas (R$)</th>
+
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for u in balancoCompleto %}
+                                            <tr>
+
+                                                <td>{{ u.datas }}</td>
+                                                {% if u.Pagamento == 1 %}
+                                                    <td>Efetuado</td>
+                                                {% else %}
+                                                    <td>À efetuar</td>
+                                                {% endif %}
+                                                <td>{{ u.receita }}</td>
+                                                <td>{{ u.despesa }}</td>
+
+
+                                                </td>
+
+
+                                            </tr>
+
+
+                                            <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
+                                                 aria-labelledby="exampleModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        {% endfor %}
+
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-footer -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
 
 
 {% endblock content-main %} {% block extraJS %}
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    $(function(){
-	 var campo = $("#id_nomeproduto");
-	 campo.keyup(function(e){
-		 e.preventDefault();
-		 campo.val($(this).val().toUpperCase());
-	 });
- });
-</script>
+        $(function () {
+            var campo = $("#id_nomeproduto");
+            campo.keyup(function (e) {
+                e.preventDefault();
+                campo.val($(this).val().toUpperCase());
+            });
+        });
+    </script>
 
 
-<script>
+    <script>
 
- $(function () {
-    $('#tabela').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : false,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  });
+        $(function () {
+            $('#tabela').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+            })
+        });
 
-     $(function () {
-    $('#tabela2').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : false,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  });
+        $(function () {
+            $('#tabela2').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+            })
+        });
 
-          $(function () {
-    $('#tabela3').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : false,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  });
+        $(function () {
+            $('#tabela3').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+            })
+        });
 
-               $(function () {
-    $('#tabela4').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : false,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  });
+        $(function () {
+            $('#tabela4').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+            })
+        });
 
-</script>
+    </script>
 
 
 

@@ -45,12 +45,12 @@
                         {% for u in reuniao %}
                             <tr>
                                 <td>{{ u.dataReuniao }}</td>
-                                 {% if u.tipoReuniao == 'GER' %}
-                                <td>GERAL</td>
-                                 {% elif u.tipoReuniao == 'DIR' %}
-                                  <td>DIRETORIA</td>
-                                      {% elif u.tipoReuniao == 'PRO' %}
-                                  <td>PROJETOS</td>
+                                {% if u.tipoReuniao == 'GER' %}
+                                    <td>GERAL</td>
+                                {% elif u.tipoReuniao == 'DIR' %}
+                                    <td>DIRETORIA</td>
+                                {% elif u.tipoReuniao == 'PRO' %}
+                                    <td>PROJETOS</td>
                                 {% endif %}
 
                                 <td>{{ u.descricaoReuniao }}</td>
@@ -130,16 +130,19 @@
 
     <script>
 
- $(function () {
-    $('#tabela').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : false,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  });
+        $(function () {
+            $('#tabela').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+            })
+        });
     </script>
 
 
