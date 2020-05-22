@@ -404,7 +404,8 @@ def reuniao(request):
             reu = Reuniao.objects.last()
             membros = ",".join([str (u) for u in reu.presenca.all()])
             email = membros.split(',')
-            print(email)
+
+            print(list(email))
 
             send_mail(
                 'NextStep - REUNIÃO',
@@ -503,7 +504,7 @@ def ata_delete(request, pk):
 ######## Receitas
 @login_required
 def receita(request):
-    receita = Receita.objects.all().order_by('-Data')
+    receita = Receita.objects.all().order_by('Data')
 
     if request.method == 'POST':
         form = ReceitaForm(request.POST)
@@ -525,11 +526,11 @@ def receita(request):
 @login_required
 def receita_edit(request, pk):
     receita = get_object_or_404(Receita, pk=pk)
-    balanco = Balanco.objects.get(receitas_id=pk)
+  #  balanco = Balanco.objects.get(receitas_id=pk)
     form = ReceitaForm(request.POST or None, instance=receita)
 
     if form.is_valid():
-        balanco.delete()
+      #  balanco.delete()
         form.save()
         return redirect('receita')
 

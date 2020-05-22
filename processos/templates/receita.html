@@ -31,10 +31,15 @@
 
                         <thead>
                         <tr>
-                            <th>Serviço/Cliente</th>
+                            <th>Serviço</th>
                             <th>Data</th>
-                            <th>Desconto</th>
-                            <th>Valor Total</th>
+                            <th>Valor Parcela</th>
+                            <th>Entrada</th>
+
+
+                            <th>Nº da Parcela</th>
+                            <th>Pagamento</th>
+
                             <th>Ações</th>
 
                         </tr>
@@ -45,8 +50,16 @@
                             <tr>
                                 <td>{{ u.Servico }}</td>
                                 <td>{{ u.Data }}</td>
-                                <td>{{ u.Desconto }}</td>
-                                <td>{{ u.valorFinal }}</td>
+                                <td>{{ u.valorParcela }}</td>
+                                <td>{{ u.Entrada }}</td>
+
+
+                                <td>{{ u.parcelamento }}</td>
+                                {% if u.Pagamento == 1 %}
+                                    <td>Efetuado</td>
+                                {% else %}
+                                    <td>A receber</td>
+                                {% endif %}
 
                                 </td>
 

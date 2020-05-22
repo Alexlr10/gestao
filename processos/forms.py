@@ -166,7 +166,7 @@ class ServicoForm(forms.ModelForm):
         # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
-
+            'Desconto': forms.TextInput(attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
         }
         
 class ProjetoForm(forms.ModelForm):
@@ -218,7 +218,8 @@ class ReceitaForm(forms.ModelForm):
 
         widgets = {
             'Data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'Desconto': forms.TextInput(attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
+            'Entrada': forms.TextInput(attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
+            'valorParcela': forms.TextInput(attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
         }
 
 

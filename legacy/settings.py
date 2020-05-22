@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'bootstrapform',
     'ckeditor',
     'processos',
+
 ]
 
 MIDDLEWARE = [
@@ -107,11 +108,11 @@ DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dbur
 #         'PORT': '5432',
 #     }
 # }
-
+#
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'docemel',
+#         'NAME': 'gestao_interna',
 #         'USER': 'root',
 #         'PASSWORD': '91851007',
 #         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
