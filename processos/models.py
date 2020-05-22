@@ -273,7 +273,6 @@ class Ata(models.Model):
 class Receita(models.Model):
     Servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='servico')
     Data = models.DateField('Data',blank=True, null=True)
-    Entrada = models.DecimalField('Entrada',max_digits=6, decimal_places=2)
     valorParcela = models.DecimalField('Valor da Parcela', max_digits=6, decimal_places=2)
     Pagamento = models.BooleanField('Pagamento Efetuado', default=True)
     parcelamento = models.IntegerField('Parcelado', max_length=4, choices=FUNCAO_CHOICE_PARCELAMENTO)
@@ -288,9 +287,10 @@ class Receita(models.Model):
 
 
 class Despesas(models.Model):
-    despesa = models.CharField('Despesa', max_length=4, choices=FUNCAO_CHOICE_DESPESA)
+    despesa = models.CharField('Despesa',max_length=40, null=True, blank=True)
     data = models.DateField('data', blank=True, null=True)
     valor = models.DecimalField('valor', max_digits=6, decimal_places=2)
+    Pagamento = models.BooleanField('Pagamento Efetuado', default=True)
 
     class Meta:
         verbose_name = _("Despesa")
@@ -303,30 +303,33 @@ class Balanco(models.Model):
     receita = models.DecimalField('compra', max_digits=6, decimal_places=2,blank=True, null=True)
     despesa = models.DecimalField('despesa', max_digits=6, decimal_places=2,blank=True, null=True)
     datas = models.DateField('datas', blank=True, null=True)
+    Pagamento = models.BooleanField('Pagamento Efetuado', default=True)
 
     class Meta:
         verbose_name = _("Balanco")
         verbose_name_plural = _("Balanco")
 
-    # @receiver(post_save,sender=Receita)
-    # def salvar_rendimento(sender,instance,created, **kwargs):
-    #     receita = Balanco()
-    #     receita.receitas_id = instance.pk
-    #     receita.datas = instance.Data
-    #     receita.receita = ((instance.Servico.valor) - instance.Desconto)
-    #     receita.save()
-    #
-    # @receiver(post_save,sender=Despesas)
-    # def salvar_despesa(sender,instance,created, **kwargs):
-    #     despesa = Balanco()
-    #     despesa.despesa_id = instance.pk
-    #     despesa.datas = instance.data
-    #     despesa.despesa = instance.valor
-    #     despesa.save()
-    #
-    #
-    # def __str__(self):
-    #     return str(self.datas)
+    @receiver(post_save,sender=Receita)
+    def salvar_rendimento(sender,instance,created, **kwargs):
+        receita = Balanco()
+        receita.receitas_id = instance.pk
+        receita.datas = instance.Data
+        receita.receita = instance.valorParcela
+        receita.Pagamento = instance.Pagamento
+        receita.save()
+
+    @receiver(post_save,sender=Despesas)
+    def salvar_despesa(sender,instance,created, **kwargs):
+        despesa = Balanco()
+        despesa.despesa_id = instance.pk
+        despesa.datas = instance.data
+        despesa.despesa = instance.valor
+        despesa.Pagamento = instance.Pagamento
+        despesa.save()
+
+
+    def __str__(self):
+        return str(self.datas)
 
 class Ouvidoria(models.Model):
     data = models.DateField('data', blank=True, null=True)

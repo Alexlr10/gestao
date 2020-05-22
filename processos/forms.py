@@ -10,8 +10,9 @@ from . import models
 class UsuarioCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    password1 = forms.CharField(label=_('Senha'), widget=forms.TextInput(attrs={'type': 'password','id': 'password1'}))
-    password2 = forms.CharField(label=_('Confirmação da senha'), widget=forms.TextInput(attrs={'type': 'password','id': 'password2'}))
+    password1 = forms.CharField(label=_('Senha'), widget=forms.TextInput(attrs={'type': 'password', 'id': 'password1'}))
+    password2 = forms.CharField(label=_('Confirmação da senha'),
+                                widget=forms.TextInput(attrs={'type': 'password', 'id': 'password2'}))
 
     class Meta:
         model = Usuario
@@ -33,7 +34,6 @@ class UsuarioCreationForm(forms.ModelForm):
         widgets = {
 
             'Situacao': forms.CheckboxInput(attrs={'id': 'situacao', 'onclick': 'myFunction()'}),
-
 
         }
 
@@ -128,9 +128,10 @@ class UsuarioForm(forms.ModelForm):
 
         widgets = {
             'Nome': forms.TextInput(attrs={'placeholder': 'Nome'}),
-            'Login': forms.TextInput(attrs={'class': 'form-control','id':'Login'}),
-            'Password': forms.TextInput(attrs={'class': 'form-control','id':'Password'}),
-            'Situacao': forms.TextInput(attrs={'type': 'checkbox', 'class': 'form-control','id':'situacao', 'onclick':'myFunction()'}),
+            'Login': forms.TextInput(attrs={'class': 'form-control', 'id': 'Login'}),
+            'Password': forms.TextInput(attrs={'class': 'form-control', 'id': 'Password'}),
+            'Situacao': forms.TextInput(
+                attrs={'type': 'checkbox', 'class': 'form-control', 'id': 'situacao', 'onclick': 'myFunction()'}),
 
         }
 
@@ -157,6 +158,7 @@ class ClienteForm(forms.ModelForm):
             'email': forms.TextInput(attrs={'placeholder': 'E-mail '}),
         }
 
+
 class ServicoForm(forms.ModelForm):
     # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
 
@@ -168,7 +170,8 @@ class ServicoForm(forms.ModelForm):
         widgets = {
             'Desconto': forms.TextInput(attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
         }
-        
+
+
 class ProjetoForm(forms.ModelForm):
     # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
 
@@ -191,13 +194,12 @@ class ReuniaoForm(forms.ModelForm):
 
         widgets = {
             'descricaoReuniao': forms.Textarea(attrs={'class': 'form-control', 'id': 'descricaoReuniao'}),
-            'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control','id': 'dataReuniao'}),
+            'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control', 'id': 'dataReuniao'}),
             'tipoReuniao': forms.Select(attrs={'id': 'descricaoReuniao'}),
         }
 
+
 class AtaForm(forms.ModelForm):
-
-
     class Meta:
         model = Ata
         fields = '__all__'
@@ -219,10 +221,9 @@ class ReceitaForm(forms.ModelForm):
         widgets = {
             'Data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
             'Entrada': forms.TextInput(attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
-            'valorParcela': forms.TextInput(attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
+            'valorParcela': forms.TextInput(
+                attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
         }
-
-
 
 
 class DespesasForm(forms.ModelForm):
@@ -233,7 +234,7 @@ class DespesasForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
-
+            'despesa': forms.TextInput(attrs={'id': 'despesa'}),
             'data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
 
@@ -252,7 +253,6 @@ class BalancoForm(forms.ModelForm):
 
 
 class OuvidoriaForm(forms.ModelForm):
-
     class Meta:
         model = Ouvidoria
         fields = '__all__'
@@ -261,4 +261,3 @@ class OuvidoriaForm(forms.ModelForm):
 
             'data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
-

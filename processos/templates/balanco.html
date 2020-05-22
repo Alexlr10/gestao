@@ -232,6 +232,7 @@
                     <thead>
                     <tr>
                         <th>Periodo</th>
+                        <th>Pagamento</th>
                         <th>Rendimentos (R$)</th>
                         <th>Despesas  (R$)</th>
 
@@ -245,6 +246,11 @@
                     <tr>
 
                         <td>{{ u.datas }}</td>
+                        {% if u.Pagamento == 1 %}
+                                    <td>Efetuado</td>
+                                {% else %}
+                                    <td>À efetuar</td>
+                                {% endif %}
                        <td>{{ u.receita }}</td>
                         <td>{{ u.despesa }}</td>
 

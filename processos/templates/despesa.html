@@ -34,6 +34,7 @@
                         <th>Nome</th>
                         <th>Data</th>
                         <th>Valor</th>
+                        <th>Pagamento</th>
 
 
                         <th>Ações</th>
@@ -46,6 +47,11 @@
                     <tr>
                         <td>{{ u.despesa }}</td>
                         <td>{{ u.data }}</td>
+                          {% if u.Pagamento == 1 %}
+                                    <td>Efetuado</td>
+                                {% else %}
+                                    <td>À efetuar</td>
+                                {% endif %}
                         <td>{{ u.valor}}</td>
 
 
@@ -116,7 +122,7 @@
 <script type="text/javascript">
 
     $(function(){
-	 var campo = $("#id_nomeproduto");
+	 var campo = $("#despesa");
 	 campo.keyup(function(e){
 		 e.preventDefault();
 		 campo.val($(this).val().toUpperCase());
@@ -142,13 +148,7 @@
 
 
 
-<script type="text/javascript">
-    $("#phone").mask("(00) 0000-0000");
-    $("#cel1").mask("(00) 0 0000-0000");
-    $("#cel2").mask("(00) 0 0000-0000");
-    $("#cpf").mask("000.000.000-00");
 
-</script>
 
 
 {% endblock extraJS %}

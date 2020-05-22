@@ -526,11 +526,11 @@ def receita(request):
 @login_required
 def receita_edit(request, pk):
     receita = get_object_or_404(Receita, pk=pk)
-  #  balanco = Balanco.objects.get(receitas_id=pk)
+    balanco = Balanco.objects.get(receitas_id=pk)
     form = ReceitaForm(request.POST or None, instance=receita)
 
     if form.is_valid():
-      #  balanco.delete()
+        balanco.delete()
         form.save()
         return redirect('receita')
 
@@ -544,6 +544,8 @@ def receita_edit(request, pk):
 @login_required
 def receita_delete(request, pk):
     receita = get_object_or_404(Receita,pk=pk)
+    balanco = Balanco.objects.get(receitas_id=pk)
+    balanco.delete()
     receita.delete()
     messages.error(request, 'Cadastro removido com sucesso')
 
@@ -572,6 +574,8 @@ def despesa(request):
 @login_required
 def despesa_delete(request,pk):
     despesa = get_object_or_404(Despesas,pk=pk)
+    balanco = Balanco.objects.get(despesa_id=pk)
+    balanco.delete()
     despesa.delete()
     return redirect('despesa')
 
@@ -599,30 +603,34 @@ def balanco(request):
     balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_char(processos_balanco."datas", 'MM-YYYY') as periodo,
                                     sum(receita) as rendimento,  sum(despesa) as despesa,
                                       (sum(receita) - sum(despesa)) as total FROM 
-                                        public.processos_balanco GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')''')
+                                        public.processos_balanco 
+                                        WHERE processos_balanco."Pagamento" = true 
+                                        GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')''')
 
     balancoPrimeiroSemestre = Balanco.objects.raw('''SELECT DISTINCT 1 as id,to_char(processos_balanco."datas", 'YYYY') as ano,
                                                     sum(receita) as rendimento,
                                                     sum(despesa) as despesa, (sum(receita) - sum(despesa)) as total 
                                                     FROM public.processos_balanco  where 
-                                                    to_char(processos_balanco."datas", 'MM') = '01' 
+                                                    processos_balanco."Pagamento" = true and 
+                                                    (to_char(processos_balanco."datas", 'MM') = '01' 
                                                     or to_char(processos_balanco."datas", 'MM') = '02' or 
                                                     to_char(processos_balanco."datas", 'MM') = '03' or
                                                      to_char(processos_balanco."datas", 'MM') = '04' or 
                                                      to_char(processos_balanco."datas", 'MM') = '05' or 
-                                                     to_char(processos_balanco."datas", 'MM') = '06'
+                                                     to_char(processos_balanco."datas", 'MM') = '06')
                                                       GROUP BY to_char(processos_balanco."datas", 'YYYY') ''')
 
     balancoSegundoSemestre = Balanco.objects.raw('''SELECT DISTINCT 1 as id,to_char(processos_balanco."datas", 'YYYY') as ano,
                                                         sum(receita) as rendimento,
                                                         sum(despesa) as despesa, (sum(receita) - sum(despesa)) as total 
                                                         FROM public.processos_balanco  where 
-                                                        to_char(processos_balanco."datas", 'MM') = '07' 
+                                                         processos_balanco."Pagamento" = true and 
+                                                        (to_char(processos_balanco."datas", 'MM') = '07' 
                                                         or to_char(processos_balanco."datas", 'MM') = '08' or 
                                                         to_char(processos_balanco."datas", 'MM') = '09' or
                                                          to_char(processos_balanco."datas", 'MM') = '10' or 
                                                          to_char(processos_balanco."datas", 'MM') = '11' or 
-                                                         to_char(processos_balanco."datas", 'MM') = '12'
+                                                         to_char(processos_balanco."datas", 'MM') = '12')
                                                           GROUP BY to_char(processos_balanco."datas", 'YYYY') ''')
 
     balancoCompleto = Balanco.objects.all().order_by('-datas')
