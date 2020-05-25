@@ -505,6 +505,12 @@ def ata_delete(request, pk):
 @login_required
 def receita(request):
     receita = Receita.objects.all().order_by('Data')
+    receitaAReceber = Receita.objects.raw('''SELECT 1 as id, to_char(processos_receita."Data", 'MM-YYYY') as periodo,
+                                              Sum(processos_receita."valorParcela") as receita
+                                              FROM   public.processos_receita,  public.processos_servico 
+                                                WHERE processos_receita."Pagamento" = false
+                                                 GROUP BY to_char(processos_receita."Data",'MM-YYYY')''')
+
 
     if request.method == 'POST':
         form = ReceitaForm(request.POST)
@@ -518,7 +524,8 @@ def receita(request):
 
     context = {
         'form': form,
-        'receita': receita
+        'receita': receita,
+        'receitaAReceber':receitaAReceber,
     }
 
     return render(request, 'receita.html', context)
@@ -555,6 +562,9 @@ def receita_delete(request, pk):
 @login_required
 def despesa(request):
     despesa = Despesas.objects.all().order_by('-data')
+    despesaaPagar = Despesas.objects.filter(Pagamento=False).order_by('-data')
+    today = datetime.today()
+    print(today)
     form = DespesasForm(request.POST)
 
     if request.method == 'POST':
@@ -566,7 +576,9 @@ def despesa(request):
     context = {
 
         'form': form,
-        'despesa':despesa
+        'despesa':despesa,
+        'despesaaPagar':despesaaPagar,
+        'today':today
     }
 
     return render(request, 'despesa.html', context)
@@ -635,7 +647,11 @@ def balanco(request):
 
     balancoCompleto = Balanco.objects.all().order_by('-datas')
 
-
+    somatorioGeral = Balanco.objects.raw('''SELECT DISTINCT  1 as id,
+                                    sum(receita) as rendimento,  sum(despesa) as despesa,
+                                      (sum(receita) - sum(despesa)) as total FROM 
+                                        public.processos_balanco 
+                                        WHERE processos_balanco."Pagamento" = true ''')
 
     form = BalancoForm(request.POST)
 
@@ -652,6 +668,7 @@ def balanco(request):
         'balancoCompleto':balancoCompleto,
         'balancoPrimeiroSemestre':balancoPrimeiroSemestre,
         'balancoSegundoSemestre':balancoSegundoSemestre,
+        'somatorioGeral':somatorioGeral,
 
     }
 

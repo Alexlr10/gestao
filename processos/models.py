@@ -282,9 +282,6 @@ class Receita(models.Model):
         verbose_name_plural = _("Rerceitas")
 
 
-    def __str__(self):
-        return self.Cliente.nome
-
 
 class Despesas(models.Model):
     despesa = models.CharField('Despesa',max_length=40, null=True, blank=True)

@@ -93,6 +93,78 @@
             </div>
         </div>
         <!-- /.col -->
+
+
+        <div class="box table-responsive">
+
+
+            <div class="box-header">
+                <h3 class="box-title">Despesas à pagar </h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="table-responsive">
+                    <table id="tabela2" class="table no-margin table-bordered" style="font-size: 13px">
+
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Data</th>
+                            <th>Valor</th>
+                            <th>Pagamento</th>
+                            <th>Situação</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for u in despesaaPagar %}
+                            <tr>
+                                <td>{{ u.despesa }}</td>
+                                <td>{{ u.data }}</td>
+                                {% if u.Pagamento == 1 %}
+                                    <td>Efetuado</td>
+                                {% else %}
+                                    <td>À efetuar</td>
+                                {% endif %}
+                                <td>{{ u.valor }}</td>
+                                {% if u.data  > today.today.date %}
+
+                                    <td><span class="badge bg-grey">Em prazo</span></td>
+                                {% else %}
+
+                                    <td><span class="badge bg-red">Em Atraso</span></td>
+
+                                {% endif %}
+
+                                </td>
+
+
+                            </tr>
+
+
+                            <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        {% endfor %}
+
+
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+
+
     </div>
     <div class="modal fade" id="exampleModal51" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">
@@ -145,7 +217,20 @@
                     "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
                 },
             })
-        })
+        });
+        $(function () {
+            $('#tabela2').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+            })
+        });
     </script>
 
 

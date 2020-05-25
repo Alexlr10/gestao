@@ -41,11 +41,17 @@
                         {% for u in balanco %}
                             <tr>
 
-                                <td>{{ u.periodo }}</td>
-                                <td>{{ u.rendimento }}</td>
-                                <td>{{ u.despesa }}</td>
-                                <td>{{ u.total }}</td>
 
+                                <td><span class="badge bg-grey">{{ u.periodo }}</span></td>
+                                <td><span class="badge bg-green">{{ u.rendimento }}</span></td>
+                                <td><span class="badge bg-red">{{ u.despesa }}</span></td>
+                                {% if u.total > 0 %}
+                                    <td><span class="badge bg-green">{{ u.total }}</span></td>
+                                {% elif u.total == 0 %}
+                                    <td><span class="badge bg-orange">{{ u.rendimento }}</span></td>
+                                {% else  %}
+                                    <td><span class="badge bg-red">{{ u.rendimento }}</span></td>
+                                {% endif %}
                                 </td>
 
                             </tr>
@@ -113,12 +119,18 @@
                         {% for u in balancoPrimeiroSemestre %}
                             <tr>
 
-                                <td>{{ u.ano }}</td>
-                                <td>{{ u.rendimento }}</td>
-                                <td>{{ u.despesa }}</td>
-                                <td>{{ u.total }}</td>
 
-                                </td>
+                             <td><span class="badge bg-grey">{{ u.ano }}</span></td>
+                                <td><span class="badge bg-green">{{ u.rendimento }}</span></td>
+                                <td><span class="badge bg-red">{{ u.despesa }}</span></td>
+                                {% if u.total > 0 %}
+                                    <td><span class="badge bg-green">{{ u.total }}</span></td>
+                                {% elif u.total == 0 %}
+                                    <td><span class="badge bg-orange">{{ u.rendimento }}</span></td>
+                                {% else  %}
+                                    <td><span class="badge bg-red">{{ u.rendimento }}</span></td>
+                                {% endif %}
+
 
                             </tr>
 
@@ -179,10 +191,17 @@
                                 {% for u in balancoSegundoSemestre %}
                                     <tr>
 
-                                        <td>{{ u.ano }}</td>
-                                        <td>{{ u.rendimento }}</td>
-                                        <td>{{ u.despesa }}</td>
-                                        <td>{{ u.total }}</td>
+
+                             <td><span class="badge bg-grey">{{ u.ano }}</span></td>
+                                <td><span class="badge bg-green">{{ u.rendimento }}</span></td>
+                                <td><span class="badge bg-red">{{ u.despesa }}</span></td>
+                                {% if u.total > 0 %}
+                                    <td><span class="badge bg-green">{{ u.total }}</span></td>
+                                {% elif u.total == 0 %}
+                                    <td><span class="badge bg-orange">{{ u.total }}</span></td>
+                                {% else  %}
+                                    <td><span class="badge bg-red">{{ u.total }}</span></td>
+                                {% endif %}
 
                                         </td>
 
@@ -282,6 +301,89 @@
                 </div>
                 <!-- /.box-footer -->
             </div>
+
+
+            <div class="col-xs-12" class="box table-responsive">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Balanço Total</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                            class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="table-responsive">
+                                    <table id="tabela5" class="table no-margin table-bordered" style="font-size: 13px">
+
+                                        <thead>
+                                        <tr>
+
+                                            <th>Rendimentos (R$)</th>
+                                            <th>Despesas (R$)</th>
+                                            <th>Balanco (R$)</th>
+
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for u in somatorioGeral %}
+                                            <tr>
+
+
+
+                                <td><span class="badge bg-green">{{ u.receita }}</span></td>
+                                <td><span class="badge bg-red">{{ u.despesa }}</span></td>
+                                {% if u.total > 0 %}
+                                    <td><span class="badge bg-green">{{ u.total }}</span></td>
+                                {% elif u.total == 0 %}
+                                    <td><span class="badge bg-orange">{{ u.total }}</span></td>
+                                {% else  %}
+                                    <td><span class="badge bg-red">{{ u.total }}</span></td>
+                                {% endif %}
+
+                                                </td>
+
+
+                                            </tr>
+
+
+                                            <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
+                                                 aria-labelledby="exampleModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        {% endfor %}
+
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-footer -->
+            </div>
+
+
             <!-- /.box -->
         </div>
         <!-- /.col -->
@@ -361,6 +463,21 @@
                 },
             })
         });
+
+        $(function () {
+            $('#tabela5').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+            })
+        });
+
 
     </script>
 
