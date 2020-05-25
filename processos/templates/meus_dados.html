@@ -36,12 +36,21 @@
                         <form class="ng-pristine ng-valid" role="form" method="POST" enctype="multipart/form-data" action="{% url 'meusdados' %}" enctype="multipart/form-data" onclick="validarSenha();">
                             {% csrf_token %}
 
+                             {% if usuario.Foto.url != none %}
                              <div class="row">
                                 <div class="col-sm-12">
                                     <label for="usuarioFoto" class="control-label" >Foto</label>
                                     <input id="usuarioFoto" name="usuarioFoto" type="file"><a href="{{ usuario.Foto.url }}">{{ usuario.Foto.url }}</a>
                                 </div>
                             </div>
+                            {% else %}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label for="usuarioFoto" class="control-label" >Foto</label>
+                                    <input id="usuarioFoto" name="usuarioFoto" type="file">
+                                </div>
+                            </div>
+                            {% endif %}
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="nomeUsuario" class="control-label">Nome:</label>
