@@ -47,13 +47,13 @@
                                 <td>{{ u.servico }}</td>
                                 <td>{{ u.dataEntrega }}</td>
                             {% if u.status  == 0 %}
-                                <td>Iniciado</td>
+                                <td><span class="badge bg-blue">Iniciado</span></td>
                              {% elif u.status  == 1 %}
-                                <td>Em andamento</td>
+                                <td><span class="badge bg-grey">Em andamento</span></td>
                              {% elif u.status  == 2 %}
-                                <td>Pendente</td>
+                                <td><span class="badge bg-red">Pendente</span></td>
                                {% elif u.status  == 3 %}
-                                <td>Finalizado</td>
+                                <td><span class="badge bg-green">Finalizado</span></td>
                             {% endif %}
 
                                 <td>

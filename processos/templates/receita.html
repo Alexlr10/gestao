@@ -51,9 +51,9 @@
 
                                 <td>{{ u.parcelamento }}</td>
                                 {% if u.Pagamento == 1 %}
-                                    <td>Efetuado</td>
+                                    <td><span class="badge bg-green">Efetuado</span></td>
                                 {% else %}
-                                    <td>A receber</td>
+                                    <td><span class="badge bg-grey">A receber</span></td>
                                 {% endif %}
 
                                 </td>

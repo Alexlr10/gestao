@@ -114,6 +114,13 @@ def editar_meus_dados(request):
     if request.method == 'POST' and request.POST.get('usuarioSenha') != None:
         usuario = get_object_or_404(Usuario, pk=request.user.id)
 
+        # from .models import Importacao
+        # d = Importacao()
+        # d.Usuario = request.user
+        # d.Arquivo = request.FILES['arquivo']
+        # d.TipoArquivo = 'USUA'
+
+        usuario.Foto = request.FILES['usuarioFoto']
         usuario.Nome = request.POST.get('nomeUsuario')
         usuario.Email = request.POST.get('emailUsuario')
         usuario.Celular = request.POST.get('celularUsuario')
@@ -122,13 +129,13 @@ def editar_meus_dados(request):
         usuario.set_password(request.POST.get('usuarioSenha'))
         usuario.save()
 
-        send_mail(
-            'NextStep - Atualização',
-            'Você atualizou as informações do seu perfil',
-            'sistemanextstepsi@gmail.com',
-             [usuario.Email],
-            fail_silently=False,
-        )
+        # send_mail(
+        #     'NextStep - Atualização',
+        #     'Você atualizou as informações do seu perfil',
+        #     'sistemanextstepsi@gmail.com',
+        #      [usuario.Email],
+        #     fail_silently=False,
+        # )
         messages.success(request, 'Dados alterados com sucesso')
 
         return redirect(reverse('meusdados'))
@@ -210,6 +217,13 @@ def grafico(request):
                                          (sum(receita) - sum(despesa)) as total FROM 
                                            public.processos_balanco GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')''')
 
+    receitaAReceber = Receita.objects.raw('''SELECT 1 as id, to_char(processos_receita."Data", 'MM-YYYY') as periodo,
+                                              Sum(processos_receita."valorParcela") as receita
+                                              FROM   public.processos_receita
+                                                WHERE processos_receita."Pagamento" = true
+                                                 GROUP BY to_char(processos_receita."Data",'MM-YYYY')''')
+
+
 
     total = [obj.total for obj in balanco]
 
@@ -219,6 +233,10 @@ def grafico(request):
 
     rendimentos = [obj.rendimento for obj in balanco]
 
+    receita = [obj.receita for obj in receitaAReceber]
+    data = [obj.periodo for obj in receitaAReceber]
+    data.sort()
+
     context = {
         'total': json.dumps(total, default=decimal_default),
 
@@ -227,6 +245,8 @@ def grafico(request):
 
         'rendimentos': json.dumps(rendimentos, default=decimal_default),
 
+        'receita': json.dumps(receita, default=decimal_default),
+        'data': json.dumps(data),
     }
 
 
