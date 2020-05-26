@@ -129,13 +129,13 @@ def editar_meus_dados(request):
         usuario.set_password(request.POST.get('usuarioSenha'))
         usuario.save()
 
-        # send_mail(
-        #     'NextStep - Atualização',
-        #     'Você atualizou as informações do seu perfil',
-        #     'sistemanextstepsi@gmail.com',
-        #      [usuario.Email],
-        #     fail_silently=False,
-        # )
+        send_mail(
+            'NextStep - Atualização',
+            'Você atualizou as informações do seu perfil',
+            'sistemanextstepsi@gmail.com',
+             [usuario.Email],
+            fail_silently=False,
+        )
         messages.success(request, 'Dados alterados com sucesso')
 
         return redirect(reverse('meusdados'))
@@ -524,12 +524,13 @@ def ata_delete(request, pk):
 ######## Receitas
 @login_required
 def receita(request):
-    receita = Receita.objects.all().order_by('Data')
+    receita = Receita.objects.all().order_by('-Data')
     receitaAReceber = Receita.objects.raw('''SELECT 1 as id, to_char(processos_receita."Data", 'MM-YYYY') as periodo,
                                               Sum(processos_receita."valorParcela") as receita
-                                              FROM   public.processos_receita,  public.processos_servico 
+                                              FROM   public.processos_receita
                                                 WHERE processos_receita."Pagamento" = false
-                                                 GROUP BY to_char(processos_receita."Data",'MM-YYYY')''')
+                                                 GROUP BY to_char(processos_receita."Data",'MM-YYYY')
+                                                 ORDER BY to_char(processos_receita."Data",'MM-YYYY')''')
 
 
     if request.method == 'POST':
