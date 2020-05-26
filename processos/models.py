@@ -312,6 +312,7 @@ class Balanco(models.Model):
         receita.receitas_id = instance.pk
         receita.datas = instance.Data
         receita.receita = instance.valorParcela
+        receita.despesa = 0
         receita.Pagamento = instance.Pagamento
         receita.save()
 
@@ -321,6 +322,7 @@ class Balanco(models.Model):
         despesa.despesa_id = instance.pk
         despesa.datas = instance.data
         despesa.despesa = instance.valor
+        despesa.receita = 0
         despesa.Pagamento = instance.Pagamento
         despesa.save()
 

@@ -638,7 +638,8 @@ def balanco(request):
                                       (sum(receita) - sum(despesa)) as total FROM 
                                         public.processos_balanco 
                                         WHERE processos_balanco."Pagamento" = true 
-                                        GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')''')
+                                        GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')
+                                        ORDER BY to_char(processos_balanco."datas", 'MM-YYYY')''')
 
     balancoPrimeiroSemestre = Balanco.objects.raw('''SELECT DISTINCT 1 as id,to_char(processos_balanco."datas", 'YYYY') as ano,
                                                     sum(receita) as rendimento,
