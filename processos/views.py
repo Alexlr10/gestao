@@ -215,13 +215,15 @@ def grafico(request):
     balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_char(processos_balanco."datas", 'MM-YYYY') as periodo,
                                        sum(receita) as rendimento,  sum(despesa) as despesa,
                                          (sum(receita) - sum(despesa)) as total FROM 
-                                           public.processos_balanco GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')''')
+                                           public.processos_balanco GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')
+                                           ORDER BY to_char(processos_balanco."datas", 'MM-YYYY')''')
 
     receitaAReceber = Receita.objects.raw('''SELECT 1 as id, to_char(processos_receita."Data", 'MM-YYYY') as periodo,
                                               Sum(processos_receita."valorParcela") as receita
                                               FROM   public.processos_receita
                                                 WHERE processos_receita."Pagamento" = true
-                                                 GROUP BY to_char(processos_receita."Data",'MM-YYYY')''')
+                                                 GROUP BY to_char(processos_receita."Data",'MM-YYYY')
+                                                 order BY to_char(processos_receita."Data",'MM-YYYY')''')
 
 
 

@@ -275,7 +275,7 @@ class Receita(models.Model):
     Data = models.DateField('Data',blank=True, null=True)
     valorParcela = models.DecimalField('Valor da Parcela', max_digits=6, decimal_places=2)
     Pagamento = models.BooleanField('Pagamento Efetuado', default=True)
-    parcelamento = models.IntegerField('Parcelado', max_length=4, choices=FUNCAO_CHOICE_PARCELAMENTO)
+    parcela = models.CharField('Parcela', max_length=20,blank=True, null=True)
 
     class Meta:
         verbose_name = _("Receita")
