@@ -538,7 +538,7 @@ def receita(request):
                                               FROM   public.processos_receita
                                                 WHERE processos_receita."Pagamento" = false
                                                  GROUP BY to_char(processos_receita."Data",'MM-YYYY')
-                                                 ORDER BY to_char(processos_receita."Data",'MM-YYYY')''')
+                                                 ORDER BY to_char(processos_receita."Data",'MM-YYYY') ''')
 
 
     if request.method == 'POST':
@@ -641,13 +641,13 @@ def despesa_edit(request, pk):
 
 @login_required
 def balanco(request):
-    balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_char(processos_balanco."datas", 'MM-YYYY') as periodo,
-                                    sum(receita) as rendimento,  sum(despesa) as despesa,
-                                      (sum(receita) - sum(despesa)) as total FROM 
-                                        public.processos_balanco 
-                                        WHERE processos_balanco."Pagamento" = true 
-                                        GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')
-                                        ORDER BY to_char(processos_balanco."datas", 'MM-YYYY')''')
+    balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY') as periodo,
+                                       sum(receita) as rendimento,  sum(despesa) as despesa,
+                                         (sum(receita) - sum(despesa)) as total FROM
+                                           public.processos_balanco 
+                                           WHERE processos_balanco."Pagamento" = true
+                                           GROUP BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY')
+                                           ORDER BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY') DESC''')
 
     balancoPrimeiroSemestre = Balanco.objects.raw('''SELECT DISTINCT 1 as id,to_char(processos_balanco."datas", 'YYYY') as ano,
                                                     sum(receita) as rendimento,

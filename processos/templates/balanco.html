@@ -45,7 +45,7 @@
                             <tr>
 
 
-                                <td><span class="badge bg-grey">{{ u.periodo }}</span></td>
+                                <td><span class="badge bg-grey">{{ u.periodo|date:"M Y" }}</span></td>
                                 <td><span class="badge bg-green">{{ u.rendimento }}</span></td>
                                 <td><span class="badge bg-red">{{ u.despesa }}</span></td>
                                 {% if u.total > 0 %}
@@ -397,16 +397,6 @@
 {% endblock content-main %} {% block extraJS %}
 
 
-    <script type="text/javascript">
-
-        $(function () {
-            var campo = $("#id_nomeproduto");
-            campo.keyup(function (e) {
-                e.preventDefault();
-                campo.val($(this).val().toUpperCase());
-            });
-        });
-    </script>
 
 
     <script>
