@@ -116,7 +116,7 @@ Gestão
 
     var ctx = document.getElementById("balanco");
     var names = JSON.parse('{{ datas|safe }}');
-    var prices = JSON.parse('{{ total|safe }}');
+    var prices = JSON.parse('{{ balancos|safe }}');
 
     var productsChart = new Chart(ctx, {
         type: 'line',

@@ -16,6 +16,7 @@ import json
 
 
 
+
 class usuariosUpdate(UpdateView):
     model = Usuario
     fields = ('Nome',
@@ -154,6 +155,10 @@ def decimal_default(obj):
         return float(obj)
     raise TypeError
 
+def date_handler(obj):
+    if isinstance(obj, datetime.date):
+        return obj.isoformat(obj)
+    raise TypeError
 
 @login_required
 def home(request):
@@ -212,35 +217,36 @@ def ouvidoria(request):
     return render(request,'ouvidoria.html',context)
 
 def grafico(request):
-    balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_char(processos_balanco."datas", 'MM-YYYY') as periodo,
+    balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY') as periodo,
                                        sum(receita) as rendimento,  sum(despesa) as despesa,
-                                         (sum(receita) - sum(despesa)) as total FROM 
-                                           public.processos_balanco GROUP BY to_char(processos_balanco."datas", 'MM-YYYY')
-                                           ORDER BY to_char(processos_balanco."datas", 'MM-YYYY')''')
+                                         (sum(receita) - sum(despesa)) as total FROM
+                                           public.processos_balanco 
+                                           WHERE processos_balanco."Pagamento" = true
+                                           GROUP BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY')
+                                           ORDER BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY')''')
 
     receitaAReceber = Receita.objects.raw('''SELECT 1 as id, to_char(processos_receita."Data", 'MM-YYYY') as periodo,
                                               Sum(processos_receita."valorParcela") as receita
                                               FROM   public.processos_receita
                                                 WHERE processos_receita."Pagamento" = true
                                                  GROUP BY to_char(processos_receita."Data",'MM-YYYY')
-                                                 order BY to_char(processos_receita."Data",'MM-YYYY')''')
+                                                 ORDER BY to_date(to_char(processos_receita."Data", 'MM-YYYY'), 'MM YYYY')''')
 
 
 
-    total = [obj.total for obj in balanco]
 
-    datas = [obj.periodo for obj in balanco]
-    datas.sort()
+    datas = [str (obj.periodo)[5:7] + '-' + str (obj.periodo)[0:4] for obj in balanco]
+
     balancos = [obj.total for obj in balanco]
 
     rendimentos = [obj.rendimento for obj in balanco]
 
     receita = [obj.receita for obj in receitaAReceber]
-    data = [obj.periodo for obj in receitaAReceber]
-    data.sort()
+    data = [str (obj.periodo) for obj in receitaAReceber]
+
+    print(datas)
 
     context = {
-        'total': json.dumps(total, default=decimal_default),
 
         'datas': json.dumps(datas),
         'balancos': json.dumps(balancos, default=decimal_default),
@@ -248,7 +254,7 @@ def grafico(request):
         'rendimentos': json.dumps(rendimentos, default=decimal_default),
 
         'receita': json.dumps(receita, default=decimal_default),
-        'data': json.dumps(data),
+        'data': json.dumps(data)
     }
 
 

@@ -228,7 +228,7 @@ class Servico(models.Model):
     descricao = models.TextField('Descrição', null=True, blank=True)
     valor = models.DecimalField('Valor', max_digits=6, decimal_places=2)
     Desconto = models.DecimalField('Desconto',max_digits=6, decimal_places=2)
-    parcelamento = models.IntegerField('Parcelado', max_length=4, choices=FUNCAO_CHOICE_PARCELAMENTO)
+    parcelamento = models.IntegerField('Parcelado', choices=FUNCAO_CHOICE_PARCELAMENTO)
 
     def valorFinal(self):
         return str(self.valor - self.Desconto)
@@ -312,7 +312,7 @@ class Balanco(models.Model):
         receita.receitas_id = instance.pk
         receita.datas = instance.Data
         receita.receita = instance.valorParcela
-        receita.despesa = 0
+        receita.despesa = 0.0
         receita.Pagamento = instance.Pagamento
         receita.save()
 
@@ -322,7 +322,7 @@ class Balanco(models.Model):
         despesa.despesa_id = instance.pk
         despesa.datas = instance.data
         despesa.despesa = instance.valor
-        despesa.receita = 0
+        despesa.receita = 0.0
         despesa.Pagamento = instance.Pagamento
         despesa.save()
 
