@@ -11,7 +11,7 @@
 
             <div class="modal-body" >
 
-                <form method="POST" action="{% url 'ata_edit' ata.id %}">
+                <form method="POST" action="{% url 'ata_edit' ata.id %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form|bootstrap }}
                     {{ post.text|safe }}

@@ -54,8 +54,8 @@
                                     <td>DIRETORIA</td>
                                 {% endif %}
                             <td>{{ u.dataPublicacao }} </td>
-                             <td>{{ u.texto }} </td>
-                                <td><a href="{{ u.Arquivo.url }}">{{ u.Arquivo.url }}</a></td>
+                             <td>{{ u.texto|safe }} </td>
+                                <td><a href="{{ u.Arquivo.url }}"target="_blank">{{ u.Arquivo.url }}</a></td>
 
 
 

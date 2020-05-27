@@ -507,7 +507,7 @@ def ata(request):
 def ata_edit(request, pk):
     ata = get_object_or_404(Ata, pk=pk)
 
-    form = AtaForm(request.POST or None, instance=ata)
+    form = AtaForm(request.POST or None, request.FILES or None, instance=ata)
 
     if form.is_valid():
         form.save()
