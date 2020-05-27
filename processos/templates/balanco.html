@@ -9,6 +9,85 @@
     <div class="col-xs-12">
 
         <!-- /.box -->
+     <div class="col-xs-12" class="box table-responsive">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Caixa</h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                            class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="table-responsive">
+                                    <table id="tabela5" class="table no-margin table-bordered" style="font-size: 13px">
+
+                                        <thead>
+                                        <tr>
+
+                                            <th>Receitas (R$)</th>
+                                            <th>Despesas (R$)</th>
+                                            <th>Caixa (R$)</th>
+
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for u in somatorioGeral %}
+                                            <tr>
+
+
+
+                                <td><span class="badge bg-green">{{ u.rendimento }}</span></td>
+                                <td><span class="badge bg-red">{{ u.despesa }}</span></td>
+                                {% if u.total > 0 %}
+                                    <td><span class="badge bg-green">{{ u.total }}</span></td>
+                                {% elif u.total == 0 %}
+                                    <td><span class="badge bg-orange">{{ u.total }}</span></td>
+                                {% else  %}
+                                    <td><span class="badge bg-red">{{ u.total }}</span></td>
+                                {% endif %}
+
+                                                </td>
+
+
+                                            </tr>
+
+
+                                            <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
+                                                 aria-labelledby="exampleModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        {% endfor %}
+
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-footer -->
+            </div>
 
 
          <div class="col-xs-12" class="box table-responsive">
@@ -32,7 +111,7 @@
                         <thead>
                         <tr>
                             <th>Periodo</th>
-                            <th>Rendimentos (R$)</th>
+                            <th>Receitas (R$)</th>
                             <th>Despesas (R$)</th>
                             <th>Balanco (R$)</th>
 
@@ -109,7 +188,7 @@
                         <thead>
                         <tr>
                             <th>Ano</th>
-                            <th>Rendimentos (R$)</th>
+                            <th>Receitas (R$)</th>
                             <th>Despesas (R$)</th>
                             <th>Balanco (R$)</th>
 
@@ -181,7 +260,7 @@
                                 <thead>
                                 <tr>
                                     <th>Ano</th>
-                                    <th>Rendimentos (R$)</th>
+                                    <th>Receitas (R$)</th>
                                     <th>Despesas (R$)</th>
                                     <th>Balanco (R$)</th>
 
@@ -252,7 +331,7 @@
                                         <tr>
                                             <th>Periodo</th>
                                             <th>Pagamento</th>
-                                            <th>Rendimentos (R$)</th>
+                                            <th>Receitas (R$)</th>
                                             <th>Despesas (R$)</th>
 
 
@@ -306,85 +385,6 @@
             </div>
 
 
-            <div class="col-xs-12" class="box table-responsive">
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="box">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Balanço Total</h3>
-
-                                <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                            class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <div class="table-responsive">
-                                    <table id="tabela5" class="table no-margin table-bordered" style="font-size: 13px">
-
-                                        <thead>
-                                        <tr>
-
-                                            <th>Rendimentos (R$)</th>
-                                            <th>Despesas (R$)</th>
-                                            <th>Balanco (R$)</th>
-
-
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        {% for u in somatorioGeral %}
-                                            <tr>
-
-
-
-                                <td><span class="badge bg-green">{{ u.rendimento }}</span></td>
-                                <td><span class="badge bg-red">{{ u.despesa }}</span></td>
-                                {% if u.total > 0 %}
-                                    <td><span class="badge bg-green">{{ u.total }}</span></td>
-                                {% elif u.total == 0 %}
-                                    <td><span class="badge bg-orange">{{ u.total }}</span></td>
-                                {% else  %}
-                                    <td><span class="badge bg-red">{{ u.total }}</span></td>
-                                {% endif %}
-
-                                                </td>
-
-
-                                            </tr>
-
-
-                                            <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
-                                                 aria-labelledby="exampleModalLabel">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        {% endfor %}
-
-
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.box-footer -->
-            </div>
 
 
             <!-- /.box -->
