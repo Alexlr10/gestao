@@ -121,9 +121,10 @@ def editar_meus_dados(request):
         # d.Arquivo = request.FILES['arquivo']
         # d.TipoArquivo = 'USUA'
 
-        usuario.Foto = request.FILES['usuarioFoto']
+        usuario.Foto = request.FILES.get('usuarioFoto')
         usuario.Nome = request.POST.get('nomeUsuario')
         usuario.Email = request.POST.get('emailUsuario')
+        usuario.Matricula = request.POST.get('matriculaUsuario')
         usuario.Celular = request.POST.get('celularUsuario')
         usuario.CPF = request.POST.get('cpfUsuario')
         usuario.RG = request.POST.get('rgUsuario')

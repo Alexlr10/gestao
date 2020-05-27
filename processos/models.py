@@ -131,7 +131,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     """Model definition for Usuario."""
 
     Nome = models.CharField('Nome', max_length=80)
-    Foto = models.ImageField('Foto', upload_to='profile', default=None)
+    Foto = models.ImageField('Foto', upload_to='profile')
     Login = models.CharField('Login', max_length=50, unique=True)
     password = models.CharField('Senha', max_length=128)
     Matricula = models.CharField('Matricula', max_length=128)
@@ -169,6 +169,8 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 def post_usuario(self, instance, *args, **kwargs):
     if not Usuario.objects.filter(instance.Nome).exist():
         u = instance.Usuario.save()'''
+
+
 
     @property
     def is_superuser(self):
@@ -268,8 +270,9 @@ class Reuniao(models.Model):
 class Ata(models.Model):
     Reuniao = models.ForeignKey(Reuniao, on_delete=models.CASCADE, related_name='Reuniao')
     dataPublicacao = models.DateField('data', blank=True, null=True)
-    Arquivo = models.FileField('Arquivo',upload_to= "Files", default="")
+    Arquivo = models.FileField('Arquivo',upload_to= "Files", default="",blank=True, null=True)
     texto = RichTextField(null=True, blank=True)
+
 
 
 class Receita(models.Model):

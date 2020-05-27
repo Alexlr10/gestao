@@ -121,7 +121,11 @@
             <!-- Sidebar user panel -->
 <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ request.user.Foto.url }}" class="img-circle" alt="User Image" style="width:40; height:40px;">
+            {% if request.user.Foto != '' %}
+          <img src="{{ request.user.Foto.url }}" class="img-circle" alt="User Image" style="height:45px;">
+              {% else %}
+                                        <img src="{% static 'img/nophoto.jpg' %}" class="user-image" alt="User Image">
+                                    {% endif %}
         </div>
         <div class="pull-left info">
           <p>{{ request.user.Nome }}</p>

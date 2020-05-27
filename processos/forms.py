@@ -196,6 +196,7 @@ class ReuniaoForm(forms.ModelForm):
             'descricaoReuniao': forms.Textarea(attrs={'class': 'form-control', 'id': 'descricaoReuniao'}),
             'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control', 'id': 'dataReuniao'}),
             'tipoReuniao': forms.Select(attrs={'id': 'descricaoReuniao'}),
+            'Arquivo' : forms.FileField(label='Select a file'),
         }
 
 

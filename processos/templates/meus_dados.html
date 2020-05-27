@@ -1,151 +1,172 @@
 {% extends 'base.html' %} {% load static %} {% block content-header %}
-<i class="fa fa-users "> </i> Usuário
-<small>Meus Dados</small>
+    <i class="fa fa-users "> </i> Usuário
+    <small>Meus Dados</small>
 {% endblock content-header %} {% block content-main %}
-<div class="">
-    <!-- UI - X Starts -->
-    <div class="ui-67">
+    <div class="">
+        <!-- UI - X Starts -->
+        <div class="ui-67">
 
-        <!-- Head Starts -->
-        <div class="ui-head">
-            <!-- Details -->
-            <div class="ui-details">
-                <!-- Name -->
-                <h3 id="name-header">{{ usuario.Nome }}</h3>
-                <!-- Designation -->
-            </div>
-            <!-- Image -->
-            <div class="ui-image">
-                <!-- User Image -->
-                {% if usuario.Foto.url != none %}
-                 <img src="{{ request.user.Foto.url }}" class="img-circle" alt="User Image" style="width:150px; height:150px;">{% else %}
-                <img src="{% static 'img/nophoto.jpg' %}" alt="Profile Picture" class="img-responsive" width="100"
-                    height="100"> {% endif %}
-            </div>
-        </div>
-        <!-- Head Ends -->
-
-        <!-- Content Starts -->
-        <div class="ui-content">
-
-            <div class="row">
-
-                <div class="col-sm-8 col-md-8 col-lg-8 col-lg-offset-2 acc-col">
-                    <section>
-                        <h3>Meus Dados</h3>
-                        <form class="ng-pristine ng-valid" role="form" method="POST" enctype="multipart/form-data" action="{% url 'meusdados' %}" enctype="multipart/form-data" onclick="validarSenha();">
-                            {% csrf_token %}
-
-                             {% if usuario.Foto.url != none %}
-                             <div class="row">
-                                <div class="col-sm-12">
-                                    <label for="usuarioFoto" class="control-label" >Foto</label>
-                                    <input id="usuarioFoto" name="usuarioFoto" type="file"><a href="{{ usuario.Foto.url }}">{{ usuario.Foto.url }}</a>
-                                </div>
-                            </div>
-                            {% else %}
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <label for="usuarioFoto" class="control-label" >Foto</label>
-                                    <input id="usuarioFoto" name="usuarioFoto" type="file">
-                                </div>
-                            </div>
-                            {% endif %}
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <label for="nomeUsuario" class="control-label">Nome:</label>
-                                    <input type="text" class="form-control" id="nomeUsuario" name="nomeUsuario" value="{{ usuario.Nome }}" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="emailUsuario" class="control-label">Email:</label>
-                                    <input type="email" class="form-control" id="emailUsuario" name="emailUsuario" value="{{ usuario.Email }}" required>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="celularUsuario" class="control-label">Celular:</label>
-                                    <input type="text" class="form-control" id="celularUsuario" name="celularUsuario" value="{{ usuario.Celular }}" required>
-                                </div>
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-sm-4">
-                                    <label for="cpfUsuario" class="control-label">CPF:</label>
-                                    <input type="text" class="form-control" id="cpfUsuario" name="cpfUsuario" value="{{ usuario.CPF }}" required>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <label for="rgUsuario" class="control-label">RG:</label>
-                                    <input type="text" class="form-control" id="rgUsuario" name="rgUsuario" value="{{ usuario.RG }}">
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <label for="usuarioLogin" class="control-label">Login:</label>
-                                    <div class="">
-                                        <input type="text" class="form-control" id="usuarioLogin" name="usuarioLogin" value="{{ usuario.Login }}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <label for="usuarioSenha" class="control-label">Senha:</label>
-                                    <div class="">
-                                        <input type="password" class="form-control" id="usuarioSenha" name="usuarioSenha" required>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <label for="senhaConfirm" class="control-label">Confirmar Senha:</label>
-                                    <div class="">
-                                        <input type="password" class="form-control" id="senhaConfirm" name="senhaConfirm" onkeyup="validarSenha();" required>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="btn-div">
-                                        <button id="btn-update" class="btn btn-success pull-right">Atualizar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </section>
-
-
-
-
-
-
+            <!-- Head Starts -->
+            <div class="ui-head">
+                <!-- Details -->
+                <div class="ui-details">
+                    <!-- Name -->
+                    <h3 id="name-header">{{ usuario.Nome }}</h3>
+                    <!-- Designation -->
                 </div>
-                <!-- col-8 -->
+                <!-- Image -->
+                <div class="ui-image">
+                    <!-- User Image -->
+                    {% if usuario.Foto.url != none %}
+                        <img src="{{ request.user.Foto.url }}" class="img-circle" alt="User Image"
+                             style="width:150px; height:150px;">{% else %}
+                        <img src="{% static 'img/nophoto.jpg' %}" alt="Profile Picture" class="img-responsive"
+                             width="100"
+                             height="100"> {% endif %}
+                </div>
             </div>
+            <!-- Head Ends -->
 
+            <!-- Content Starts -->
+            <div class="ui-content">
+
+                <div class="row">
+
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-lg-offset-2 acc-col">
+                        <section>
+                            <h3>Meus Dados</h3>
+                            <form class="ng-pristine ng-valid" role="form" method="POST" enctype="multipart/form-data"
+                                  action="{% url 'meusdados' %}" enctype="multipart/form-data"
+                                  onclick="validarSenha();">
+                                {% csrf_token %}
+                                {{ form.media }}
+                                {% if usuario.Foto.url != none %}
+                                    <div class="row">
+                                    <div class="col-sm-12">
+
+
+                                        <label class="control-label" for="usuarioFoto">Arquivo</label>
+
+
+                                        <div class=" "> Atualmente: <a href="{{ usuario.Foto.url }}" target="_blank" value="{{ request.user.Foto.url  }}">{{ usuario.Foto.url }} </a>
+                                            <br> Modificar:
+                                            <input type="file" name="usuarioFoto" id="usuarioFoto" value="{{ request.user.Foto.url }}" >
+
+                                        </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label for="usuarioFoto" class="control-label">Foto</label>
+                                            <input id="usuarioFoto" name="usuarioFoto" type="file" >
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label for="nomeUsuario" class="control-label">Nome:</label>
+                                        <input type="text" class="form-control" id="nomeUsuario" name="nomeUsuario"
+                                               value="{{ usuario.Nome }}" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="emailUsuario" class="control-label">Email:</label>
+                                        <input type="email" class="form-control" id="emailUsuario" name="emailUsuario"
+                                               value="{{ usuario.Email }}" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="matriculaUsuario" class="control-label">Matricula:</label>
+                                        <input type="text" class="form-control" id="matriculaUsuario"
+                                               name="matriculaUsuario" value="{{ usuario.Matricula }}" required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-sm-4">
+                                        <label for="cpfUsuario" class="control-label">CPF:</label>
+                                        <input type="text" class="form-control" id="cpfUsuario" name="cpfUsuario"
+                                               value="{{ usuario.CPF }}" required>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label for="rgUsuario" class="control-label">RG:</label>
+                                        <input type="text" class="form-control" id="rgUsuario" name="rgUsuario"
+                                               value="{{ usuario.RG }}">
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label for="celularUsuario" class="control-label">Celular:</label>
+                                        <input type="text" class="form-control" id="celularUsuario"
+                                               name="celularUsuario" value="{{ usuario.Celular }}" required>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label for="usuarioLogin" class="control-label">Login:</label>
+                                        <div class="">
+                                            <input type="text" class="form-control" id="usuarioLogin"
+                                                   name="usuarioLogin" value="{{ usuario.Login }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label for="usuarioSenha" class="control-label">Senha:</label>
+                                        <div class="">
+                                            <input type="password" class="form-control" id="usuarioSenha"
+                                                   name="usuarioSenha" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <label for="senhaConfirm" class="control-label">Confirmar Senha:</label>
+                                        <div class="">
+                                            <input type="password" class="form-control" id="senhaConfirm"
+                                                   name="senhaConfirm" onkeyup="validarSenha();" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="btn-div">
+                                            <button id="btn-update" class="btn btn-success pull-right">Atualizar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </section>
+
+
+                    </div>
+                    <!-- col-8 -->
+                </div>
+
+            </div>
+            <!-- Content Ends -->
         </div>
-        <!-- Content Ends -->
+        <!-- UI - X Ends -->
     </div>
-    <!-- UI - X Ends -->
-</div>
 {% endblock content-main %} {% block extraJS %}
-<script>    
+    <script>
 
-     function validarSenha() {
-         var password = document.getElementById("usuarioSenha").value;
-         var confirm_password = document.getElementById("senhaConfirm").value;
+        function validarSenha() {
+            var password = document.getElementById("usuarioSenha").value;
+            var confirm_password = document.getElementById("senhaConfirm").value;
 
-       console.log("senha "+password);
-       console.log("Confirmar senha " +confirm_password);
+            console.log("senha " + password);
+            console.log("Confirmar senha " + confirm_password);
 
-         if (password != confirm_password) {
-             document.getElementById('usuarioSenha').style.borderColor = "red";
-             document.getElementById('senhaConfirm').style.borderColor = "red";
-             $("#btn-update").attr('disabled',true);
-         } else {
-             document.getElementById('usuarioSenha').style.borderColor = "green";
-             document.getElementById('senhaConfirm').style.borderColor = "green";
-             $("#btn-update").attr('disabled',false);
+            if (password != confirm_password) {
+                document.getElementById('usuarioSenha').style.borderColor = "red";
+                document.getElementById('senhaConfirm').style.borderColor = "red";
+                $("#btn-update").attr('disabled', true);
+            } else {
+                document.getElementById('usuarioSenha').style.borderColor = "green";
+                document.getElementById('senhaConfirm').style.borderColor = "green";
+                $("#btn-update").attr('disabled', false);
 
-         }
+            }
 
-     }
-</script> {% endblock extraJS %}
+        }
+    </script> {% endblock extraJS %}
