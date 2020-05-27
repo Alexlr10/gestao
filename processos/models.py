@@ -268,7 +268,9 @@ class Reuniao(models.Model):
 class Ata(models.Model):
     Reuniao = models.ForeignKey(Reuniao, on_delete=models.CASCADE, related_name='Reuniao')
     dataPublicacao = models.DateField('data', blank=True, null=True)
+    Arquivo = models.FileField('Arquivo',upload_to= "", default="")
     texto = RichTextField(null=True, blank=True)
+
 
 class Receita(models.Model):
     Servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='servico')

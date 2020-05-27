@@ -422,11 +422,11 @@ def reuniao(request):
             pauta = request.POST.get('descricaoReuniao')
 
             if tipoReuniao == 'GER':
-                mensagem = str('A Next terá uma reunião GERAL dia '+ data[2] + ' do '+  data[1] + ' com as seguintes paltas: \n' + pauta)
+                mensagem = str('A Next terá uma reunião GERAL dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
             elif tipoReuniao == 'DIR':
-                mensagem = str('A Next terá uma reunião de DIRETORIA dia '+ data[2] + ' do '+  data[1] + ' com as seguintes paltas: \n' + pauta)
+                mensagem = str('A Next terá uma reunião de DIRETORIA dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
             elif tipoReuniao == 'PRO':
-                mensagem = str('A Next terá uma reunião da equipe de PROJETOS dia '+ data[2] + ' do '+  data[1] + ' com as seguintes paltas: \n' + pauta)
+                mensagem = str('A Next terá uma reunião da equipe de PROJETOS dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
 
 
             reu = Reuniao.objects.last()
@@ -487,7 +487,7 @@ def reuniao_delete(request, pk):
 def ata(request):
     ata = Ata.objects.all().order_by('-dataPublicacao')
     if request.method == 'POST':
-        form = AtaForm(request.POST)
+        form = AtaForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()

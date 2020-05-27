@@ -36,6 +36,8 @@
                         <tr>
                             <th>Reunião</th>
                             <th>Data da Publicação</th>
+                            <th>Descrição</th>
+                            <th>Arquivo</th>
 
                             <th>Ações</th>
 
@@ -51,8 +53,10 @@
                                 {% else %}
                                     <td>DIRETORIA</td>
                                 {% endif %}
+                            <td>{{ u.dataPublicacao }} </td>
+                             <td>{{ u.texto }} </td>
+                                <td><a href="{{ u.Arquivo.url }}">{{ u.Arquivo.url }}</a></td>
 
-                                <td>{{ u.dataPublicacao }} </td>
 
 
                                 </td>
@@ -106,7 +110,7 @@
                     <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Serviço</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data".>
                         {% csrf_token %}
                         {{ form|bootstrap }}
                         {{ post.text|safe }}

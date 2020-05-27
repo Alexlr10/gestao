@@ -18,7 +18,7 @@
             <div class="ui-image">
                 <!-- User Image -->
                 {% if usuario.Foto.url != none %}
-                <img src="{{ usuario.Foto.url }}" alt="Foto de Perfil" class="img-responsive" width="100" height="100"> {% else %}
+                 <img src="{{ request.user.Foto.url }}" class="img-circle" alt="User Image" style="width:150px; height:150px;">{% else %}
                 <img src="{% static 'img/nophoto.jpg' %}" alt="Profile Picture" class="img-responsive" width="100"
                     height="100"> {% endif %}
             </div>
