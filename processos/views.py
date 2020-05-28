@@ -112,38 +112,30 @@ def usuarios(request):
 
 @login_required
 def editar_meus_dados(request):
-    if request.method == 'POST' and request.POST.get('usuarioSenha') != None:
+    if request.method == 'POST' and request.POST.get('password') != None:
+
         usuario = get_object_or_404(Usuario, pk=request.user.id)
 
-        # from .models import Importacao
-        # d = Importacao()
-        # d.Usuario = request.user
-        # d.Arquivo = request.FILES['arquivo']
-        # d.TipoArquivo = 'USUA'
+        form = MeusDadosForm(request.POST or None, request.FILES or None, instance=usuario)
 
-        usuario.Foto = request.FILES.get('usuarioFoto')
-        usuario.Nome = request.POST.get('nomeUsuario')
-        usuario.Email = request.POST.get('emailUsuario')
-        usuario.Matricula = request.POST.get('matriculaUsuario')
-        usuario.Celular = request.POST.get('celularUsuario')
-        usuario.CPF = request.POST.get('cpfUsuario')
-        usuario.RG = request.POST.get('rgUsuario')
-        usuario.set_password(request.POST.get('usuarioSenha'))
-        usuario.save()
+        if form.is_valid():
+            Email = request.POST.get('Email')
+            form.save()
+            send_mail(
+                'NextStep - Atualização',
+                'Você atualizou as informações do seu perfil',
+                'sistemanextstepsi@gmail.com',
+                 [Email],
+                fail_silently=False,
+            )
+            messages.success(request, 'Dados alterados com sucesso')
 
-        send_mail(
-            'NextStep - Atualização',
-            'Você atualizou as informações do seu perfil',
-            'sistemanextstepsi@gmail.com',
-             [usuario.Email],
-            fail_silently=False,
-        )
-        messages.success(request, 'Dados alterados com sucesso')
-
-        return redirect(reverse('meusdados'))
+            return redirect(reverse('meusdados'))
 
     usuario = request.user
+    form = MeusDadosForm(request.POST or None, request.FILES or None, instance=usuario)
     context = {
+        'form':form,
         'usuario': usuario
     }
 

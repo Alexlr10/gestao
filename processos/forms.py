@@ -58,18 +58,24 @@ class UsuarioMeusDados(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
     password1 = forms.CharField(label=_('Senha'), widget=forms.PasswordInput)
-    password2 = forms.CharField(
-        label=_('Confirmação da senha'), widget=forms.PasswordInput)
+    password2 = forms.CharField(label=_('Confirmação da senha'), widget=forms.PasswordInput)
 
     class Meta:
         model = Usuario
-        fields = ('Nome',
-                  'Login',
-                  'CPF',
-                  'Email',
-                  'password1',
-                  'password2'
-                  )
+        fields = ['Foto', 'Nome', 'Email', 'Matricula', 'CPF', 'RG', 'Celular', 'Login', 'password']
+
+        widgets = {
+
+            'Nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome'}),
+            'Email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+            'Matricula': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Matricula'}),
+            'CPF': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'CPF'}),
+            'RG': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'RG'}),
+            'Celular': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Celular'}),
+            'Login': forms.TextInput(attrs={'class': 'form-control', 'id': 'Login'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'id': 'Password'}),
+
+        }
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -134,6 +140,35 @@ class UsuarioForm(forms.ModelForm):
                 attrs={'type': 'checkbox', 'class': 'form-control', 'id': 'situacao', 'onclick': 'myFunction()'}),
 
         }
+
+class MeusDadosForm(forms.ModelForm):
+    """Form definition for Filial."""
+
+    class Meta:
+        """Meta definition for Filialform."""
+
+        model = Usuario
+        #fields = '__all__'
+        fields = ['Foto','Nome','Email','Matricula','CPF','RG','Celular','Login','password']
+
+        widgets = {
+            'Nome': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Nome'}),
+            'Email': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Email'}),
+            'Matricula': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Matricula'}),
+            'CPF': forms.TextInput(attrs={'class': 'form-control','placeholder': 'CPF'}),
+            'RG': forms.TextInput(attrs={'class': 'form-control','placeholder': 'RG'}),
+            'Celular': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Celular'}),
+            'Login': forms.TextInput(attrs={'class': 'form-control', 'id': 'Login'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'id': 'Password'}),
+        }
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
 
 
 class ClienteForm(forms.ModelForm):
