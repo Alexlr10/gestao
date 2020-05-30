@@ -218,7 +218,7 @@ def aviso(request):
         form = AvisoForm(request.POST)
 
         if form.is_valid():
-           # form.save()
+            form.save()
             Data = request.POST.get('Data')
             assunto = request.POST.get('assunto')
             data = Data.split('-')
