@@ -257,7 +257,6 @@ class Reuniao(models.Model):
     # def email(self):
     #     return ",".join([str (u) for u in self.presenca.all()])
 
-
     def __str__(self):
         if self.tipoReuniao == 'GER':
             return 'GERAL - ' + str(self.dataReuniao.strftime("%d/%m/%Y"))
@@ -339,6 +338,12 @@ class Ouvidoria(models.Model):
     data = models.DateField('data', blank=True, null=True)
     texto = RichTextField(null=True, blank=True)
 
-
     def __str__(self):
         return str(self.data)
+
+class Aviso(models.Model):
+    membros = models.ManyToManyField('Usuario', null=True, blank=True, related_name="usuario")
+    Data = models.DateField('Data', blank=True, null=True)
+    assunto = models.CharField('Assunto', max_length=20, blank=True, null=True)
+    descricao = RichTextField(null=True, blank=True)
+

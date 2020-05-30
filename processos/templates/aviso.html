@@ -1,0 +1,89 @@
+{% extends "base.html" %} {% load staticfiles %} {% load bootstrap %} {% block content-header %}
+
+    <i class="fa fa-user "> </i> Email
+    <small>Email</small>
+
+
+{% endblock content-header %} {% block content-main %}
+
+    <section>
+        <div class="col-lg-10 col-lg-offset-1">
+
+            <div class="box table-responsive">
+
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="table-responsive">
+
+
+                        <h3>Envie seu email</h3>
+                        <form class="ng-pristine ng-valid" role="form" method="POST" enctype="multipart/form-data"
+                            action="{% url 'aviso' %}">
+                            {% csrf_token %}
+
+                             <div class="form-group">
+                            <label class="control-label  " >Membros</label>
+
+                            <div class=" ">
+                                <select name="membros" class=" form-control" required=""
+                                        multiple="multiple">
+
+                                    {% for u in usuario %}
+                                    <option name="membros" id="membros" value="{{ u.id }}">{{ u.Nome }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                            {{ form.Data|bootstrap }}
+                            {{ form.assunto|bootstrap }}
+                            {{ form.descricao|bootstrap }}
+                            {{ post.text|safe }}
+                            {{ form.media }}
+                            <button type="submit" class="btn btn-success">Enviar</button>
+                        </form>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+
+    </section>
+
+
+
+
+
+{% endblock content-main %} {% block extraJS %}
+
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+
+        $(function () {
+            $('.select2').select2();
+            $('#tabela').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+            })
+        });
+    </script>
+
+
+
+
+
+
+{% endblock extraJS %}

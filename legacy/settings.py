@@ -97,7 +97,7 @@ DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dbur
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-# #
+#
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -167,6 +167,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 

@@ -1,8 +1,8 @@
 import decimal
-from time import strptime
-
 from django.shortcuts import render, redirect, get_object_or_404
+
 from django.utils.datetime_safe import strftime, datetime
+from django.utils.html import strip_tags
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from django.core.mail import send_mail, send_mass_mail
@@ -12,9 +12,6 @@ from . import models
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 import json
-
-
-
 
 
 class usuariosUpdate(UpdateView):
@@ -209,6 +206,58 @@ def ouvidoria(request):
 
     return render(request,'ouvidoria.html',context)
 
+@login_required
+def aviso(request):
+    aviso = Aviso.objects.all()
+    usu = Usuario.objects.filter(Situacao=True)
+    usuario = []
+    for u in usu:
+        usuario.append(u)
+
+    if request.method == 'POST':
+        form = AvisoForm(request.POST)
+
+        if form.is_valid():
+           # form.save()
+            Data = request.POST.get('Data')
+            assunto = request.POST.get('assunto')
+            data = Data.split('-')
+            descricao = request.POST.get('descricao')
+
+            mensagem = strip_tags(descricao)
+
+            print(assunto)
+            print(data)
+            print(mensagem)
+
+            aviso = Aviso.objects.last()
+            membros = ",".join([str (u) for u in aviso.membros.all()])
+            email = membros.split(',')
+
+            print(list(email))
+
+            send_mail(
+                 assunto,
+                 mensagem,
+                'sistemanextstepsi@gmail.com',
+                 email,
+                fail_silently=False,
+            )
+
+
+            messages.success(request, 'Email enviado com sucesso aos membros')
+            return redirect('aviso')
+
+    form = AvisoForm()
+
+    context = {
+        'form': form,
+        'aviso': aviso,
+        'usuario':usuario
+    }
+
+    return render(request, 'aviso.html', context)
+
 def grafico(request):
     balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY') as periodo,
                                        sum(receita) as rendimento,  sum(despesa) as despesa,
@@ -357,6 +406,10 @@ def servico_delete(request, pk):
 @login_required
 def projeto(request):
     projeto = Projeto.objects.all()
+    usu = Usuario.objects.filter(Situacao=True)
+    usuario = []
+    for u in usu:
+        usuario.append(u)
     if request.method == 'POST':
         form = ProjetoForm(request.POST)
 
@@ -369,7 +422,8 @@ def projeto(request):
 
     context = {
         'form': form,
-        'projeto': projeto
+        'projeto': projeto,
+        'usuario':usuario
     }
 
     return render(request, 'projeto.html', context)
@@ -377,6 +431,10 @@ def projeto(request):
 @login_required
 def projeto_edit(request, pk):
     projeto = get_object_or_404(Projeto, pk=pk)
+    usu = Usuario.objects.filter(Situacao=True)
+    usuario = []
+    for u in usu:
+        usuario.append(u)
 
     form = ProjetoForm(request.POST or None, instance=projeto)
 
@@ -386,7 +444,8 @@ def projeto_edit(request, pk):
 
     context = {
         'form': form,
-        'projeto': projeto
+        'projeto': projeto,
+        'usuario':usuario
     }
 
     return render(request, 'projeto_edit.html', context)
@@ -403,7 +462,14 @@ def projeto_delete(request, pk):
 ######## Reuniao
 @login_required
 def reuniao(request):
-    reuniao = Reuniao.objects.all().order_by('-dataReuniao')
+    reuniao = Reuniao.objects.all().order_by('dataReuniao')
+
+    usu = Usuario.objects.filter(Situacao=True)
+    usuario = []
+    for u in usu:
+        usuario.append(u)
+
+
     if request.method == 'POST':
         form = ReuniaoForm(request.POST)
 
@@ -440,11 +506,15 @@ def reuniao(request):
             messages.success(request, 'Reunião cadastrada com sucesso')
             return redirect('reuniao')
 
+
+
+
     form = ReuniaoForm()
 
     context = {
         'form': form,
-        'reuniao': reuniao
+        'reuniao': reuniao,
+        'usuario': usuario
     }
 
     return render(request, 'reuniao.html', context)
@@ -452,6 +522,10 @@ def reuniao(request):
 @login_required
 def reuniao_edit(request, pk):
     reuniao = get_object_or_404(Reuniao, pk=pk)
+    usu = Usuario.objects.filter(Situacao=True)
+    usuario = []
+    for u in usu:
+        usuario.append(u)
 
     form = ReuniaoForm(request.POST or None, instance=reuniao)
 
@@ -461,7 +535,8 @@ def reuniao_edit(request, pk):
 
     context = {
         'form': form,
-        'reuniao': reuniao
+        'reuniao': reuniao,
+        'usuario': usuario,
     }
 
     return render(request, 'reuniao_edit.html', context)

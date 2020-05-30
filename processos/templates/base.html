@@ -21,7 +21,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/usuario.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
 
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -119,19 +118,19 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <!-- Sidebar user panel -->
-<div class="user-panel">
-        <div class="pull-left image">
-            {% if request.user.Foto != '' %}
-          <img src="{{ request.user.Foto.url }}" class="img-circle" alt="User Image" style="height:45px;">
-              {% else %}
-                                        <img src="{% static 'img/nophoto.jpg' %}" class="user-image" alt="User Image">
-                                    {% endif %}
-        </div>
-        <div class="pull-left info">
-          <p>{{ request.user.Nome }}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> {{ request.user.Funcao }}</a>
-        </div>
-      </div>
+            <div class="user-panel">
+                <div class="pull-left image">
+                    {% if request.user.Foto != '' %}
+                        <img src="{{ request.user.Foto.url }}" class="img-circle" alt="User Image" style="height:45px;">
+                    {% else %}
+                        <img src="{% static 'img/nophoto.jpg' %}" class="user-image" alt="User Image">
+                    {% endif %}
+                </div>
+                <div class="pull-left info">
+                    <p>{{ request.user.Nome }}</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> {{ request.user.Funcao }}</a>
+                </div>
+            </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
@@ -149,14 +148,16 @@
                         <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a></li>
                         <li><a href="{% url 'usuarios' %}"><i class="fa fa-user-plus"></i><span>Usuários</span></a></li>
 
-                        <li><a href="{% url 'mensagem' %}"><i class="fa  fa-registered"></i>
-                            <span>Reclamações</span></a></li>
+                        <li><a href="{% url 'mensagem' %}"><i class="fa  fa-registered"></i><span>Reclamações</span></a>
+                        </li>
                         <li><a href="#"
                                onCLick="window.open('https://trello.com/b/dK86RFrm/equipe-de-recursos-humanos','_blank');"><i
                                 class="fa  fa-trello"></i> <span>Trello</span></a></li>
                     </ul>
 
                 </li>
+
+
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-line-chart"></i>
@@ -165,9 +166,11 @@
                     <i class="fa fa-angle-left pull-right"></i>
                     </span>
                     </a>
+
+
                     <ul class="treeview-menu">
                         <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a></li>
-                          <li><a href="{% url 'servico' %}"><i class="fa  fa-wrench"></i> <span>Serviços</span></a></li>
+                        <li><a href="{% url 'servico' %}"><i class="fa  fa-wrench"></i> <span>Serviços</span></a></li>
                         <li><a href="{% url 'receita' %}"><i class="fa  fa-money"></i> <span>Receita</span></a></li>
                         <li><a href="{% url 'despesa' %}"><i class="fa fa-credit-card"></i><span>Despesas</span></a>
                         </li>
@@ -175,10 +178,11 @@
                         </li>
                         <li><a href="{% url 'ata' %}"><i class="fa fa-book"></i><span>Atas</span></a></li>
                         <li><a href="{% url 'grafico' %}"><i class="fa fa-bar-chart-o"></i><span>Graficos</span></a>
+                        </li>
                         <li><a href="#"
                                onCLick="window.open('https://trello.com/b/dsS6gj0k/equipe-administrativa-financeira','_blank');"><i
                                 class="fa  fa-trello"></i> <span>Trello</span></a></li>
-                        </li>
+
                     </ul>
 
                 </li>
@@ -191,18 +195,22 @@
                     <i class="fa fa-angle-left pull-right"></i>
                     </span>
                     </a>
+
+
                     <ul class="treeview-menu">
                         <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a></li>
                         <li><a href="{% url 'servico' %}"><i class="fa  fa-wrench"></i> <span>Serviços</span></a></li>
                         <li><a href="{% url 'projeto' %}"><i class="fa  fa-coffee"></i> <span>Projeto</span></a></li>
+
+                        <li><a href="{% url 'projeto' %}"><i class="fa  fa-coffee"></i> <span>Projeto</span></a></li>
                         <li><a href="#"
                                onCLick="window.open('https://trello.com/b/dJi21xt6/equipe-de-marketing','_blank');"><i
                                 class="fa  fa-trello"></i> <span>Trello</span></a></li>
-                        <li><a href="{% url 'projeto' %}"><i class="fa  fa-coffee"></i> <span>Projeto</span></a></li>
-
                     </ul>
 
                 </li>
+
+
                 <li class="treeview">
                     <a href="#">
                         <i class="fa  fa-check-square"></i>
@@ -242,31 +250,41 @@
                                 class="fa  fa-trello"></i> <span>Trello</span></a></li>
 
                     </ul>
-                  <li><a href="{% url 'reuniao' %}"><i class="fa  fa-calendar"></i> <span>Reuniao</span></a></li>
-                <li><a href="#" onCLick="window.open('https://app.slack.com/client/T0108MUDHV1/C010A4FG8PK','_blank');"><i
-                        class="fa  fa-slack"></i> <span>Slack</span></a></li>
 
                 </li>
-                <li><a href="#"
-                       onCLick="window.open('https://www.instagram.com/nextstepsi/','_blank');"><i
-                        class="fa  fa-instagram"></i> <span>Instagran</span></a></li>
 
-                <li><a href="#"
-                       onCLick="window.open('https://mega.nz/fm/za4DjByI/','_blank');"><i
-                        class="fa  fa-cloud"></i> <span>Mega</span></a></li>
-{#                  <li><a href="{% url 'contas' %}"><i class="fa  fa-share-alt"></i> <span>Contas</span></a></li>#}
-
-                <li><a href="{% url 'ouvidoria' %}" ><i
-                        class="fa fa-comment-o"></i><span>Ouvidoria</span></a></li>
-
-                {#            <li><a href="{% url 'produto' %}"><i class="fa fa-check"></i><span>Produtos</span></a></li>#}
-                {#            <li><a href="{% url 'estoque' %}"><i class="fa  fa-check-square"></i><span>Estoque</span></a></li>#}
-                {#            <li><a href="{% url 'compra' %}"><i class="fa  fa-cart-plus"></i><span>Vendas</span></a></li>#}
-                {#            <li><a href="{% url 'lote' %}"><i class="fa fa-truck"></i><span>Lote</span></a></li>#}
-                {#            <li><a href="{% url 'despesa' %}"><i class="fa fa-credit-card"></i><span>Despesas</span></a></li>#}
-                {#            <li><a href="{% url 'balanco' %}"><i class="fa fa-balance-scale"></i><span>Balanço</span></a></li>#}
+                <li class="treeview">
+                    <a href="#">
+                        <i class=" fa fa-arrows"></i>
+                        <span>Ferramentas</span>
+                        <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"
+                               onCLick="window.open('https://app.slack.com/client/T0108MUDHV1/C010A4FG8PK','_blank');"><i
+                                class="fa  fa-slack"></i> <span>Slack</span></a></li>
 
 
+                        <li><a href="#"
+                               onCLick="window.open('https://www.instagram.com/nextstepsi/','_blank');"><i
+                                class="fa  fa-instagram"></i> <span>Instagran</span></a></li>
+
+                        <li><a href="#"
+                               onCLick="window.open('https://mega.nz/fm/za4DjByI/','_blank');"><i
+                                class="fa  fa-cloud"></i> <span>Mega</span></a></li>
+                    </ul>
+
+                </li>
+
+                <li><a href="{% url 'reuniao' %}"><i class="fa  fa-calendar"></i> <span>Reuniao</span></a></li>
+                <li><a href="{% url 'aviso' %}"><i class="fa fa-calendar-check-o"></i><span>Avisos</span></a></li>
+
+
+                <li><a href="{% url 'ouvidoria' %}"><i class="fa fa-comment-o"></i><span>Ouvidoria</span></a></li>
+
+            </ul>
         </section>
         <!-- /.sidebar -->
     </aside>

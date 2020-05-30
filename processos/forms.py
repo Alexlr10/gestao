@@ -152,6 +152,7 @@ class MeusDadosForm(forms.ModelForm):
         fields = ['Foto','Nome','Email','Matricula','CPF','RG','Celular','Login','password']
 
         widgets = {
+            'Foto': forms.FileInput(),
             'Nome': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Nome'}),
             'Email': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Email'}),
             'Matricula': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Matricula'}),
@@ -208,11 +209,11 @@ class ServicoForm(forms.ModelForm):
 
 
 class ProjetoForm(forms.ModelForm):
-    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
+    responsaveis = forms.ModelMultipleChoiceField(queryset=Usuario.objects.filter(Situacao=True))
 
     class Meta:
         model = Projeto
-        fields = '__all__'
+        fields = ['servico','dataEntrega','status','responsaveis']
 
         widgets = {
             'dataEntrega': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
@@ -220,17 +221,20 @@ class ProjetoForm(forms.ModelForm):
 
 
 class ReuniaoForm(forms.ModelForm):
-    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
+    presenca = forms.ModelMultipleChoiceField(queryset= Usuario.objects.filter(Situacao=True))
+
+    ausencia = forms.ModelMultipleChoiceField(queryset= Usuario.objects.filter(Situacao=True),required = False)
+
 
     class Meta:
         model = Reuniao
-        fields = '__all__'
+        fields =  ['dataReuniao','tipoReuniao','descricaoReuniao','presenca','ausencia']
         # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
             'descricaoReuniao': forms.Textarea(attrs={'class': 'form-control', 'id': 'descricaoReuniao'}),
             'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control', 'id': 'dataReuniao'}),
-            'tipoReuniao': forms.Select(attrs={'id': 'descricaoReuniao'}),
+            #'tipoReuniao': forms.Select(attrs={'id': 'tipoReuniao','class': 'form-control'}),
             'Arquivo' : forms.FileField(label='Select a file'),
         }
 
@@ -242,7 +246,7 @@ class AtaForm(forms.ModelForm):
         # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
-            'dataPublicacao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'dataPublicacao': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 
@@ -297,3 +301,19 @@ class OuvidoriaForm(forms.ModelForm):
 
             'data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
+
+class AvisoForm(forms.ModelForm):
+    membros = forms.ModelMultipleChoiceField(queryset=Usuario.objects.filter(Situacao=True))
+
+    class Meta:
+        model = Aviso
+        fields = ['membros','Data','assunto','descricao']
+
+        widgets = {
+            #'membros': forms.ModelMultipleChoiceField(),
+            'Email': forms.TextInput(attrs={'class': 'form-control','id':'Email'}),
+            'Data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
+        }
+
+
+

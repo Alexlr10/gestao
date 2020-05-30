@@ -9,7 +9,22 @@
 
     <form method="POST" action="{% url 'projeto_edit' projeto.id  %}">
         {% csrf_token %}
-        {{ form|bootstrap }}
+       {{ form.servico|bootstrap }}
+                        {{ form.dataEntrega|bootstrap }}
+                        {{ form.status|bootstrap }}
+                         <div class="form-group">
+                            <label class="control-label  " >Convocados</label>
+
+                            <div class=" ">
+                                <select name="responsaveis" class=" form-control" required=""
+                                        multiple="multiple">
+
+                                    {% for u in usuario %}
+                                    <option name="responsaveis" id="responsaveis" value="{{ u.id }}">{{ u.Nome }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         <button type="submit" class="btn btn-success">Alterar</button>
     </form>
