@@ -69,6 +69,7 @@ urlpatterns = [
     path('mensagem/', views.mensagem, name='mensagem'),
     path('ouvidoria/', views.ouvidoria, name='ouvidoria'),
     path('aviso/', views.aviso, name='aviso'),
+    path('faltas/', views.faltasReunioes, name='faltas'),
 ]
 
 if settings.DEBUG:

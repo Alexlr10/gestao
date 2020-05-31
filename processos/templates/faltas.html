@@ -31,20 +31,26 @@
 
                         <thead>
                         <tr>
-                            <th>Data</th>
-                            <th>Mensagem</th>
+                            <th>Mes</th>
+                            <th>Nome</th>
+                            <th>Nº Faltas</th>
 
 
                         </tr>
                         </thead>
                         <tbody>
 
-                        {% for u in ouvidoria %}
+                        {% for u in faltas %}
                             <tr>
 
-                                <td>{{ u.data  }} </td>
-                                <td>{{ u.texto|safe  }} </td>
+                               <td><span class="badge bg-grey">{{ u.mes|date:"M Y" }}</span></td>
+                                <td>{{ u.Nome  }} </td>
 
+                                {% if u.faltas >= 2  %}
+                                 <td><span class="badge bg-red">{{ u.faltas }}</span></td>
+                                {% else %}
+                                 <td><span class="badge bg-green">{{ u.faltas }}</span></td>
+                            {% endif %}
 
                             </tr>
 

@@ -9,20 +9,35 @@
 
 
 
-    <div class="col-xs-12">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-lg-offset-1">
 
-        <!-- /.box -->
+    <!-- /.box -->
 
 
-        <div class="box table-responsive">
-            <div class="box-header">
+    <div class="box table-responsive">
+        <div class="box-header">
+            <form method="POST">
+                {% csrf_token %}
+                    {{ post.text|safe }}
+                         {{ form.media }}
+                <div class="row">
+                    <div class="col-sm-4">
 
-                <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">
-                    Clique aqui e deixe sua mensagem
-                </button>
+                        {{ form.data|bootstrap }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10">
 
-            </div>
+                        {{ form.texto|bootstrap }}
 
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </form>
+        </div>
 
 
         <!-- /.col -->

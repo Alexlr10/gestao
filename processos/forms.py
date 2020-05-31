@@ -246,7 +246,7 @@ class AtaForm(forms.ModelForm):
         # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
-            'dataPublicacao': forms.TextInput(attrs={'class': 'form-control'}),
+            'dataPublicacao': forms.TextInput(attrs={'class': 'form-control','type': 'date', }),
         }
 
 
@@ -295,7 +295,7 @@ class BalancoForm(forms.ModelForm):
 class OuvidoriaForm(forms.ModelForm):
     class Meta:
         model = Ouvidoria
-        fields = '__all__'
+        fields = ['data','texto']
 
         widgets = {
 

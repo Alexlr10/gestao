@@ -174,7 +174,7 @@ def home(request):
 
 @login_required
 def mensagem(request):
-    ouvidoria = Ouvidoria.objects.all().order_by('data')
+    ouvidoria = Ouvidoria.objects.all().order_by('-data')
     print(ouvidoria)
 
     form = OuvidoriaForm()
@@ -796,3 +796,21 @@ def balanco_edit(request, pk):
 
     return render(request, 'balanco_edit.html', context)
 
+@login_required
+def faltasReunioes(request):
+    faltas = Reuniao.objects.raw('''SELECT 1 as id, to_date(to_char(processos_reuniao."dataReuniao", 'MM YYYY'), 'MM YYYY') as mes,
+                                    processos_usuario."Nome", count(processos_usuario."Nome") as faltas
+                                    FROM  public.processos_reuniao, public.processos_reuniao_ausencia, 
+                                    public.processos_usuario WHERE 
+                                    processos_reuniao.id = processos_reuniao_ausencia.reuniao_id AND
+                                      processos_usuario.id = processos_reuniao_ausencia.usuario_id
+                                       group by processos_usuario."Nome", 
+                                       to_char(processos_reuniao."dataReuniao", 'MM YYYY')
+                                         order by to_char(processos_reuniao."dataReuniao", 'MM YYYY') desc''')
+    form = ReuniaoForm()
+    context = {
+        'form':form,
+        'faltas': faltas
+    }
+
+    return render(request, 'faltas.html', context)
