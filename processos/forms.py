@@ -298,19 +298,19 @@ class OuvidoriaForm(forms.ModelForm):
         fields = ['data','texto']
 
         widgets = {
-
+            ''
             'data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
 
 class AvisoForm(forms.ModelForm):
-    membros = forms.ModelMultipleChoiceField(queryset=Usuario.objects.filter(Situacao=True))
+    membros = forms.ModelMultipleChoiceField(queryset=Usuario.objects.filter(Situacao=True),widget=forms.CheckboxSelectMultiple())
 
     class Meta:
         model = Aviso
         fields = ['membros','Data','assunto','descricao']
 
         widgets = {
-            #'membros': forms.ModelMultipleChoiceField(),
+            'membros': forms.CheckboxSelectMultiple(),
             'Email': forms.TextInput(attrs={'class': 'form-control','id':'Email'}),
             'Data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
         }

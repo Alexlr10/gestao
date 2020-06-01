@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load staticfiles %} {% load bootstrap %} {% block content-header %}
+{% extends "base.html" %} {% load bootstrap %}{% load static %} {% block content-header %}
 
     <i class="fa fa-user "> </i> Clientes
     <small>Gerenciar Clientes</small>
@@ -125,15 +125,18 @@
             });
         });
 
-        $(document).ready(function () {
-
+        $(function () {
             $('#tabela').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
                 "language": {
                     "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
                 },
-                stateSave: true,
-            });
-
+            })
         });
     </script>
 
