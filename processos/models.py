@@ -272,8 +272,6 @@ class Ata(models.Model):
     Arquivo = models.FileField('Arquivo',upload_to= "Files", default="",blank=True, null=True)
     texto = RichTextField(null=True, blank=True)
 
-
-
 class Receita(models.Model):
     Servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='servico')
     Data = models.DateField('Data',blank=True, null=True)

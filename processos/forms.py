@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import gettext as _
-
+from dal import autocomplete
 from .models import *
 
 from . import models
@@ -239,13 +239,17 @@ class ReuniaoForm(forms.ModelForm):
         }
 
 
+
 class AtaForm(forms.ModelForm):
+    #Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all(), widget=autocomplete.ModelSelect2(url='Reuniao-Autocomplete'))
+
     class Meta:
         model = Ata
+        #fields = ['Reuniao']
         fields = '__all__'
-        # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
+         #+   'Reuniao': autocomplete.ModelSelect2(url='Reuniao-Autocomplete'),
             'dataPublicacao': forms.TextInput(attrs={'class': 'form-control','type': 'date', }),
         }
 

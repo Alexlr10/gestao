@@ -3,145 +3,151 @@
     <i class="fa fa-user "> </i> Ata
     <small>Gerenciar Atas</small>
 
-
 {% endblock content-header %} {% block content-main %}
 
 
+    {{ form.media }}
+
+<div class="col-xs-12">
+
+    <!-- /.box -->
 
 
-    <div class="col-xs-12">
+    <div class="box table-responsive">
+        <div class="box-header">
 
-        <!-- /.box -->
+            <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
+                Atas
+            </button>
 
-
-        <div class="box table-responsive">
-            <div class="box-header">
-
-                <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
-                    Atas
-                </button>
-
-            </div>
+        </div>
 
 
-            <div class="box-header">
-                <h3 class="box-title">Todos as Atas cadastradas no sistema</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="table-responsive">
-                    <table id="tabela" class="table no-margin table-bordered" style="font-size: 13px">
+        <div class="box-header">
+            <h3 class="box-title">Todos as Atas cadastradas no sistema</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="table-responsive">
+                <table id="tabela" class="table no-margin table-bordered" style="font-size: 13px">
 
-                        <thead>
+                    <thead>
+                    <tr>
+                        <th>Reunião</th>
+                        <th>Data da Publicação</th>
+                        <th>Descrição</th>
+                        <th>Arquivo</th>
+
+                        <th>Ações</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for u in ata %}
                         <tr>
-                            <th>Reunião</th>
-                            <th>Data da Publicação</th>
-                            <th>Descrição</th>
-                            <th>Arquivo</th>
 
-                            <th>Ações</th>
+                        {% if u.Reuniao.tipoReuniao == 'GER' %}
+                            <td>GERAL</td>
+                        {% else %}
+                            <td>DIRETORIA</td>
+                        {% endif %}
+                        <td>{{ u.dataPublicacao }} </td>
+                        <td>{{ u.texto|safe }} </td>
+                        {% if u.Arquivo.url != None %}
+                        <td><a href="{{ u.Arquivo.url }}" target="_blank">{{ u.Arquivo.url }}</a></td>
+                        {% else %}
+                        <td><a  target="_blank"></a></td>
+                    {% endif %}
 
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        {% for u in ata %}
-                            <tr>
-
-                                {% if u.Reuniao.tipoReuniao == 'GER' %}
-                                    <td>GERAL</td>
-                                {% else %}
-                                    <td>DIRETORIA</td>
-                                {% endif %}
-                            <td>{{ u.dataPublicacao }} </td>
-                             <td>{{ u.texto|safe }} </td>
-                                <td><a href="{{ u.Arquivo.url }}"target="_blank">{{ u.Arquivo.url }}</a></td>
+                    </td>
 
 
+                    <td>
+                        <a href="{% url 'ata_edit' u.id %}" data-toggle="modal"
+                           data-target="#myModal{{ u.id }}">
+                            <button type="button" class="btn btn-xs btn-warning">Editar</button>
+                        </a>
+                        <a href="{% url 'ata_delete' u.id %}">
+                            <button type="button" class="btn btn-xs btn-danger">Apagar</button>
+                        </a>
 
-                                </td>
-
-
-                                <td>
-                                    <a href="{% url 'ata_edit' u.id %}" data-toggle="modal"
-                                       data-target="#myModal{{ u.id }}">
-                                        <button type="button" class="btn btn-xs btn-warning">Editar</button>
-                                    </a>
-                                    <a href="{% url 'ata_delete' u.id %}">
-                                        <button type="button" class="btn btn-xs btn-danger">Apagar</button>
-                                    </a>
-
-                                </td>
+                    </td>
 
 
-                            </tr>
+                    </tr>
 
 
-                            <div class="modal fade" data-backdrop="static" id="myModal{{ u.id }}" tabindex="-1"
-                                 role="dialog"
-                                 aria-labelledby="exampleModalLabel">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
+                    <div class="modal fade" data-backdrop="static" id="myModal{{ u.id }}" tabindex="-1"
+                         role="dialog"
+                         aria-labelledby="exampleModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
 
-                                    </div>
-                                </div>
                             </div>
+                        </div>
+                    </div>
 
 
-                        {% endfor %}
+                    {% endfor %}
 
 
-                        </tfoot>
-                    </table>
-                </div>
-                <!-- /.box-body -->
+                    </tfoot>
+                </table>
             </div>
-        </div>
-        <!-- /.col -->
-    </div>
-    <div class="modal fade" data-backdrop="static" id="exampleModal51" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Serviço</h4>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" enctype="multipart/form-data".>
-                        {% csrf_token %}
-                        {{ form|bootstrap }}
-                        {{ post.text|safe }}
-                        {{ form.media }}
-
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Cadastrar</button>
-                    </form>
-                </div>
-
-            </div>
+            <!-- /.box-body -->
         </div>
     </div>
+    <!-- /.col -->
+</div>
+<div class="modal fade" data-backdrop="static" id="exampleModal51" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Serviço</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data" .>
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+
+                    {{ post.text|safe }}
+                    {{ form.media }}
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 {% endblock content-main %} {% block extraJS %}
 
+
     <script>
 
- $(function () {
-    $('#tabela').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : false,
-      'info'        : true,
-      'autoWidth'   : true,
-         "language": {
-                "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
-            },
-    })
-  });
+        $(function () {
+
+
+            $('#tabela').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+            })
+        });
+
     </script>
 
 

@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
+
+
 from .views import *
 from . import views
 from django.conf.urls.static import static
@@ -41,6 +43,8 @@ urlpatterns = [
     path('reuniao/', views.reuniao, name='reuniao'),
     path('reuniao_edit/<int:pk>/', views.reuniao_edit, name='reuniao_edit'),
     path('reuniao_delete/<int:pk>/', views.reuniao_delete, name='reuniao_delete'),
+
+
 
     # Ata
     path('ata/', views.ata, name='ata'),

@@ -40,6 +40,8 @@ AUTH_USER_MODEL = 'processos.Usuario'
 # Application definition
 
 INSTALLED_APPS = [
+    'dal',
+    'dal_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +51,8 @@ INSTALLED_APPS = [
     'bootstrapform',
     'ckeditor',
     'processos',
+
+
 
 ]
 
@@ -98,16 +102,16 @@ DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dbur
 #     }
 # }
 #
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'gestao_interna',
-#         'USER': 'postgres',
-#         'PASSWORD': '91851007',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'gestao_interna',
+        'USER': 'postgres',
+        'PASSWORD': '91851007',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 # # # #
 # DATABASES = {
 #     'default': {
