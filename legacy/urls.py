@@ -24,8 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('processos.urls')),
     path('Reuniao-Autocomplete/', ReuniaoAutocomplete.as_view(), name='Reuniao-Autocomplete', ),
-
-
 ]
 
 if settings.DEBUG:

@@ -1,12 +1,9 @@
-from django.core.serializers import json
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
-from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_save, post_delete
-from django.db.models import Sum
 from ckeditor.fields import RichTextField
 from django.core.mail import send_mail
 

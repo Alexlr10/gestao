@@ -6,7 +6,7 @@
 {% endblock content-header %} {% block content-main %}
 
 
-    {{ form.media }}
+
 
 <div class="col-xs-12">
 
@@ -113,6 +113,7 @@
             <div class="modal-body">
                 <form method="POST" enctype="multipart/form-data" .>
                     {% csrf_token %}
+
                     {{ form|bootstrap }}
 
                     {{ post.text|safe }}
@@ -131,6 +132,8 @@
 
 
     <script>
+
+
 
         $(function () {
 
