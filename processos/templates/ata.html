@@ -3,7 +3,9 @@
     <i class="fa fa-user "> </i> Ata
     <small>Gerenciar Atas</small>
 
-{% endblock content-header %} {% block content-main %}
+{% endblock content-header %}
+
+{% block content-main %}
 
 
 
@@ -117,7 +119,7 @@
                     {{ form|bootstrap }}
 
                     {{ post.text|safe }}
-                    {{ form.media }}
+
 
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success">Cadastrar</button>
@@ -127,8 +129,8 @@
         </div>
     </div>
 </div>
-
-{% endblock content-main %} {% block extraJS %}
+ {{ form.media }}
+{% endblock content-main %}  {% block extraJS %}
 
 
     <script>
