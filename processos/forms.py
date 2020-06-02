@@ -240,7 +240,7 @@ class ReuniaoForm(forms.ModelForm):
 
 
 
-class AtaForm(forms.ModelForm):
+class AtaForm(forms.Form):
     #Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all(), widget=autocomplete.ModelSelect2(url='Reuniao-Autocomplete'))
     Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all(),
                                      widget=autocomplete.ModelSelect2(url='Reuniao-Autocomplete',
