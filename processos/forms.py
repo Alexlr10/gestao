@@ -240,19 +240,26 @@ class ReuniaoForm(forms.ModelForm):
 
 
 
-class AtaForm(forms.Form):
-    #Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all(), widget=autocomplete.ModelSelect2(url='Reuniao-Autocomplete'))
-    Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all(),
-                                     widget=autocomplete.ModelSelect2(url='Reuniao-Autocomplete',
-                                     attrs={'id': 'id_Reuniao',
-                                            'style': 'width: 100% !important',
-                                            'data-dropdown-css-class': 'select2-info'}))
+class AtaForm(forms.ModelForm):
+    # Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all(), widget=autocomplete.ModelSelect2(url='Reuniao-Autocomplete'))
+    # Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all(),
+    #                                  widget=autocomplete.ModelSelect2(url='Reuniao-Autocomplete',
+    #                                  attrs={'id': 'id_Reuniao',
+    #                                         'style': 'width: 100% !important',
+    #                                         'data-dropdown-css-class': 'select2-info'}))
 
     class Meta:
         model = Ata
-        fields = ('Reuniao',)
-        #fields = '__all__'
 
+        fields = ['Reuniao', 'dataPublicacao', 'Arquivo', 'texto']
+
+        widgets = {
+            'Reuniao': autocomplete.ModelSelect2(url='Reuniao-Autocomplete',
+                                                 attrs={'class': 'form-control select2bs4 select2-blue', 'id': 'id_Reuniao',
+                                                        'style': 'width: 100% !important',
+                                                        'data-dropdown-css-class': 'select2-info'}),
+            'dataPublicacao': forms.TextInput(attrs={'class': 'form-control', 'type': 'date', 'id':'dataPublicacao' }),
+        }
 
 
 class ReceitaForm(forms.ModelForm):

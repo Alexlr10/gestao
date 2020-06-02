@@ -4,7 +4,6 @@ from .models import *
 class ReuniaoAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         qs = Reuniao.objects.all()
-        print(qs)
 
         if self.q:
 

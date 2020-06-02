@@ -555,9 +555,6 @@ def reuniao_delete(request, pk):
 @login_required
 def ata(request):
     ata = Ata.objects.all().order_by('-dataPublicacao')
-    reuniao = Reuniao.objects.all().order_by('dataReuniao')
-
-
     if request.method == 'POST':
         form = AtaForm(request.POST, request.FILES)
 
@@ -570,8 +567,7 @@ def ata(request):
 
     context = {
         'form': form,
-        'ata': ata,
-      #  'reuniao':reuniao
+        'ata': ata
     }
 
     return render(request, 'ata.html', context)

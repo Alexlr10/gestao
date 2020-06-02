@@ -257,10 +257,10 @@ class Reuniao(models.Model):
     def __str__(self):
         if self.tipoReuniao == 'GER':
             return 'GERAL - ' + str(self.dataReuniao.strftime("%d/%m/%Y"))
-        else:
+        elif self.tipoReuniao == 'DIR':
             return 'DIRETORIA - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
-
-
+        elif self.tipoReuniao == 'PRO':
+            return 'PROJETOS - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
 
 
 class Ata(models.Model):
@@ -268,6 +268,8 @@ class Ata(models.Model):
     dataPublicacao = models.DateField('data', blank=True, null=True)
     Arquivo = models.FileField('Arquivo',upload_to= "Files", default="",blank=True, null=True)
     texto = RichTextField(null=True, blank=True)
+
+
 
 class Receita(models.Model):
     Servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='servico')
