@@ -462,7 +462,7 @@ def projeto_delete(request, pk):
 ######## Reuniao
 @login_required
 def reuniao(request):
-    reuniao = Reuniao.objects.all().order_by('dataReuniao')
+    reuniao = Reuniao.objects.all().order_by('-dataReuniao')
 
     usu = Usuario.objects.filter(Situacao=True)
     usuario = []
@@ -480,11 +480,11 @@ def reuniao(request):
             data = dataReuniao.split('-')
             pauta = request.POST.get('descricaoReuniao')
 
-            if tipoReuniao == 'GER':
+            if tipoReuniao == 'GERAL':
                 mensagem = str('A Next terá uma reunião GERAL dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
-            elif tipoReuniao == 'DIR':
+            elif tipoReuniao == 'DIRETORIA':
                 mensagem = str('A Next terá uma reunião de DIRETORIA dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
-            elif tipoReuniao == 'PRO':
+            elif tipoReuniao == 'PROJETOS':
                 mensagem = str('A Next terá uma reunião da equipe de PROJETOS dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
 
 

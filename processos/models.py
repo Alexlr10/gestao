@@ -88,9 +88,9 @@ FUNCAO_CHOICE_SERVICO = (
 )
 
 FUNCAO_CHOICE_REUNIAO = (
-    ('GER', 'GERAL'),
-    ('DIR', 'DIRETORIA'),
-    ('PRO', 'PROJETOS'),
+    ('GERAL', 'GERAL'),
+    ('DIRETORIA', 'DIRETORIA'),
+    ('PROJETOS', 'PROJETOS'),
 )
 
 
@@ -246,7 +246,7 @@ class Projeto(models.Model):
 
 class Reuniao(models.Model):
     dataReuniao = models.DateField('Data da Reunião', blank=True, null=True)
-    tipoReuniao = models.CharField('Reunião', max_length=4, choices=FUNCAO_CHOICE_REUNIAO)
+    tipoReuniao = models.CharField('Reunião', max_length=12, choices=FUNCAO_CHOICE_REUNIAO)
     descricaoReuniao = models.TextField('Descrição', null=True, blank=True)
     presenca = models.ManyToManyField('Usuario', null=True, blank=True, related_name="presenca")
     ausencia = models.ManyToManyField('Usuario', null=True, blank=True, related_name="ausencia")
@@ -254,12 +254,20 @@ class Reuniao(models.Model):
     # def email(self):
     #     return ",".join([str (u) for u in self.presenca.all()])
 
-    def __str__(self):
-        if self.tipoReuniao == 'GER':
+    def reuniao(self):
+        if self.tipoReuniao == 'GERAL':
             return 'GERAL - ' + str(self.dataReuniao.strftime("%d/%m/%Y"))
-        elif self.tipoReuniao == 'DIR':
+        elif self.tipoReuniao == 'DIRETORIA':
             return 'DIRETORIA - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
-        elif self.tipoReuniao == 'PRO':
+        elif self.tipoReuniao == 'PROJETOS':
+            return 'PROJETOS - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
+
+    def __str__(self):
+        if self.tipoReuniao == 'GERAL':
+            return 'GERAL - ' + str(self.dataReuniao.strftime("%d/%m/%Y"))
+        elif self.tipoReuniao == 'DIRETORIA':
+            return 'DIRETORIA - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
+        elif self.tipoReuniao == 'PROJETOS':
             return 'PROJETOS - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
 
 

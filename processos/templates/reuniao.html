@@ -5,7 +5,33 @@
 
 
 {% endblock content-header %} {% block content-main %}
-
+{##}
+{#    <style>#}
+{#        .select2-container--default .select2-selection--single .select2-selection__rendered {#}
+{#            line-height: 100% !important;#}
+{#        }#}
+{##}
+{#        .select2-container .select2-selection--single {#}
+{#            height: 40px !important;#}
+{#        }#}
+{##}
+{#        .select2-container .select2-selection--multiple {#}
+{##}
+{#            min-height: 45px !important;#}
+{#        }#}
+{##}
+{#        .select2-container--default .select2-selection--multiple .select2-selection__rendered {#}
+{##}
+{#            height: 100% !important;#}
+{#        }#}
+{##}
+{#        .select2-container .select2-selection--multiple .select2-selection__rendered {#}
+{#            overflow: auto !important;#}
+{##}
+{#        }#}
+{##}
+{##}
+{#    </style>#}
     <div class="col-xs-12">
 
         <!-- /.box -->
@@ -45,13 +71,7 @@
                         {% for u in reuniao %}
                             <tr>
                                 <td>{{ u.dataReuniao }}</td>
-                                {% if u.tipoReuniao == 'GER' %}
-                                    <td>GERAL</td>
-                                {% elif u.tipoReuniao == 'DIR' %}
-                                    <td>DIRETORIA</td>
-                                {% elif u.tipoReuniao == 'PRO' %}
-                                    <td>PROJETOS</td>
-                                {% endif %}
+                                <td>{{ u.tipoReuniao }}</td>
 
                                 <td>{{ u.descricaoReuniao }}</td>
                                 <td>
@@ -103,14 +123,14 @@
         </div>
         <!-- /.col -->
     </div>
-    <div class="modal fade" id="exampleModal51" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal fade" id="exampleModal51" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Serviço</h4>
+                    <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Reunião</h4>
                 </div>
                 <div class="modal-body">
                     <form method="POST">
@@ -122,30 +142,30 @@
 
 
 
+                                                <div class="form-group">
+                                                    <label class="control-label  ">Convocados</label>
+
+                                                    <div class="">
+                                                        <select name="presenca"  id="presenca" class="form-control" required=""
+                                                                multiple="multiple">
+
+                                                            {% for u in usuario %}
+                                                                <option name="presenca" id="presenca" value="{{ u.id }}">{{ u.Nome }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+
                         <div class="form-group">
-                            <label class="control-label  " >Convocados</label>
+
+                            <label class="control-label  ">Ausência</label>
 
                             <div class=" ">
-                                <select name="presenca" class=" form-control" required=""
+                                <select name="ausencia" class=" form-control"
                                         multiple="multiple">
 
                                     {% for u in usuario %}
-                                    <option name="presenca" id="presenca" value="{{ u.id }}">{{ u.Nome }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-
-                     <div class="form-group">
-
-                            <label class="control-label  " >Ausência</label>
-
-                            <div class=" ">
-                                <select name="ausencia" class=" form-control" required=""
-                                        multiple="multiple">
-
-                                    {% for u in usuario %}
-                                    <option name="ausencia" id="presenca" value="{{ u.id }}">{{ u.Nome }}</option>
+                                        <option name="ausencia" id="presenca" value="{{ u.id }}">{{ u.Nome }}</option>
                                     {% endfor %}
                                 </select>
 
@@ -153,7 +173,6 @@
                             </div>
 
                         </div>
-
 
 
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -165,11 +184,20 @@
         </div>
     </div>
 
+   {{ form.media.js }}
 {% endblock content-main %} {% block extraJS %}
+
+    <script>
+  $(function () {
+
+        $('presenca').select2();
+
+});
+    </script>
+
 
 
     <script>
-
 
         $(function () {
 

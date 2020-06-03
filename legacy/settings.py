@@ -42,6 +42,7 @@ AUTH_USER_MODEL = 'processos.Usuario'
 INSTALLED_APPS = [
     'dal',
     'dal_select2',
+    'django_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,6 +83,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'legacy.wsgi.application'
 
@@ -178,3 +181,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sistemanextstepsi@gmail.com'
 EMAIL_HOST_PASSWORD = 'nextstepsi'
 EMAIL_USE_TLS = True
+

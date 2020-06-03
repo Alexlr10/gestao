@@ -4,3 +4,4 @@ from .forms import *
 
 admin.site.register(Cliente)
 admin.site.register(Ata)
+admin.site.register(Reuniao)
