@@ -101,16 +101,16 @@ DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dbur
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'gestao_interna',
-#         'USER': 'postgres',
-#         'PASSWORD': '91851007',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'gestao_interna',
+        'USER': 'postgres',
+        'PASSWORD': '91851007',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 # # # #
 # DATABASES = {
 #     'default': {
@@ -183,12 +183,22 @@ EMAIL_USE_TLS = True
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        # 'LOCATION': 'redis:'+'*'+':6379/1',
+         'LOCATION': 'redis://localhost:6379',
     },
     'select2': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis:'+'*'+':6379/1',
+        'LOCATION': 'redis://localhost:6379',
         'TIMEOUT': 60 * 60 * 24
+    },
+}
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDISCLOUD_URL', 'redis://localhost:6379')],
+        },
+        "ROUTING": "chat.routing.channel_routing",
     },
 }
 
