@@ -33,8 +33,8 @@
                         <tr>
                             <th>Nome</th>
                             <th>Data</th>
-                            <th>Valor</th>
                             <th>Pagamento</th>
+                            <th>Valor</th>
 
 
                             <th>Ações</th>
@@ -48,9 +48,9 @@
                                 <td>{{ u.despesa }}</td>
                                 <td>{{ u.data }}</td>
                                 {% if u.Pagamento == 1 %}
-                                    <td>Efetuado</td>
+                                    <td><span class="badge bg-green">Efetuado</span></td>
                                 {% else %}
-                                    <td>À efetuar</td>
+                                    <td><span class="badge bg-grey">À efetuar</span></td>
                                 {% endif %}
                                 <td>{{ u.valor }}</td>
 
@@ -110,8 +110,9 @@
                         <tr>
                             <th>Nome</th>
                             <th>Data</th>
-                            <th>Valor</th>
                             <th>Pagamento</th>
+                            <th>Valor</th>
+
                             <th>Situação</th>
 
 
@@ -124,9 +125,9 @@
                                 <td>{{ u.despesa }}</td>
                                 <td>{{ u.data }}</td>
                                 {% if u.Pagamento == 1 %}
-                                    <td>Efetuado</td>
+                                    <td><span class="badge bg-green">Efetuado</span></td>
                                 {% else %}
-                                    <td>À efetuar</td>
+                                    <td><span class="badge bg-grey">À efetuar</span></td>
                                 {% endif %}
                                 <td>{{ u.valor }}</td>
                                 {% if u.data  > today.today.date %}

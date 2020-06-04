@@ -602,7 +602,7 @@ def ata_delete(request, pk):
 @login_required
 def receita(request):
     receita = Receita.objects.all().order_by('-Data')
-    receitaAReceber = Receita.objects.raw('''SELECT 1 as id, to_char(processos_receita."Data", 'MM-YYYY') as periodo,
+    receitaAReceber = Receita.objects.raw('''SELECT 1 as id, to_date(to_char(processos_receita."Data", 'MM-YYYY'), 'MM-YYYY') as periodo,
                                               Sum(processos_receita."valorParcela") as receita
                                               FROM   public.processos_receita
                                                 WHERE processos_receita."Pagamento" = false
