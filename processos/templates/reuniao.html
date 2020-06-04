@@ -135,18 +135,28 @@
                 <div class="modal-body">
                     <form method="POST">
                         {% csrf_token %}
-{#                        {{ form.media.js }}#}
-                        {{ form.dataReuniao|bootstrap }}
-                        {{ form.tipoReuniao|bootstrap }}
+                        {#                        {{ form.media.js }}#}
+
+
+                    <div class="row">
+                                    <div class="col-sm-6">
+                                   {{ form.dataReuniao|bootstrap }}
+                                    </div>
+                                    <div class="col-sm-6" >
+                                    {{ form.tipoReuniao|bootstrap }}
+                                    </div>
+                                </div>
+
                         {{ form.descricaoReuniao|bootstrap }}
-{#                        {{ form.presenca|bootstrap }}#}
+{#                                                {{ form.presenca|bootstrap }}#}
 
 
-                        <div class="form-group" >
+                        <div class="form-group">
                             <label class="control-label  ">Convocados</label>
 
                             <div class="">
-                                <select name="presenca" id="presenca" class="form-control" style="width:580px; height:200px;"required=""
+                                <select name="presenca" id="presenca" class="form-control presenca"
+                                        style="width:580px; height:200px;" required=""
                                         multiple="multiple">
 
                                     {% for u in usuario %}
@@ -166,7 +176,8 @@
                                         multiple="multiple" style="width:580px; height:200px;">
 
                                     {% for u in usuario %}
-                                        <option name="ausencia" id="presenca" value="{{ u.id }}">{{ u.Nome.upper }}</option>
+                                        <option name="ausencia" id="ausencia"
+                                                value="{{ u.id }}">{{ u.Nome.upper }}</option>
                                     {% endfor %}
                                 </select>
 
@@ -185,13 +196,18 @@
         </div>
     </div>
 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     {{ form.media.js }}
     {{ form.media.css }}
 {% endblock content-main %} {% block extraJS %}
 
 
     <script>
+
+        {#$(document).ready(function () {#}
+        {#    $('.presenca').select2();#}
+        {#});#}
+
 
         $(function () {
 

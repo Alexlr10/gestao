@@ -52,16 +52,16 @@
                                     <td>GERAL</td>
                                 {% elif u.Reuniao.tipoReuniao == 'DIRETORIA' %}
                                     <td>DIRETORIA</td>
-                                {% else  %}
+                                {% else %}
                                     <td>PROJETOS</td>
                                 {% endif %}
                                 <td>{{ u.dataPublicacao }} </td>
                                 <td>{{ u.texto|safe }} </td>
 
-                            {% if u.Arquivo.url != None %}
-                                <td><a href="{{ u.Arquivo.url }}" target="_blank">{{ u.Arquivo.url }}</a></td>
+                                {% if u.Arquivo.url != None %}
+                                    <td><a href="{{ u.Arquivo.url }}" target="_blank">{{ u.Arquivo.url }}</a></td>
                                 {% else %}
-                            <td><a target="_blank"></a></td>
+                                    <td><a target="_blank"></a></td>
                                 {% endif %}
                                 </td>
 
@@ -103,7 +103,7 @@
         </div>
         <!-- /.col -->
     </div>
-    <div class="modal fade" data-backdrop="static" id="exampleModal51"role="dialog"
+    <div class="modal fade" data-backdrop="static" id="exampleModal51" role="dialog"
          aria-labelledby="exampleModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -111,12 +111,23 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Serviço</h4>
+                    <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Ata</h4>
                 </div>
                 <div class="modal-body">
                     <form method="POST" enctype="multipart/form-data" .>
                         {% csrf_token %}
-                        {{ form|bootstrap }}
+
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form.Reuniao|bootstrap }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form.dataPublicacao|bootstrap }}
+                            </div>
+                        </div>
+                        {{ form.Arquivo|bootstrap }}
+                        {{ form.texto|bootstrap }}
                         {{ post.text|safe }}
                         {{ form.media }}
 
@@ -132,6 +143,11 @@
 {% endblock content-main %} {% block extraJS %}
 
     <script>
+
+        $(document).ready(function () {
+            $('.reuniao').select2();
+        });
+
 
         $(function () {
             $('#tabela').DataTable({

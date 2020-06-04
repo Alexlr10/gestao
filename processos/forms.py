@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import gettext as _
 from .models import *
-from django_select2 import forms as s2forms
 from . import models
 
 
@@ -242,6 +241,8 @@ class ReuniaoForm(forms.ModelForm):
             'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control', 'id': 'dataReuniao'}),
             'tipoReuniao': forms.Select(attrs={'id': 'tipoReuniao','class': 'form-control'}),
             'Arquivo' : forms.FileField(label='Select a file'),
+            #'presenca': forms.SelectMultiple(attrs={'class':'presenca','style':'width:550px; height:200px;'}),
+
              # 'presenca': s2forms.ModelSelect2MultipleWidget( model = Usuario.objects.filter(Situacao=True),
              #                                                 search_fields = ["Nome__icontains","Email__icontains",],
              #                                                 attrs={'class': 'form-control','style':'width:570px; height:200px;',
@@ -267,15 +268,16 @@ class AtaForm(forms.ModelForm):
         fields = ['Reuniao', 'dataPublicacao', 'Arquivo', 'texto']
 
         widgets = {
+            'Reuniao': forms.Select(attrs={'class':'reuniao','style':'width:300px; '}),
             # 'Reuniao': autocomplete.ModelSelect2(url='Reuniao-Autocomplete',
             #                                      attrs={'class': 'form-control select2bs4 select2-blue', 'id': 'id_Reuniao',
             #                                             'style': 'width: 100% !important',
             #                                             'data-dropdown-css-class': 'select2-info'}),
-            'Reuniao': s2forms.ModelSelect2Widget(model=Reuniao.objects.all(),
-                                                           search_fields = ["tipoReuniao__icontains","dataReuniao__icontains",],
-                                                           attrs={'class': 'form-control','style':'width:870px; height:200px;',
-                                                                  'color':'red'} ),
-            'dataPublicacao': forms.TextInput(attrs={'class': 'form-control', 'type': 'date', 'id':'dataPublicacao' }),
+            # 'Reuniao': s2forms.ModelSelect2Widget(model=Reuniao.objects.all(),
+            #                                                search_fields = ["tipoReuniao__icontains","dataReuniao__icontains",],
+            #                                                attrs={'class': 'form-control','style':'width:870px; height:200px;',
+            #                                                       'color':'red'} ),
+            'dataPublicacao': forms.TextInput(attrs={'class': 'form-control', 'type': 'date', 'id':'dataPublicacao','style':'width:300px;' }),
         }
 
 

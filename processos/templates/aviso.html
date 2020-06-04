@@ -18,29 +18,40 @@
 
                         <h3>Envie seu email</h3>
                         <form class="ng-pristine ng-valid" role="form" method="POST" enctype="multipart/form-data"
-                            action="{% url 'aviso' %}">
+                              action="{% url 'aviso' %}">
                             {% csrf_token %}
 
-                             <div class="form-group">
-                            <label class="control-label  " >Membros</label>
+                            <div class="form-group">
+                                <label class="control-label  ">Membros</label>
 
-                            <div class=" ">
-                                <select name="membros" class=" form-control" required=""
-                                        multiple="multiple">
+                                <div class=" ">
+                                    <select name="membros" class=" form-control" required=""style="width:840px; height:200px;"
+                                            multiple="multiple">
 
-                                    {% for u in usuario %}
-                                    <option name="membros" id="membros" value="{{ u.id }}">{{ u.Nome }}</option>
-                                    {% endfor %}
-                                </select>
+                                        {% for u in usuario %}
+                                            <option name="membros" id="membros" value="{{ u.id }}">{{ u.Funcao.upper }} -- {{ u.Nome.upper }} -- {{ u.Email }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                            {{ form.Data|bootstrap }}
-                            {{ form.assunto|bootstrap }}
+
+                            <div class="row">
+                                <div class="col-sm-5">
+
+                                    {{ form.assunto|bootstrap }}
+                                </div>
+                                <div class="col-sm-5">
+                                    {{ form.Data|bootstrap }}
+                                </div>
+
+                            </div>
+
                             {{ form.descricao|bootstrap }}
                             {{ post.text|safe }}
                             {{ form.media }}
-                          <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i>Enviar</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i>Enviar
+                            </button>
                         </form>
 
                     </div>

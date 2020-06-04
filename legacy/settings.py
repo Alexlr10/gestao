@@ -40,7 +40,6 @@ AUTH_USER_MODEL = 'processos.Usuario'
 # Application definition
 
 INSTALLED_APPS = [
-    'django_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -180,28 +179,3 @@ EMAIL_HOST_USER = 'sistemanextstepsi@gmail.com'
 EMAIL_HOST_PASSWORD = 'nextstepsi'
 EMAIL_USE_TLS = True
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-         'LOCATION': 'redis://localhost:6379',
-    },
-    'select2': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://localhost:6379',
-        'TIMEOUT': 60 * 60 * 24
-    },
-}
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgi_redis.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [os.environ.get('REDISCLOUD_URL', 'redis://localhost:6379')],
-        },
-        "ROUTING": "chat.routing.channel_routing",
-    },
-}
-
-REDIS_URL = os.getenv('estao-interna.herokuapp.com/', 'redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = REDIS_URL
-SELECT2_CACHE_BACKEND = "select2"
