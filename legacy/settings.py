@@ -191,4 +191,7 @@ CACHES = {
         'TIMEOUT': 60 * 60 * 24
     },
 }
+
+REDIS_URL = os.getenv('estao-interna.herokuapp.com/', 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = REDIS_URL
 SELECT2_CACHE_BACKEND = "select2"
