@@ -49,10 +49,18 @@
                                 <td>
                                     {% if u.Funcao == 'PROP' %}
                                         PROPRIETÁRIO
-                                    {% elif u.Funcao == 'SUPV' or u.Funcao == 'SUPM' %}
-                                        GERENTE
-                                    {% elif u.Funcao == 'VEND' %}
-                                        CONSULTOR
+                                    {% elif u.Funcao == 'PRE' %}
+                                        PRESIDENCIA
+                                    {% elif u.Funcao == 'MAR' %}
+                                        MARKETING
+                                    {% elif u.Funcao == 'QUA' %}
+                                        QUALIDADE
+                                    {% elif u.Funcao == 'ADM' %}
+                                        ADM/FINANCEIRO
+                                    {% elif u.Funcao == 'PRO' %}
+                                        PROJETOS
+                                    {% elif u.Funcao == 'RH' %}
+                                        RECURSSOS HUMANOS
                                     {% endif %}
                                 </td>
                                 <td>{{ u.Contato }}</td>

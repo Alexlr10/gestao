@@ -1,5 +1,5 @@
 {% load static %}
-<html >
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,10 +22,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/usuario.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/ionicons.min.css' %}">
 
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/jquery-3.5.1.js" />
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/jquery-3.5.1.js"/>
 
-<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
 
+    <link rel="stylesheet" href="{% static 'adminlte/css/autocomplete-select2.min.css' %}">
 
 
     <!-- Google Font -->
@@ -148,7 +149,7 @@
 
                         <li><a href="{% url 'mensagem' %}"><i class="fa  fa-registered"></i><span>Reclamações</span></a>
                         </li>
-                            <li><a href="{% url 'faltas' %}"><i class="fa fa-minus-circle"></i><span>Faltas</span></a></li>
+                        <li><a href="{% url 'faltas' %}"><i class="fa fa-minus-circle"></i><span>Faltas</span></a></li>
                         <li><a href="#"
                                onCLick="window.open('https://trello.com/b/dK86RFrm/equipe-de-recursos-humanos','_blank');"><i
                                 class="fa  fa-trello"></i> <span>Trello</span></a></li>
@@ -334,13 +335,13 @@
     </div>
 
     <!-- /.content-wrapper -->
-
+    <script src={% static 'select2/js/select2.min.js' %}></script>
 
     <script src={% static 'jquery/jquery.min.js' %}></script>
     <script src={% static 'jquery-slimscroll/jquery.slimscroll.min.js' %}></script>
     <script src={% static 'fastclick/fastclick.js' %}></script>
     <script src={% static 'adminlte/js/adminlte.min.js' %}></script>
-    <script src={% static 'select2/js/select2.min.js' %}></script>
+
     <script src={% static 'datatables/js/jquery.dataTables.min.js' %}></script>
     <script src={% static 'datatables/js/dataTables.bootstrap.min.js' %}></script>
     <script src={% static 'bootstrap/js/bootstrap.min.js' %}></script>

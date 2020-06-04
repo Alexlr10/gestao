@@ -12,7 +12,7 @@ FUNCAO_CHOICE = (
     ('PRE', 'Presidencia'),
     ('MAR', 'Marketing'),
     ('QUA', 'Qualidade'),
-    ('ADM','Adm/Fin'),
+    ('ADM','Adm/Financeiro'),
     ('PRO', 'Projetos'),
     ('RH', 'Recursos Humanos'),
 )

@@ -223,12 +223,12 @@ class ProjetoForm(forms.ModelForm):
 class ReuniaoForm(forms.ModelForm):
     #presenca = forms.ModelMultipleChoiceField(queryset= Usuario.objects.filter(Situacao=True))
 
-    presenca = forms.ModelMultipleChoiceField(
-        queryset= Usuario.objects.filter(Situacao=True),
-        widget=autocomplete.Select2Multiple(url='Usuario-Autocomplete', attrs={'multiple':'multiple','id':'presenca',
-                                                                               'class': 'form-control select2bs4 select2-blue',
-                                                                                'style': 'width: 100% !important',
-                                                                               'data-dropdown-css-class': 'select2-info'}))
+    # presenca = forms.ModelMultipleChoiceField(
+    #     queryset= Usuario.objects.filter(Situacao=True),
+    #     widget=autocomplete.ModelSelect2Multiple(url='Usuario-Autocomplete', attrs={'multiple':'multiple','id':'presenca',
+    #                                                                            'class': 'form-control select2bs4 select2-blue',
+    #                                                                             'style': 'width: 100% !important',
+    #                                                                            'data-dropdown-css-class': 'select2-info'}))
 
     ausencia = forms.ModelMultipleChoiceField(queryset= Usuario.objects.filter(Situacao=True),required = False)
 
@@ -239,16 +239,16 @@ class ReuniaoForm(forms.ModelForm):
         # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
-            'descricaoReuniao': forms.Textarea(attrs={'class': 'form-control', 'id': 'descricaoReuniao'}),
+            #'descricaoReuniao': forms.Textarea(attrs={'class': 'form-control', 'id': 'descricaoReuniao'}),
             'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control', 'id': 'dataReuniao'}),
             'tipoReuniao': forms.Select(attrs={'id': 'tipoReuniao','class': 'form-control'}),
             'Arquivo' : forms.FileField(label='Select a file'),
-            # 'presenca': forms.MultipleChoiceField(label="Languages (Subdomains)",
-            #                                       widget=django_select2.forms.Select2MultipleWidget(
-            #                                           attrs={'data-placeholder': 'Please choose languages'} ))
+            'presenca': autocomplete.Select2Multiple(url='Usuario-Autocomplete')
 
-
-            #'presenca': autocomplete.ModelSelect2Multiple(url='Usuario-Autocomplete',attrs={'multiple':'multiple'}),
+            # 'presenca': autocomplete.ModelSelect2Multiple(url='Usuario-Autocomplete'
+            #                                               ,attrs={'class': 'form-control select2bs4 select2-blue',
+            #                                                       'id': 'id_Reuniao','style': 'width: 100% !important',
+            #                                                       'data-dropdown-css-class': 'select2-info'}),
             # '#presenca': autocomplete.ModelSelect2Multiple(url='Usuario-Autocomplete',
             #                                               attrs={'multiple':'multiple', 'style':'width: 100%;',
             #                                                      'id': 'id_Reuniao','role':'presentation'
