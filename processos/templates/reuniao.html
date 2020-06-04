@@ -135,7 +135,7 @@
                 <div class="modal-body">
                     <form method="POST">
                         {% csrf_token %}
-                        {{ form.media }}
+{#                        {{ form.media.js }}#}
                         {{ form.dataReuniao|bootstrap }}
                         {{ form.tipoReuniao|bootstrap }}
                         {{ form.descricaoReuniao|bootstrap }}
@@ -185,7 +185,9 @@
         </div>
     </div>
 
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     {{ form.media.js }}
+    {{ form.media.css }}
 {% endblock content-main %} {% block extraJS %}
 
 

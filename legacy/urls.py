@@ -18,13 +18,12 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
-from processos.autocomplete import ReuniaoAutocomplete, UsuarioAutocomplete
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('processos.urls')),
-    path('Reuniao-Autocomplete/', ReuniaoAutocomplete.as_view(), name='Reuniao-Autocomplete', ),
-    path('Usuario-Autocomplete/', UsuarioAutocomplete.as_view(), name='Usuario-Autocomplete', ),
+    path("select2/", include("django_select2.urls")),
 
 ]
 

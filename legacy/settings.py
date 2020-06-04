@@ -40,8 +40,7 @@ AUTH_USER_MODEL = 'processos.Usuario'
 # Application definition
 
 INSTALLED_APPS = [
-    'dal',
-    'dal_select2',
+    'django_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -181,3 +180,15 @@ EMAIL_HOST_USER = 'sistemanextstepsi@gmail.com'
 EMAIL_HOST_PASSWORD = 'nextstepsi'
 EMAIL_USE_TLS = True
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+    },
+    'select2': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/2',
+        'TIMEOUT': 60 * 60 * 24
+    },
+}
+SELECT2_CACHE_BACKEND = "select2"
