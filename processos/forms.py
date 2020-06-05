@@ -255,7 +255,7 @@ class ReuniaoForm(forms.ModelForm):
 
 
 class AtaForm(forms.ModelForm):
-    # Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all(), widget=autocomplete.ModelSelect2(url='Reuniao-Autocomplete'))
+    #Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all().order_by('-dataReuniao'),widget=forms.Select(attrs={'class':'reuniao','style':'width:300px; '})),
     # Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all(),
     #                                  widget=autocomplete.ModelSelect2(url='Reuniao-Autocomplete',
     #                                  attrs={'id': 'id_Reuniao',
@@ -268,7 +268,7 @@ class AtaForm(forms.ModelForm):
         fields = ['Reuniao', 'dataPublicacao', 'Arquivo', 'texto']
 
         widgets = {
-            'Reuniao': forms.Select(attrs={'class':'reuniao','style':'width:300px; '}),
+             'Reuniao': forms.Select(attrs={'class':'reuniao','style':'width:300px; '}),
             # 'Reuniao': autocomplete.ModelSelect2(url='Reuniao-Autocomplete',
             #                                      attrs={'class': 'form-control select2bs4 select2-blue', 'id': 'id_Reuniao',
             #                                             'style': 'width: 100% !important',

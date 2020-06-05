@@ -209,7 +209,7 @@ def ouvidoria(request):
 @login_required
 def aviso(request):
     aviso = Aviso.objects.all()
-    usu = Usuario.objects.filter(Situacao=True)
+    usu = Usuario.objects.filter(Situacao=True).order_by('Nome')
     usuario = []
     for u in usu:
         usuario.append(u)
@@ -464,7 +464,7 @@ def projeto_delete(request, pk):
 def reuniao(request):
     reuniao = Reuniao.objects.all().order_by('-dataReuniao')
 
-    usu = Usuario.objects.filter(Situacao=True)
+    usu = Usuario.objects.filter(Situacao=True).order_by('Nome')
     usuario = []
     for u in usu:
         usuario.append(u)
