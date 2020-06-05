@@ -9,36 +9,46 @@
 
     <form method="POST" action="{% url 'reuniao_edit' reuniao.id  %}">
         {% csrf_token %}
-        {{ form.dataReuniao|bootstrap }}
-                        {{ form.tipoReuniao|bootstrap }}
-                        {{ form.descricaoReuniao|bootstrap }}
+           <div class="row">
+                                    <div class="col-sm-6">
+                                   {{ form.dataReuniao|bootstrap }}
+                                    </div>
+                                    <div class="col-sm-6" >
+                                    {{ form.tipoReuniao|bootstrap }}
+                                    </div>
+                                </div>
 
+                        {{ form.descricaoReuniao|bootstrap }}
+{#                                                {{ form.presenca|bootstrap }}#}
 
 
                         <div class="form-group">
-                            <label class="control-label  " >Convocados</label>
+                            <label class="control-label  ">Convocados</label>
 
-                            <div class=" ">
-                                <select name="presenca" class=" form-control" required=""
+                            <div class="">
+                                <select name="presenca" id="presenca" class="form-control presenca"
+                                        style="width:580px; height:200px;" required=""
                                         multiple="multiple">
 
                                     {% for u in usuario %}
-                                    <option name="presenca" id="presenca" value="{{ u.id }}">{{ u.Nome }}</option>
+                                        <option name="presenca" id="presenca"
+                                                value="{{ u.id }}">{{ u.Nome.upper }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                         </div>
 
-                     <div class="form-group">
+                        <div class="form-group">
 
-                            <label class="control-label  " >Ausência</label>
+                            <label class="control-label  ">Ausência</label>
 
                             <div class=" ">
                                 <select name="ausencia" class=" form-control"
-                                        multiple="multiple">
+                                        multiple="multiple" style="width:580px; height:200px;">
 
                                     {% for u in usuario %}
-                                    <option name="ausencia" id="ausencia" value="{{ u.id }}">{{ u.Nome }}</option>
+                                        <option name="ausencia" id="ausencia"
+                                                value="{{ u.id }}">{{ u.Nome.upper }}</option>
                                     {% endfor %}
                                 </select>
 
