@@ -74,7 +74,10 @@ def usuarios(request):
             form.save()
             login = request.POST.get('Login')
             email = request.POST.get('Email')
-            mensagem = str('Parabens!!! Você agora é um novo membro Next Step!\nUsuario: '+ login + '\nSenha: 010101')
+            mensagem = str('Parabens!!! Você agora é um novo membro Next Step!!\n'
+                           'Login: '+ login + '\n Senha: 12345678\n'
+                                              'você pode alterar à qualquer momento acessando'
+                                              'seu Perfil-Meus Dados no sistema')
             send_mail(
                 'Next Step',
                 mensagem,
@@ -522,7 +525,7 @@ def reuniao(request):
 @login_required
 def reuniao_edit(request, pk):
     reuniao = get_object_or_404(Reuniao, pk=pk)
-    usu = Usuario.objects.filter(Situacao=True)
+    usu = Usuario.objects.filter(Situacao=True).order_by('Nome')
     usuario = []
     for u in usu:
         usuario.append(u)

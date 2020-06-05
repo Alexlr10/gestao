@@ -1,37 +1,41 @@
+{% load bootstrap %} {% load static %}
 
-{% load bootstrap %}
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="exampleModalLabel">Editar Cadastro</h4>
+</div>
 
-    <div class="modal-dialog modal-lg"  role="document" >
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="exampleModalLabel">Editar Cadastro</h4>
+<div class="modal-body">
+
+    <form method="POST" action="{% url 'ata_edit' ata.id %}" enctype="multipart/form-data" >
+        {% csrf_token %}
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                {{ form.Reuniao|bootstrap }}
             </div>
-
-            <div class="modal-body" >
-
-                <form method="POST" action="{% url 'ata_edit' ata.id %}" enctype="multipart/form-data">
-                    {% csrf_token %}
-
-
-                        <div class="row">
-                            <div class="col-sm-6">
-                                {{ form.Reuniao|bootstrap }}
-                            </div>
-                            <div class="col-sm-6">
-                                {{ form.dataPublicacao|bootstrap }}
-                            </div>
-                        </div>
-                        {{ form.Arquivo|bootstrap }}
-                        {{ form.texto|bootstrap }}
-                        {{ post.text|safe }}
-                        {{ form.media }}
-
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Alterar</button>
-                </form>
+            <div class="col-sm-6">
+                {{ form.dataPublicacao|bootstrap }}
             </div>
         </div>
+        {{ form.Arquivo|bootstrap }}
+        {{ form.texto|bootstrap }}
+        {{ post.text|safe }}
+        {{ form.media }}
+
+
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success">Alterar</button>
+    </form>
+
 
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('.reuniao').select2();
+    });
+
+</script>

@@ -33,8 +33,6 @@
                         <th>Contato</th>
                         <th>Matricula</th>
                         <th>Email</th>
-                        <th>LinkedIn</th>
-                        <th>Ativo</th>
                         <th>Ações</th>
                     </tr>
                     </thead>
@@ -66,13 +64,7 @@
                                 <td>{{ u.Contato }}</td>
                                 <td>{{ u.Matricula }}</td>
                                 <td>{{ u.Email }}</td>
-                                <td>{{ u.LinkedIn }}</td>
 
-                                {% if u.Situacao == 1 %}
-                                    <td>Ativo</td>
-                                {% else %}
-                                    <td>Inativo</td>
-                                {% endif %}
 
                                 <td>
                                     <a href="{% url 'usuario_edit' u.id %}" data-toggle="modal"
@@ -127,8 +119,6 @@
                         <th>Contato</th>
                         <th>Matricula</th>
                         <th>Email</th>
-                        <th>LinkedIn</th>
-                        <th>Ativo</th>
                         <th>Ações</th>
                     </tr>
                     </thead>
@@ -140,25 +130,26 @@
                                 <td>{{ u.Nome }}</td>
                                 <td>{{ u.Login }}</td>
 
-                                <td>
+                               <td>
                                     {% if u.Funcao == 'PROP' %}
                                         PROPRIETÁRIO
-                                    {% elif u.Funcao == 'SUPV' or u.Funcao == 'SUPM' %}
-                                        GERENTE
-                                    {% elif u.Funcao == 'VEND' %}
-                                        CONSULTOR
+                                    {% elif u.Funcao == 'PRE' %}
+                                        PRESIDENCIA
+                                    {% elif u.Funcao == 'MAR' %}
+                                        MARKETING
+                                    {% elif u.Funcao == 'QUA' %}
+                                        QUALIDADE
+                                    {% elif u.Funcao == 'ADM' %}
+                                        ADM/FINANCEIRO
+                                    {% elif u.Funcao == 'PRO' %}
+                                        PROJETOS
+                                    {% elif u.Funcao == 'RH' %}
+                                        RECURSSOS HUMANOS
                                     {% endif %}
                                 </td>
                                 <td>{{ u.Contato }}</td>
                                 <td>{{ u.Matricula }}</td>
                                 <td>{{ u.Email }}</td>
-                                <td>{{ u.LinkedIn }}</td>
-
-                                {% if u.Situacao == 1 %}
-                                    <td>Ativo</td>
-                                {% else %}
-                                    <td>Inativo</td>
-                                {% endif %}
 
                                 <td>
                                     <a href="{% url 'usuario_edit' u.id %}" data-toggle="modal"

@@ -268,7 +268,7 @@ class AtaForm(forms.ModelForm):
         fields = ['Reuniao', 'dataPublicacao', 'Arquivo', 'texto']
 
         widgets = {
-             'Reuniao': forms.Select(attrs={'class':'reuniao','style':'width:300px; '}),
+             'Reuniao': forms.Select(attrs={'class':'reuniao','style':'width:300px;','id':'id_Reuniao'}),
             # 'Reuniao': autocomplete.ModelSelect2(url='Reuniao-Autocomplete',
             #                                      attrs={'class': 'form-control select2bs4 select2-blue', 'id': 'id_Reuniao',
             #                                             'style': 'width: 100% !important',
