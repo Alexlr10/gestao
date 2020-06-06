@@ -241,13 +241,13 @@ def aviso(request):
 
             print(list(email))
 
-            # send_mail(
-            #      assunto,
-            #      mensagem,
-            #     'sistemanextstepsi@gmail.com',
-            #      email,
-            #     fail_silently=False,
-            # )
+            send_mail(
+                 assunto,
+                 mensagem,
+                'sistemanextstepsi@gmail.com',
+                 email,
+                fail_silently=False,
+            )
 
 
             messages.success(request, 'Email enviado com sucesso aos membros')
