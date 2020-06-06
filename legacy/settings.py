@@ -93,6 +93,7 @@ default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
 DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dburl), }
 
+#BANCO DO SQLITE3
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -100,17 +101,32 @@ DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dbur
 #     }
 # }
 #
+
+#BANCO DO POSTGRESQL
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'gestao_interna',
+        'USER': 'postgres',
+        'PASSWORD': '91851007',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
+#BANCO DO POSTGRESQL DOCKER
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'gestao_interna',
+#         'NAME': 'postgres',
 #         'USER': 'postgres',
-#         'PASSWORD': '91851007',
-#         'HOST': '127.0.0.1',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'db',
 #         'PORT': '5432',
 #     }
 # }
-# # # #
+#
+#BANCO DO MYSQL
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
