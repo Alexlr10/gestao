@@ -350,5 +350,5 @@ class Aviso(models.Model):
     membros = models.ManyToManyField('Usuario', null=True, blank=True, related_name="usuario")
     Data = models.DateField('Data', blank=True, null=True)
     assunto = models.CharField('Assunto', max_length=20, blank=True, null=True)
-    descricao = RichTextField(null=True, blank=True)
+    descricao = models.TextField('Descrição', null=True, blank=True)
 

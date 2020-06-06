@@ -25,11 +25,13 @@
                                 <label class="control-label  ">Membros</label>
 
                                 <div class=" ">
-                                    <select name="membros" class=" form-control" required=""style="width:840px; height:200px;"
+                                    <select name="membros" class=" form-control" required=""
+                                            style="width:840px; height:200px;"
                                             multiple="multiple">
 
                                         {% for u in usuario %}
-                                            <option name="membros" id="membros" value="{{ u.id }}">{{ u.Funcao.upper }} -- {{ u.Nome.upper }} -- {{ u.Email }}</option>
+                                            <option name="membros" id="membros" value="{{ u.id }}">{{ u.Funcao.upper }}
+                                                -- {{ u.Nome.upper }} -- {{ u.Email }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -86,6 +88,8 @@
                 },
             })
         });
+
+
     </script>
 
 

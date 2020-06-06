@@ -344,6 +344,7 @@ class AvisoForm(forms.ModelForm):
             'membros': forms.CheckboxSelectMultiple(),
             'Email': forms.TextInput(attrs={'class': 'form-control','id':'Email'}),
             'Data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'descricao': forms.Textarea(attrs={'type': 'textArea', 'class': 'form-control','style':'width:850px; height:200px;'}),
         }
 
 
