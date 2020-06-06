@@ -114,7 +114,7 @@ DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dbur
 #     }
 # }
 
-BANCO DO POSTGRESQL DOCKER
+#BANCO DO POSTGRESQL DOCKER
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
