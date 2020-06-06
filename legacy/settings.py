@@ -103,28 +103,28 @@ DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dbur
 #
 
 #BANCO DO POSTGRESQL
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gestao_interna',
-        'USER': 'postgres',
-        'PASSWORD': '91851007',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
-
-#BANCO DO POSTGRESQL DOCKER
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'postgres',
+#         'NAME': 'gestao_interna',
 #         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'db',
+#         'PASSWORD': '91851007',
+#         'HOST': '127.0.0.1',
 #         'PORT': '5432',
 #     }
 # }
+
+BANCO DO POSTGRESQL DOCKER
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': '5432',
+    }
+}
 #
 #BANCO DO MYSQL
 # DATABASES = {

@@ -1,9 +1,16 @@
 version: '3.3'
 
 services:
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    networks: 
+      - default
   # Postgres
   db:
     image: postgres
+    restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -20,3 +27,4 @@ services:
       - db
     depends_on:
       - db
+
