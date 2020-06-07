@@ -113,8 +113,8 @@
                     </button>
                     <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Ata</h4>
                 </div>
-                <div class="modal-body">
-                    <form method="POST"  enctype="multipart/form-data" .>
+                <div class="modal-body" id="myModal">
+                    <form method="POST" enctype="multipart/form-data" .>
                         {% csrf_token %}
 
 
@@ -145,7 +145,11 @@
     <script>
 
         $(document).ready(function () {
-            $('.reuniao').select2();
+            // $('.reuniao').select2();
+            $('#id_Reuniao').select2({
+                dropdownParent: $('#myModal')
+            });
+
         });
 
 

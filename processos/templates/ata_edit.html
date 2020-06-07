@@ -6,7 +6,7 @@
     <h4 class="modal-title" id="exampleModalLabel">Editar Cadastro</h4>
 </div>
 
-<div class="modal-body">
+<div class="modal-body" id="myModal1" >
 
     <form method="POST" action="{% url 'ata_edit' ata.id %}" enctype="multipart/form-data" >
         {% csrf_token %}
@@ -34,8 +34,11 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        $('.reuniao').select2();
-    });
+       $(document).ready(function () {
+            // $('.reuniao').select2();
+            $('#id_Reuniao').select2({
+                dropdownParent: $('#myModal1')
+            });
 
+        });
 </script>
