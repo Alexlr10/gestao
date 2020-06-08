@@ -1,17 +1,54 @@
 {% load bootstrap %}
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
     <h4 class="modal-title" id="exampleModalLabel">Editar Cadastro</h4>
- </div>
+</div>
 
-<div class="modal-body">
+<div class="modal-body" id="myModal">
 
-    <form method="POST" action="{% url 'servico_edit' servico.id  %}">
+    <form method="POST" action="{% url 'servico_edit' servico.id %}">
         {% csrf_token %}
-        {{ form|bootstrap }}
+        <div class="row">
+            <div class="col-sm-6">
+                {{ form.cliente|bootstrap }}
+            </div>
+            <div class="col-sm-6">
+                {{ form.nomeServico|bootstrap }}
+            </div>
+        </div>
+
+        {{ form.descricao|bootstrap }}
+
+        <div class="row">
+            <div class="col-sm-6">
+                {{ form.valor|bootstrap }}
+            </div>
+            <div class="col-sm-6">
+                {{ form.Desconto|bootstrap }}
+            </div>
+        </div>
+
+        {{ form.parcelamento|bootstrap }}
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         <button type="submit" class="btn btn-success">Alterar</button>
     </form>
 
 
 </div>
+
+<script>
+     $(document).ready(function () {
+            // $('.reuniao').select2();
+            $('#id_cliente').select2({
+                dropdownParent: $('#myModal')
+            });
+        });
+
+            $(document).ready(function () {
+            // $('.reuniao').select2();
+            $('#id_nomeServico').select2({
+                dropdownParent: $('#myModal')
+            });
+        });
+</script>

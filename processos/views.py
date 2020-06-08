@@ -527,6 +527,8 @@ def reuniao(request):
 @login_required
 def reuniao_edit(request, pk):
     reuniao = get_object_or_404(Reuniao, pk=pk)
+
+
     usu = Usuario.objects.filter(Situacao=True).order_by('Nome')
     usuario = []
     for u in usu:

@@ -6,6 +6,15 @@
 
 {% endblock content-header %} {% block content-main %}
 
+    <style>
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #3c8dbc;
+            border-color: #367fa9;
+            padding: 1px 10px;
+            color: #fff;
+        };
+    </style>
+
     <div class="col-xs-12">
 
         <!-- /.box -->
@@ -46,15 +55,15 @@
                             <tr>
                                 <td>{{ u.servico }}</td>
                                 <td>{{ u.dataEntrega }}</td>
-                            {% if u.status  == 0 %}
-                                <td><span class="badge bg-blue">Iniciado</span></td>
-                             {% elif u.status  == 1 %}
-                                <td><span class="badge bg-grey">Em andamento</span></td>
-                             {% elif u.status  == 2 %}
-                                <td><span class="badge bg-red">Pendente</span></td>
-                               {% elif u.status  == 3 %}
-                                <td><span class="badge bg-green">Finalizado</span></td>
-                            {% endif %}
+                                {% if u.status  == 0 %}
+                                    <td><span class="badge bg-blue">Iniciado</span></td>
+                                {% elif u.status  == 1 %}
+                                    <td><span class="badge bg-grey">Em andamento</span></td>
+                                {% elif u.status  == 2 %}
+                                    <td><span class="badge bg-red">Pendente</span></td>
+                                {% elif u.status  == 3 %}
+                                    <td><span class="badge bg-green">Finalizado</span></td>
+                                {% endif %}
 
                                 <td>
                                     {% for i in u.responsaveis.all %}
@@ -110,21 +119,31 @@
                     </button>
                     <h4 class="modal-title" id="exampleModalLabel"> Cadastrar Projeto</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="myModal">
                     <form method="POST">
                         {% csrf_token %}
                         {{ form.servico|bootstrap }}
-                        {{ form.dataEntrega|bootstrap }}
-                        {{ form.status|bootstrap }}
-                         <div class="form-group">
-                            <label class="control-label  " >Convocados</label>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form.dataEntrega|bootstrap }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form.status|bootstrap }}
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label  ">Responsaveis</label>
 
                             <div class=" ">
-                                <select name="responsaveis" class=" form-control" required=""
-                                        multiple="multiple">
+                                <select name="responsaveis" class="responsaveis"
+                                        style="width: 580px" required=""
+                                        name="states[]" multiple="multiple">
 
                                     {% for u in usuario %}
-                                    <option name="responsaveis" id="responsaveis" value="{{ u.id }}">{{ u.Nome }}</option>
+                                        <option name="responsaveis"
+                                                value="{{ u.id }}">{{ u.Nome }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -141,21 +160,42 @@
 {% endblock content-main %} {% block extraJS %}
 
     <script>
+        $(document).ready(function () {
+            // $('.reuniao').select2();
+            $('#id_servico').select2({
+                dropdownParent: $('#myModal')
+            });
 
+        });
 
-    $(function () {
-    $('#tabela').DataTable({
-      'paging'      : true,
-      'lengthChange': true,
-      'searching'   : true,
-      'ordering'    : false,
-      'info'        : true,
-      'autoWidth'   : true,
-         "language": {
-                "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
-            },
-    })
-  });
+        $(document).ready(function () {
+            // $('.reuniao').select2();
+            $('#id_status').select2({
+                dropdownParent: $('#myModal')
+            });
+
+        });
+
+        $(document).ready(function () {
+            $('.responsaveis').select2({
+                placeholder: 'Selecione os membros',
+            });
+
+        });
+
+        $(function () {
+            $('#tabela').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': false,
+                'info': true,
+                'autoWidth': true,
+                "language": {
+                    "url": "{% static 'datatables/Portuguese-Brasil.json' %}"
+                },
+            })
+        });
     </script>
 
 

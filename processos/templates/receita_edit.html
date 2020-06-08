@@ -4,14 +4,36 @@
     <h4 class="modal-title" id="exampleModalLabel">Editar Cadastro</h4>
  </div>
 
-<div class="modal-body">
+<div class="modal-body" id="myModal">
 
     <form method="POST" action="{% url 'receita_edit' receita.id  %}">
         {% csrf_token %}
-        {{ form|bootstrap }}
+              {{ form.Servico|bootstrap }}
+                          <div class="row">
+                            <div class="col-sm-6">
+                                {{ form.Data|bootstrap }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form.valorParcela|bootstrap }}
+                            </div>
+                        </div>
+
+                        {{ form.Pagamento|bootstrap }}
+                        {{ form.parcela|bootstrap }}
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         <button type="submit" class="btn btn-success">Alterar</button>
     </form>
 
 
 </div>
+
+<script>
+
+       $(document).ready(function () {
+            // $('.reuniao').select2();
+            $('#id_servico').select2({
+                dropdownParent: $('#myModal')
+            });
+
+        });
+</script>
