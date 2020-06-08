@@ -538,7 +538,27 @@ def reuniao_edit(request, pk):
 
     if form.is_valid():
         form.save()
+
+        reu = Reuniao.objects.get(pk=pk)
+        membros = ",".join([str(u) for u in reu.ausencia.all()])
+        email = membros.split(',')
+        mensagem = str('Caro membro, você faltou na reunião '
+                       '' + reu.tipoReuniao + ' da data de ' + str(
+            reu.dataReuniao.strftime("%d/%m/%Y")) + ' e não foi justificada,'
+                                                    ' sua falta será contabilizada em nosso sistema.'
+                                                    'Em caso de dúvidas entre em contato com o RH.')
+        print(list(email))
+        print(mensagem)
+
+        send_mail(
+            'NextStep - REUNIÃO',
+            mensagem,
+            'sistemanextstepsi@gmail.com',
+            email,
+            fail_silently=False,
+        )
         return redirect('reuniao')
+
 
     context = {
         'form': form,

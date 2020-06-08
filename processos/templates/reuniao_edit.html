@@ -21,22 +21,22 @@
                         {{ form.descricaoReuniao|bootstrap }}
 {#                                                {{ form.presenca|bootstrap }}#}
 
-{##}
-{#                        <div class="form-group">#}
-{#                            <label class="control-label  ">Convocados</label>#}
-{##}
-{#                            <div class="">#}
-{#                                <select name="presenca" id="presenca" class="form-control presenca"#}
-{#                                        style="width:580px; height:200px;" required=""#}
-{#                                        multiple="multiple">#}
-{##}
-{#                                    {% for u in usuario %}#}
-{#                                        <option name="presenca" id="presenca"#}
-{#                                                value="{{ u.id }}">{{ u.Nome.upper }}</option>#}
-{#                                    {% endfor %}#}
-{#                                </select>#}
-{#                            </div>#}
-{#                        </div>#}
+
+                        <div class="form-group">
+                            <label class="control-label  ">Convocados</label>
+
+                            <div class="">
+                                <select name="presenca" id="presenca" class="form-control presenca"
+                                        style="width:580px; height:200px;" required=""
+                                        multiple="multiple">
+
+                                    {% for u in usuario %}
+                                        <option name="presenca" id="presenca"
+                                                value="{{ u.id }}">{{ u.Nome.upper }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group">
 
