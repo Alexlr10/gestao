@@ -38,6 +38,7 @@
                             </div>
                         </div>
 
+    {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'RH' or request.user.Funcao == 'PRE'%}
                         <div class="form-group">
 
                             <label class="control-label  ">Ausência</label>
@@ -56,6 +57,8 @@
                             </div>
 
                         </div>
+
+    {% endif %}
 
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         <button type="submit" class="btn btn-success">Alterar</button>

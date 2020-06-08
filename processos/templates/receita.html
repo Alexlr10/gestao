@@ -13,11 +13,11 @@
 
         <div class="box table-responsive">
             <div class="box-header">
-
+    {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
                 <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
                     Receita
                 </button>
-
+{% endif %}
             </div>
 
 
@@ -36,9 +36,9 @@
                             <th>Valor Parcela</th>
                             <th>Nº da Parcela</th>
                             <th>Pagamento</th>
-
+    {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
                             <th>Ações</th>
-
+{% endif %}
                         </tr>
                         </thead>
                         <tbody>
@@ -58,7 +58,7 @@
 
                                 </td>
 
-
+                                {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
                                 <td>
                                     <a href="{% url 'receita_edit' u.id %}" data-toggle="modal"
                                        data-target="#myModal{{ u.id }}">
@@ -70,7 +70,7 @@
 
                                 </td>
 
-
+                        {% endif %}
                             </tr>
 
 
@@ -122,7 +122,7 @@
 
                         {% for u in receitaAReceber %}
                             <tr>
-                                <td><span class="badge bg-grey">{{ u.periodo|date:"M Y"  }}</span></td>
+                                <td><span class="badge bg-grey">{{ u.periodo|date:"M Y" }}</span></td>
 
 
                                 <td><span class="badge bg-green">{{ u.receita }}</span></td>
@@ -169,7 +169,7 @@
                     <form method="POST">
                         {% csrf_token %}
                         {{ form.Servico|bootstrap }}
-                          <div class="row">
+                        <div class="row">
                             <div class="col-sm-6">
                                 {{ form.Data|bootstrap }}
                             </div>
@@ -194,7 +194,7 @@
 
     <script>
 
-       $(document).ready(function () {
+        $(document).ready(function () {
             // $('.reuniao').select2();
             $('#id_servico').select2({
                 dropdownParent: $('#myModal')

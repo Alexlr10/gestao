@@ -16,11 +16,11 @@
 
         <div class="box table-responsive">
             <div class="box-header">
-
+ {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
                 <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
                     Atas
                 </button>
-
+{% endif %}
             </div>
 
 
@@ -38,9 +38,9 @@
                             <th>Data da Publicação</th>
                             <th>Descrição</th>
                             <th>Arquivo</th>
-
+ {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
                             <th>Ações</th>
-
+{% endif %}
                         </tr>
                         </thead>
                         <tbody>
@@ -65,7 +65,7 @@
                                 {% endif %}
                                 </td>
 
-
+ {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
                                 <td>
                                     <a href="{% url 'ata_edit' u.id %}" data-toggle="modal"
                                        data-target="#myModal{{ u.id }}">
@@ -76,7 +76,7 @@
                                     </a>
 
                                 </td>
-
+{% endif %}
 
                             </tr>
 

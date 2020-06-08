@@ -91,6 +91,7 @@ FUNCAO_CHOICE_REUNIAO = (
     ('GERAL', 'GERAL'),
     ('DIRETORIA', 'DIRETORIA'),
     ('PROJETOS', 'PROJETOS'),
+    ('EXTERNA', 'EXTERNA'),
 )
 
 

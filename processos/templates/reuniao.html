@@ -66,10 +66,11 @@
                                        data-target="#myModal{{ u.id }}">
                                         <button type="button" class="btn btn-xs btn-warning">Editar</button>
                                     </a>
-                                    <a href="{% url 'reuniao_delete' u.id %}">
-                                        <button type="button" class="btn btn-xs btn-danger">Apagar</button>
-                                    </a>
-
+                                    {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'RH' or request.user.Funcao == 'PRE' %}
+                                        <a href="{% url 'reuniao_delete' u.id %}">
+                                            <button type="button" class="btn btn-xs btn-danger">Apagar</button>
+                                        </a>
+                                    {% endif %}
                                 </td>
 
 
@@ -112,17 +113,17 @@
                         {#                        {{ form.media.js }}#}
 
 
-                    <div class="row">
-                                    <div class="col-sm-6">
-                                   {{ form.dataReuniao|bootstrap }}
-                                    </div>
-                                    <div class="col-sm-6" >
-                                    {{ form.tipoReuniao|bootstrap }}
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form.dataReuniao|bootstrap }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form.tipoReuniao|bootstrap }}
+                            </div>
+                        </div>
 
                         {{ form.descricaoReuniao|bootstrap }}
-{#                                                {{ form.presenca|bootstrap }}#}
+                        {#                                                {{ form.presenca|bootstrap }}#}
 
 
                         <div class="form-group">
@@ -180,7 +181,9 @@
 
         {#$(document).ready(function () {#}
         {#    $('.presenca').select2();#}
-        {#});#}
+        {#})
+        ;
+        #}
 
 
         $(function () {

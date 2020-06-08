@@ -13,11 +13,11 @@
 
         <div class="box table-responsive">
             <div class="box-header">
-
+  {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
                 <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
                     Despesas
                 </button>
-
+{% endif %}
             </div>
 
 
@@ -36,9 +36,9 @@
                             <th>Pagamento</th>
                             <th>Valor</th>
 
-
+  {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
                             <th>Ações</th>
-
+{% endif %}
                         </tr>
                         </thead>
                         <tbody>
@@ -57,7 +57,7 @@
 
                                 </td>
 
-
+  {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
                                 <td>
                                     <a href="{% url 'despesa_edit' u.id %}" data-toggle="modal"
                                        data-target="#myModal{{ u.id }}">
@@ -68,8 +68,7 @@
                                     </a>
 
                                 </td>
-
-
+                            {% endif %}
                             </tr>
 
 
