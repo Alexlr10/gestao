@@ -5,7 +5,7 @@
     <h4 class="modal-title" id="exampleModalLabel">Editar Cadastro</h4>
  </div>
 
-<div class="modal-body">
+<div class="modal-body" id="myModal">
 
     <form method="POST" action="{% url 'reuniao_edit' reuniao.id  %}">
         {% csrf_token %}
@@ -25,9 +25,9 @@
                         <div class="form-group">
                             <label class="control-label  ">Convocados</label>
 
-                            <div class="">
+                            <div class="table-responsive">
                                 <select name="presenca" id="presenca" class="form-control presenca"
-                                        style="width:580px; height:200px;" required=""
+                                        style="width:565px; height:200px;" required=""
                                         multiple="multiple">
 
                                     {% for u in usuario %}
@@ -43,9 +43,9 @@
 
                             <label class="control-label  ">Ausência</label>
 
-                            <div class=" ">
+                            <div class="table-responsive">
                                 <select name="ausencia" class=" form-control"
-                                        multiple="multiple" style="width:580px; height:200px;">
+                                        multiple="multiple" style="width:565px; height:200px;">
 
                                     {% for u in usuario %}
                                         <option name="ausencia" id="ausencia"
@@ -66,3 +66,13 @@
 
 
 </div>
+
+<script>
+        $(document).ready(function () {
+            // $('.reuniao').select2();
+            $('#tipoReuniao').select2({
+                dropdownParent: $('#myModal')
+            });
+
+        });
+</script>

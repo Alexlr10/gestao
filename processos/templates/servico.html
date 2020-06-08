@@ -5,7 +5,20 @@
 
 
 {% endblock content-header %} {% block content-main %}
+    <style>
+        .select2-container--default .select2-selection--single {
+            padding: 6px;
+            height: 35px;
+            width: 100%;
+            position: relative;
+        }
 
+    </style>
+    <style>
+        .select2 {
+            width: 100% !important;
+        }
+    </style>
     <div class="col-xs-12">
 
         <!-- /.box -->
@@ -122,10 +135,10 @@
 
                         <div class="row">
                             <div class="col-sm-6">
-                               {{ form.valor|bootstrap }}
+                                {{ form.valor|bootstrap }}
                             </div>
                             <div class="col-sm-6">
-                             {{ form.Desconto|bootstrap }}
+                                {{ form.Desconto|bootstrap }}
                             </div>
                         </div>
 
@@ -150,7 +163,7 @@
             });
         });
 
-            $(document).ready(function () {
+        $(document).ready(function () {
             // $('.reuniao').select2();
             $('#id_nomeServico').select2({
                 dropdownParent: $('#myModal')

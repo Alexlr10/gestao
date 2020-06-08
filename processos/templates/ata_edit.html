@@ -21,8 +21,10 @@
             </div>
         </div>
         {{ form.Arquivo|bootstrap }}
-        {{ form.texto|bootstrap }}
-        {{ post.text|safe }}
+        <div class="table-responsive">
+                        {{ form.texto|bootstrap }}
+                        {{ post.text|safe }}
+                            </div>
         {{ form.media }}
 
 

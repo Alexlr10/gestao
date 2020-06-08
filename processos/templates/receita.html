@@ -6,6 +6,20 @@
 
 {% endblock content-header %} {% block content-main %}
 
+<style>
+.select2-container--default .select2-selection--single{
+    padding:6px;
+    height: 35px;
+    width: 100%;
+    position: relative;
+}
+
+</style>
+    <style>
+        .select2 {
+            width: 100% !important;
+        }
+    </style>
     <div class="col-xs-12">
 
         <!-- /.box -->
@@ -13,11 +27,11 @@
 
         <div class="box table-responsive">
             <div class="box-header">
-    {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
-                <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
-                    Receita
-                </button>
-{% endif %}
+                {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
+                    <button type="button" class="ui-button" data-toggle="modal" data-target="#exampleModal51">Cadastrar
+                        Receita
+                    </button>
+                {% endif %}
             </div>
 
 
@@ -36,9 +50,9 @@
                             <th>Valor Parcela</th>
                             <th>Nº da Parcela</th>
                             <th>Pagamento</th>
-    {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
-                            <th>Ações</th>
-{% endif %}
+                            {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
+                                <th>Ações</th>
+                            {% endif %}
                         </tr>
                         </thead>
                         <tbody>
@@ -59,18 +73,18 @@
                                 </td>
 
                                 {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'ADM' or request.user.Funcao == 'PRE' %}
-                                <td>
-                                    <a href="{% url 'receita_edit' u.id %}" data-toggle="modal"
-                                       data-target="#myModal{{ u.id }}">
-                                        <button type="button" class="btn btn-xs btn-warning">Editar</button>
-                                    </a>
-                                    <a href="{% url 'receita_delete' u.id %}">
-                                        <button type="button" class="btn btn-xs btn-danger">Apagar</button>
-                                    </a>
+                                    <td>
+                                        <a href="{% url 'receita_edit' u.id %}" data-toggle="modal"
+                                           data-target="#myModal{{ u.id }}">
+                                            <button type="button" class="btn btn-xs btn-warning">Editar</button>
+                                        </a>
+                                        <a href="{% url 'receita_delete' u.id %}">
+                                            <button type="button" class="btn btn-xs btn-danger">Apagar</button>
+                                        </a>
 
-                                </td>
+                                    </td>
 
-                        {% endif %}
+                                {% endif %}
                             </tr>
 
 
@@ -168,7 +182,9 @@
                 <div class="modal-body" id="myModal">
                     <form method="POST">
                         {% csrf_token %}
-                        {{ form.Servico|bootstrap }}
+                        <div class="table-responsive">
+                            {{ form.Servico|bootstrap }}
+                        </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 {{ form.Data|bootstrap }}
