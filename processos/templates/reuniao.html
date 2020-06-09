@@ -137,43 +137,44 @@
                         </div>
 
                         {{ form.descricaoReuniao|bootstrap }}
-                        {#                                                {{ form.presenca|bootstrap }}#}
+                        {{ form.presenca|bootstrap }}
+                        {{ form.ausencia|bootstrap }}
 
 
-                        <div class="form-group">
-                            <label class="control-label  ">Convocados</label>
-
-                            <div class="table-responsive">
-                                <select name="presenca" id="presenca" class="form-control presenca"
-                                        style="width:565px; height:200px;" required=""
-                                        multiple="multiple">
-
-                                    {% for u in usuario %}
-                                        <option name="presenca" id="presenca"
-                                                value="{{ u.id }}">{{ u.Nome.upper }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <label class="control-label  ">Ausência</label>
-
-                            <div class="table-responsive">
-                                <select name="ausencia" class=" form-control"
-                                        multiple="multiple" style="width:565px; height:200px;">
-
-                                    {% for u in usuario %}
-                                        <option name="ausencia" id="ausencia"
-                                                value="{{ u.id }}">{{ u.Nome.upper }}</option>
-                                    {% endfor %}
-                                </select>
-
-
-                            </div>
-
-                        </div>
+                        {#                        <div class="form-group">#}
+                        {#                            <label class="control-label  ">Convocados</label>#}
+                        {##}
+                        {#                            <div class="table-responsive">#}
+                        {#                                <select name="presenca" id="presenca" class="form-control presenca"#}
+                        {#                                        style="width:565px; height:200px;" required=""#}
+                        {#                                        multiple="multiple">#}
+                        {##}
+                        {#                                    {% for u in usuario %}#}
+                        {#                                        <option name="presenca" id="presenca"#}
+                        {#                                                value="{{ u.id }}">{{ u.Nome.upper }}</option>#}
+                        {#                                    {% endfor %}#}
+                        {#                                </select>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {##}
+                        {#                        <div class="form-group">#}
+                        {##}
+                        {#                            <label class="control-label  ">Ausência</label>#}
+                        {##}
+                        {#                            <div class="table-responsive">#}
+                        {#                                <select name="ausencia" class=" form-control"#}
+                        {#                                        multiple="multiple" style="width:565px; height:200px;">#}
+                        {##}
+                        {#                                    {% for u in usuario %}#}
+                        {#                                        <option name="ausencia" id="ausencia"#}
+                        {#                                                value="{{ u.id }}">{{ u.Nome.upper }}</option>#}
+                        {#                                    {% endfor %}#}
+                        {#                                </select>#}
+                        {##}
+                        {##}
+                        {#                            </div>#}
+                        {##}
+                        {#                        </div>#}
 
 
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

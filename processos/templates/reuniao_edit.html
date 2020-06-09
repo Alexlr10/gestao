@@ -1,78 +1,46 @@
-
 {% load bootstrap %}
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
     <h4 class="modal-title" id="exampleModalLabel">Editar Cadastro</h4>
- </div>
+</div>
 
 <div class="modal-body" id="myModal">
 
-    <form method="POST" action="{% url 'reuniao_edit' reuniao.id  %}">
+    <form method="POST" action="{% url 'reuniao_edit' reuniao.id %}">
         {% csrf_token %}
-           <div class="row">
-                                    <div class="col-sm-6">
-                                   {{ form.dataReuniao|bootstrap }}
-                                    </div>
-                                    <div class="col-sm-6" >
-                                    {{ form.tipoReuniao|bootstrap }}
-                                    </div>
-                                </div>
+        <div class="row">
+            <div class="col-sm-6">
+                {{ form.dataReuniao|bootstrap }}
+            </div>
+            <div class="col-sm-6">
+                {{ form.tipoReuniao|bootstrap }}
+            </div>
+        </div>
 
-                        {{ form.descricaoReuniao|bootstrap }}
-{#                                                {{ form.presenca|bootstrap }}#}
-
-
-                        <div class="form-group">
-                            <label class="control-label  ">Convocados</label>
-
-                            <div class="table-responsive">
-                                <select name="presenca" id="presenca" class="form-control presenca"
-                                        style="width:565px; height:200px;" required=""
-                                        multiple="multiple">
-
-                                    {% for u in usuario %}
-                                        <option name="presenca" id="presenca"
-                                                value="{{ u.id }}">{{ u.Nome.upper }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-
-    {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'RH' or request.user.Funcao == 'PRE'%}
-                        <div class="form-group">
-
-                            <label class="control-label  ">Ausência</label>
-
-                            <div class="table-responsive">
-                                <select name="ausencia" class=" form-control"
-                                        multiple="multiple" style="width:565px; height:200px;">
-
-                                    {% for u in usuario %}
-                                        <option name="ausencia" id="ausencia"
-                                                value="{{ u.id }}">{{ u.Nome.upper }}</option>
-                                    {% endfor %}
-                                </select>
+        {{ form.descricaoReuniao|bootstrap }}
 
 
-                            </div>
+        {{ form.presenca|bootstrap }}
 
-                        </div>
+        {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'RH' or request.user.Funcao == 'PRE' %}
+            {{ form.ausencia|bootstrap }}
 
-    {% endif %}
+        {% endif %}
 
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-success">Alterar</button>
-    </form>
+<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+<button type="submit" class="btn btn-success">Alterar</button>
+</form>
 
 
 </div>
 
 <script>
-        $(document).ready(function () {
-            // $('.reuniao').select2();
-            $('#tipoReuniao').select2({
-                dropdownParent: $('#myModal')
-            });
-
+    $(document).ready(function () {
+        // $('.reuniao').select2();
+        $('#tipoReuniao').select2({
+            dropdownParent: $('#myModal')
         });
+
+    });
 </script>

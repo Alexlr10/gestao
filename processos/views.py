@@ -469,10 +469,10 @@ def projeto_delete(request, pk):
 def reuniao(request):
     reuniao = Reuniao.objects.all().order_by('-dataReuniao')
 
-    usu = Usuario.objects.filter(Situacao=True).order_by('Nome')
-    usuario = []
-    for u in usu:
-        usuario.append(u)
+    # usu = Usuario.objects.filter(Situacao=True).order_by('Nome')
+    # usuario = []
+    # for u in usu:
+    #     usuario.append(u)
 
 
     if request.method == 'POST':
@@ -492,12 +492,10 @@ def reuniao(request):
             elif tipoReuniao == 'PROJETOS':
                 mensagem = str('A Next terá uma reunião da equipe de PROJETOS dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
 
-
             reu = Reuniao.objects.last()
-            membros = ",".join([str (u) for u in reu.presenca.all()])
-            email = membros.split(',')
-
-            print(list(email))
+            membros = [u for u in reu.presenca.values_list('Email', flat=True)]
+            email = membros
+            print(email)
 
             send_mail(
                 'NextStep - REUNIÃO',
@@ -519,7 +517,7 @@ def reuniao(request):
     context = {
         'form': form,
         'reuniao': reuniao,
-        'usuario': usuario
+        #'usuario': usuario
     }
 
     return render(request, 'reuniao.html', context)
@@ -529,19 +527,20 @@ def reuniao_edit(request, pk):
     reuniao = get_object_or_404(Reuniao, pk=pk)
 
 
-    usu = Usuario.objects.filter(Situacao=True).order_by('Nome')
-    usuario = []
-    for u in usu:
-        usuario.append(u)
+    # usu = Usuario.objects.filter(Situacao=True).order_by('Nome')
+    # usuario = []
+    # for u in usu:
+    #     usuario.append(u)
 
     form = ReuniaoForm(request.POST or None, instance=reuniao)
 
     if form.is_valid():
         form.save()
 
-        reu = Reuniao.objects.get(pk=pk)
-        membros = ",".join([str(u) for u in reu.ausencia.all()])
-        email = membros.split(',')
+        reu = Reuniao.objects.last()
+        membros = [u for u in reu.presenca.values_list('Email', flat=True)]
+        email = membros
+        print(email)
         mensagem = str('Caro membro, você faltou na reunião '
                        '' + reu.tipoReuniao + ' da data de ' + str(
             reu.dataReuniao.strftime("%d/%m/%Y")) + ' e não foi justificada,'
@@ -563,7 +562,7 @@ def reuniao_edit(request, pk):
     context = {
         'form': form,
         'reuniao': reuniao,
-        'usuario': usuario,
+
     }
 
     return render(request, 'reuniao_edit.html', context)

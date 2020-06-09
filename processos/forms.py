@@ -245,7 +245,8 @@ class ReuniaoForm(forms.ModelForm):
             'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control', 'id': 'dataReuniao'}),
             'tipoReuniao': forms.Select(attrs={'id': 'tipoReuniao','class': 'form-control'}),
             'Arquivo' : forms.FileField(label='Select a file'),
-            #'presenca': forms.SelectMultiple(attrs={'class':'presenca','style':'width:550px; height:200px;'}),
+            'presenca': forms.SelectMultiple(attrs={'class':'presenca','style':'width:565px; height:200px;'}),
+            'ausencia': forms.SelectMultiple(attrs={'class':'ausencia','style':'width:565px; height:200px;'}),
 
              # 'presenca': s2forms.ModelSelect2MultipleWidget( model = Usuario.objects.filter(Situacao=True),
              #                                                 search_fields = ["Nome__icontains","Email__icontains",],

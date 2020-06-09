@@ -200,7 +200,7 @@ def post_usuario(self, instance, *args, **kwargs):
 
     def __str__(self):
         """Unicode representation of Usuario."""
-        return str(self.Email)
+        return self.Nome.upper()
 
 class Cliente(models.Model):
 
