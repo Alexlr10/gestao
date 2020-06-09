@@ -145,9 +145,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     Facebook = models.CharField('Facebook link', max_length=120, null=True, blank=True)
     Instagram = models.CharField('Instagram link', max_length=120, null=True, blank=True)
     LinkedIn = models.CharField('LinkedIn link', max_length=120, null=True, blank=True)
-    Data_de_Nascimento = models.DateField('Data de Nascimento', blank=True, null=True)
-    Data_de_Admissão = models.DateField('Data de Admissão', blank=True, null=True)
-    Data_de_Demissão = models.DateField('Data de Demissão', blank=True, null=True)
     Funcao = models.CharField('Função', max_length=4, choices=FUNCAO_CHOICE)
 
     # campos necessários pra o DJango

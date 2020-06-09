@@ -229,17 +229,10 @@ def aviso(request):
 
             mensagem = strip_tags(descricao)
 
-            # print(assunto)
-            # print(data)
-
-            print(descricao)
-            print(mensagem)
-
             aviso = Aviso.objects.last()
-            membros = ",".join([str (u) for u in aviso.membros.all()])
-            email = membros.split(',')
-
-            print(list(email))
+            membros = [u for u in aviso.membros.values_list('Email', flat=True)]
+            email = membros
+            print(email)
 
             send_mail(
                  assunto,
