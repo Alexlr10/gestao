@@ -208,7 +208,10 @@ class ServicoForm(forms.ModelForm):
 
 
 class ProjetoForm(forms.ModelForm):
-    responsaveis = forms.ModelMultipleChoiceField(queryset=Usuario.objects.filter(Situacao=True))
+    responsaveis = forms.ModelMultipleChoiceField(
+        queryset=Usuario.objects.filter(
+            Situacao=True).order_by('Nome'),
+        widget=forms.SelectMultiple(attrs={'class': 'responsaveis'}))
 
     class Meta:
         model = Projeto
@@ -217,7 +220,8 @@ class ProjetoForm(forms.ModelForm):
         widgets = {
             'servico': forms.Select(attrs={'class': 'servico', 'style': 'width:580px;','margin-top':'-4px', 'id': 'id_servico'}),
             'status': forms.Select(attrs={'class': 'status', 'id': 'id_status'}),
-            'dataEntrega': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'dataEntrega': forms.TextInput(attrs={'type': 'date'}),
+            #'responsaveis': forms.SelectMultiple(attrs={'class':'responsaveis','id':'id_responsaveisss'}),
 
         }
 
@@ -231,8 +235,14 @@ class ProjetoForm(forms.ModelForm):
 
 class ReuniaoForm(forms.ModelForm):
 
-    presenca = forms.ModelMultipleChoiceField(queryset= Usuario.objects.filter(Situacao=True)),
-    ausencia = forms.ModelMultipleChoiceField(queryset= Usuario.objects.filter(Situacao=True),required = False),
+    presenca = forms.ModelMultipleChoiceField(
+        queryset= Usuario.objects.filter(
+            Situacao=True).order_by('Nome'),
+        widget=forms.SelectMultiple(attrs={'class':'presenca','style':'width:565px; height:200px;'}))
+    ausencia = forms.ModelMultipleChoiceField(
+        queryset= Usuario.objects.filter(Situacao=True).order_by('Nome'),
+        required = False,
+        widget=forms.SelectMultiple(attrs={'class':'presenca','style':'width:565px; height:200px;'}))
 
 
     class Meta:
@@ -245,8 +255,8 @@ class ReuniaoForm(forms.ModelForm):
             'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control', 'id': 'dataReuniao'}),
             'tipoReuniao': forms.Select(attrs={'id': 'tipoReuniao','class': 'form-control'}),
             'Arquivo' : forms.FileField(label='Select a file'),
-            'presenca': forms.SelectMultiple(attrs={'class':'presenca','style':'width:565px; height:200px;'}),
-            'ausencia': forms.SelectMultiple(attrs={'class':'ausencia','style':'width:565px; height:200px;'}),
+           # 'presenca': forms.SelectMultiple(attrs={'class':'presenca','style':'width:565px; height:200px;'}),
+           # 'ausencia': forms.SelectMultiple(attrs={'class':'ausencia','style':'width:565px; height:200px;'}),
 
              # 'presenca': s2forms.ModelSelect2MultipleWidget( model = Usuario.objects.filter(Situacao=True),
              #                                                 search_fields = ["Nome__icontains","Email__icontains",],
