@@ -1,6 +1,19 @@
 # Gestao Interna Next Step
 
-## Instalar o docker em sua maquina 
+## Instalar o docker em sua maquina Windows 10 PRO
+
+1. Faça o download do instalador a partir do link:
+   
+   https://www.docker.com/get-started
+
+2. Faça a instalação e seguindo a instalação padrão
+
+3. Abra a aplicaçao pelo icone na area de trabalho e abra a interface
+   clicando no submenu proximo ao relogio e clicando com o botao direto abra a dashboard.
+
+
+
+## Instalar o docker em sua maquina Linux
 
 1. Atualize seu Sistema
    O sistema precisa ser atualizado para você ter mais segurança e confiabilidade para a instalação do Docker. 
@@ -75,5 +88,12 @@
   
    docker-compose up
    
+   Crie seu super usuario com o comando 
+
+   docker-compose run web python manage.py createsuperuser
+
+   Nos atributos de superusuario e obrigatorio Situaçao = 1 e Funcao = PROP
+
+   Abra seu navegador com a url localhost:8000
 
 `
