@@ -112,12 +112,12 @@ def usuarios(request):
 
 @login_required
 def editar_meus_dados(request):
-    if request.method == 'POST' and request.POST.get('password') != None:
+    if request.POST.get('password') != None:
 
         usuario = get_object_or_404(Usuario, pk=request.user.id)
 
         form = MeusDadosForm(request.POST or None, request.FILES or None, instance=usuario)
-
+        print(form.errors)
         if form.is_valid():
             Email = request.POST.get('Email')
             form.save()
@@ -404,10 +404,10 @@ def servico_delete(request, pk):
 @login_required
 def projeto(request):
     projeto = Projeto.objects.all()
-    usu = Usuario.objects.filter(Situacao=True)
-    usuario = []
-    for u in usu:
-        usuario.append(u)
+    # usu = Usuario.objects.filter(Situacao=True)
+    # usuario = []
+    # for u in usu:
+    #     usuario.append(u)
     if request.method == 'POST':
         form = ProjetoForm(request.POST)
 
@@ -421,7 +421,7 @@ def projeto(request):
     context = {
         'form': form,
         'projeto': projeto,
-        'usuario':usuario
+     #   'usuario':usuario
     }
 
     return render(request, 'projeto.html', context)
@@ -429,10 +429,10 @@ def projeto(request):
 @login_required
 def projeto_edit(request, pk):
     projeto = get_object_or_404(Projeto, pk=pk)
-    usu = Usuario.objects.filter(Situacao=True)
-    usuario = []
-    for u in usu:
-        usuario.append(u)
+    # usu = Usuario.objects.filter(Situacao=True)
+    # usuario = []
+    # for u in usu:
+    #     usuario.append(u)
 
     form = ProjetoForm(request.POST or None, instance=projeto)
 
@@ -443,7 +443,7 @@ def projeto_edit(request, pk):
     context = {
         'form': form,
         'projeto': projeto,
-        'usuario':usuario
+       # 'usuario':usuario
     }
 
     return render(request, 'projeto_edit.html', context)

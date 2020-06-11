@@ -129,7 +129,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     """Model definition for Usuario."""
 
     Nome = models.CharField('Nome', max_length=80)
-    Foto = models.ImageField('Foto', upload_to='profile')
+    Foto = models.ImageField('Foto', upload_to='profile',blank=True, null=True)
     Login = models.CharField('Login', max_length=50, unique=True)
     password = models.CharField('Senha', max_length=128)
     Matricula = models.CharField('Matricula', max_length=128)
