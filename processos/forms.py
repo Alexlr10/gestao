@@ -208,6 +208,7 @@ class ServicoForm(forms.ModelForm):
 
 
 class ProjetoForm(forms.ModelForm):
+    #SOBRESCREVE A VARIAVEL ORIGINAL COM OS DADOS DESEJADOS
     responsaveis = forms.ModelMultipleChoiceField(
         queryset=Usuario.objects.filter(
             Situacao=True).order_by('Nome'),
@@ -225,13 +226,6 @@ class ProjetoForm(forms.ModelForm):
 
         }
 
-
-
-# class UsuarioWidget(s2forms.ModelSelect2MultipleWidget):
-#     search_fields = [
-#         "Nome__icontains",
-#         "Email__icontains",
-#     ]
 
 class ReuniaoForm(forms.ModelForm):
 
@@ -251,18 +245,10 @@ class ReuniaoForm(forms.ModelForm):
         # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
-            #'descricaoReuniao': forms.Textarea(attrs={'class': 'form-control', 'id': 'descricaoReuniao'}),
+
             'dataReuniao': forms.TextInput(attrs={'type': 'date', 'class': 'form-control', 'id': 'dataReuniao'}),
             'tipoReuniao': forms.Select(attrs={'id': 'tipoReuniao','class': 'form-control'}),
             'Arquivo' : forms.FileField(label='Select a file'),
-           # 'presenca': forms.SelectMultiple(attrs={'class':'presenca','style':'width:565px; height:200px;'}),
-           # 'ausencia': forms.SelectMultiple(attrs={'class':'ausencia','style':'width:565px; height:200px;'}),
-
-             # 'presenca': s2forms.ModelSelect2MultipleWidget( model = Usuario.objects.filter(Situacao=True),
-             #                                                 search_fields = ["Nome__icontains","Email__icontains",],
-             #                                                 attrs={'class': 'form-control','style':'width:570px; height:200px;',
-             #                                                        'color':'red'}
-             #                                                 )
 
 
          }
@@ -270,12 +256,6 @@ class ReuniaoForm(forms.ModelForm):
 
 
 class AtaForm(forms.ModelForm):
-    #Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all().order_by('-dataReuniao'),widget=forms.Select(attrs={'class':'reuniao','style':'width:300px; '})),
-    # Reuniao = forms.ModelChoiceField(queryset=Reuniao.objects.all(),
-    #                                  widget=autocomplete.ModelSelect2(url='Reuniao-Autocomplete',
-    #                                  attrs={'id': 'id_Reuniao',
-    #                                         'style': 'width: 100% !important',
-    #                                         'data-dropdown-css-class': 'select2-info'}))
 
     class Meta:
         model = Ata
@@ -284,20 +264,11 @@ class AtaForm(forms.ModelForm):
 
         widgets = {
              'Reuniao': forms.Select(attrs={'class':'reuniao','style':'width:300px;','id':'id_Reuniao'}),
-            # 'Reuniao': autocomplete.ModelSelect2(url='Reuniao-Autocomplete',
-            #                                      attrs={'class': 'form-control select2bs4 select2-blue', 'id': 'id_Reuniao',
-            #                                             'style': 'width: 100% !important',
-            #                                             'data-dropdown-css-class': 'select2-info'}),
-            # 'Reuniao': s2forms.ModelSelect2Widget(model=Reuniao.objects.all(),
-            #                                                search_fields = ["tipoReuniao__icontains","dataReuniao__icontains",],
-            #                                                attrs={'class': 'form-control','style':'width:870px; height:200px;',
-            #                                                       'color':'red'} ),
-            'dataPublicacao': forms.TextInput(attrs={'class': 'form-control', 'type': 'date', 'id':'dataPublicacao','style':'width:300px;' }),
+             'dataPublicacao': forms.TextInput(attrs={'class': 'form-control', 'type': 'date', 'id':'dataPublicacao','style':'width:300px;' }),
         }
 
 
 class ReceitaForm(forms.ModelForm):
-    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
 
     class Meta:
         model = Receita
@@ -314,7 +285,6 @@ class ReceitaForm(forms.ModelForm):
 
 
 class DespesasForm(forms.ModelForm):
-    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
 
     class Meta:
         model = Despesas

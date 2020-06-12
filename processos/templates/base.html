@@ -280,7 +280,7 @@
 
 
                         <ul class="treeview-menu">
-                            {% if request.user.Funcao != 'RH' and request.user.Funcao != 'QUA' and request.user.Funcao != 'PRO' %}
+                            {% if request.user.Funcao != 'RH' and request.user.Funcao != 'QUA' and request.user.Funcao != 'PRO' and request.user.Funcao != 'MAR' %}
                                 <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a>
                                 </li>
 

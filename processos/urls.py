@@ -21,7 +21,7 @@ urlpatterns = [
     # USUARIO
     path('usuarios/', views.usuarios, name='usuarios'),
     path('usuario_edit/<int:pk>/', views.usuario_edit, name='usuario_edit'),
-    path('usuarios_delete/<pk>',usuariosDelete.as_view(), name='usuarios_delete'),
+    path('usuarios_delete/<pk>',views.usuario_delete, name='usuarios_delete'),
     path('meus_dados/', views.editar_meus_dados, name='meusdados'),
 
     # Cliente

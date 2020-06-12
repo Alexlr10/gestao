@@ -180,16 +180,6 @@ def post_usuario(self, instance, *args, **kwargs):
         verbose_name = 'Usuário'
         verbose_name_plural = 'Usuários'
 
-    # def save(self, *arqs, **kwargs):
-    #     super(Usuario, self).save(*arqs, **kwargs)
-    #     mensagem =  str('Parabens!!! Você agora é um novo membro Next Step!\nUsuario: '+ self.Login+'\nSenha: 010101')
-    #     send_mail(
-    #         'Next Step',
-    #          mensagem,
-    #         'sistemanextstepsi@gmail.com',
-    #         [self.Email],
-    #         fail_silently=False,
-    #     )
 
     def nome(self):
         """Unicode representation of Usuario."""
@@ -313,6 +303,8 @@ class Balanco(models.Model):
         verbose_name = _("Balanco")
         verbose_name_plural = _("Balanco")
 
+    #POST SAVE UTILIZADO PARA SALVAR DADOS CADASTRADOS EM RECEITA E DESPESAS
+    #PARA FACILITAR CALCULOS E CONSULTAS
     @receiver(post_save,sender=Receita)
     def salvar_rendimento(sender,instance,created, **kwargs):
         receita = Balanco()

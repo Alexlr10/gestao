@@ -14,55 +14,32 @@ from django.contrib.auth.decorators import login_required
 import json
 
 
-class usuariosUpdate(UpdateView):
-    model = Usuario
-    fields = ('Nome',
-              'Login',
-              'Situacao',
-              'CPF',
-              'Email',
-              'Funcao',
-              )
-    success_url = reverse_lazy('usuarios')
-    template_name = 'usuario_edit.html'
+# class usuariosUpdate(UpdateView):
+#     model = Usuario
+#     fields = ('Nome',
+#               'Login',
+#               'Situacao',
+#               'CPF',
+#               'Email',
+#               'Funcao',
+#               )
+#     success_url = reverse_lazy('usuarios')
+#     template_name = 'usuario_edit.html'
+#
+#
+# class usuariosDelete(DeleteView):
+#     model = Usuario
+#     success_url = reverse_lazy('usuarios')
+#     template_name = 'usuarios_delete.html'
 
 
-class usuariosDelete(DeleteView):
-    model = Usuario
-    success_url = reverse_lazy('usuarios')
-    template_name = 'usuarios_delete.html'
-
-@login_required
-def usuario_edit(request, pk):
-    usuario = get_object_or_404(Usuario, pk=pk)
-    form = UsuarioCreationForm(request.POST or None, instance=usuario)
-
-    if form.is_valid():
-        form.save()
-
-        send_mail(
-            'NextStep - Atualização',
-            'Suas informações de perfil foram atualizadas',
-            'alexlr10.al@gmail.com',
-            [usuario.Email],
-            fail_silently=False,
-        )
-        return redirect('usuarios')
-
-    context = {
-        'form': form,
-        'usuario': usuario
-    }
-
-    return render(request, 'usuario_edit.html', context)
-
-@login_required
-def usuario_delete(request, pk):
-    usuario = Usuario.objects.get(pk=pk)
-    usuario.delete()
-    messages.error(request, 'Cadastro removido com sucesso')
-
-    return redirect('usuarios')
+# @login_required
+# def usuario_delete(request, pk):
+#     usuario = Usuario.objects.get(pk=pk)
+#     usuario.delete()
+#     messages.error(request, 'Cadastro removido com sucesso')
+#
+#     return redirect('usuarios')
 
 
 def usuarios(request):
@@ -72,12 +49,15 @@ def usuarios(request):
 
         if form.is_valid():
             form.save()
+            #PEGANDO O LOGIN E O EMAIL CADASTRADO PARA ENVIAR A MENSAGEM POR EMAIL PARA O NOVO USUARIO
             login = request.POST.get('Login')
             email = request.POST.get('Email')
             mensagem = str('Parabens!!! Você agora é um novo membro Next Step!!\n'
                            'Login: '+ login + '\n Senha: 12345678\n'
                                               'você pode alterar à qualquer momento acessando'
+             
                                               'seu Perfil-Meus Dados no sistema')
+            #FUNCAO PARA ENVIO DE EMAIL
             send_mail(
                 'Next Step',
                 mensagem,
@@ -111,6 +91,39 @@ def usuarios(request):
 
 
 @login_required
+def usuario_edit(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    form = UsuarioCreationForm(request.POST or None, instance=usuario)
+
+    if form.is_valid():
+        form.save()
+
+        send_mail(
+            'NextStep - Atualização',
+            'Suas informações de perfil foram atualizadas',
+            'alexlr10.al@gmail.com',
+            [usuario.Email],
+            fail_silently=False,
+        )
+        return redirect('usuarios')
+
+    context = {
+        'form': form,
+        'usuario': usuario
+    }
+
+    return render(request, 'usuario_edit.html', context)
+
+
+@login_required
+def usuario_delete(request, pk):
+    usuario = Usuario.objects.get(pk=pk)
+    usuario.delete()
+    messages.error(request, 'Usuarios removido com sucesso')
+
+    return redirect('usuarios')
+
+@login_required
 def editar_meus_dados(request):
     if request.POST.get('password') != None:
 
@@ -140,6 +153,7 @@ def editar_meus_dados(request):
     }
 
     return render(request, 'meus_dados.html', context)
+
 
 
 
@@ -222,6 +236,7 @@ def aviso(request):
 
         if form.is_valid():
             form.save()
+            #PEGANDO INFORMAÇOES DO FORMULARIO PARA ENVIO DO EMAIL
             Data = request.POST.get('Data')
             assunto = request.POST.get('assunto')
             data = Data.split('-')
@@ -229,6 +244,7 @@ def aviso(request):
 
             mensagem = strip_tags(descricao)
 
+            #BUSCANDO DO BANCO OS ULTIMOS DADOS CADASTRADOS PARA ENVIO DO EMAIL
             aviso = Aviso.objects.last()
             membros = [u for u in aviso.membros.values_list('Email', flat=True)]
             email = membros
@@ -256,6 +272,7 @@ def aviso(request):
 
     return render(request, 'aviso.html', context)
 
+#FUNCAO PARA BUSCAR OS DADOS PARA PLOTAGEM DO GRAFICO
 def grafico(request):
     balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY') as periodo,
                                        sum(receita) as rendimento,  sum(despesa) as despesa,
@@ -274,7 +291,7 @@ def grafico(request):
 
 
 
-
+    #TRANSFORMANDDO DATA EM STRING E CONCATENANDO A ORDEM DE EXIBIÇAO
     datas = [str (obj.periodo)[5:7] + '-' + str (obj.periodo)[0:4] for obj in balanco]
 
     balancos = [obj.total for obj in balanco]
@@ -286,6 +303,7 @@ def grafico(request):
 
     print(datas)
 
+    #UTILIZANDO FUNCAO JSON,DUMPS PARA TRANSFORMAR OS DADOS EM JSON
     context = {
 
         'datas': json.dumps(datas),
@@ -470,7 +488,7 @@ def reuniao(request):
 
     if request.method == 'POST':
         form = ReuniaoForm(request.POST)
-
+        #PEGANDO AS INFORMAÇOES DO FORMULARIO PARA ENVIO DO EMAIL
         if form.is_valid():
             form.save()
             dataReuniao = request.POST.get('dataReuniao')
@@ -478,15 +496,20 @@ def reuniao(request):
             data = dataReuniao.split('-')
             pauta = request.POST.get('descricaoReuniao')
 
+            #VERIFICANDO QUAL FOI O TIPO DE REUNIAO CADASTRADA
             if tipoReuniao == 'GERAL':
                 mensagem = str('A Next terá uma reunião GERAL dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
             elif tipoReuniao == 'DIRETORIA':
                 mensagem = str('A Next terá uma reunião de DIRETORIA dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
             elif tipoReuniao == 'PROJETOS':
                 mensagem = str('A Next terá uma reunião da equipe de PROJETOS dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
+            elif tipoReuniao == 'EXTERNA':
+                mensagem = str('A Next terá uma reunião da equipe de EXTERNA dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
 
+
+            #BUSCANDO A ULTIMA REUNIAO CADASTRADA PARA O ENVIO DO EMAIL
             reu = Reuniao.objects.last()
-            membros = [u for u in reu.presenca.values_list('Email', flat=True)]
+            membros = [u for u in reu.presenca.values_list('Email', flat=True)]#FLAT=TRUE NAO EXIBE A CHAVE NA LISTA
             email = membros
             print(email)
 
@@ -529,9 +552,9 @@ def reuniao_edit(request, pk):
 
     if form.is_valid():
         form.save()
-
+        # BUSCANDO A ULTIMA REUNIAO CADASTRADA PARA O ENVIO DO EMAIL
         reu = Reuniao.objects.last()
-        membros = [u for u in reu.presenca.values_list('Email', flat=True)]
+        membros = [u for u in reu.presenca.values_list('Email', flat=True)]#FLAT=TRUE NAO EXIBE A CHAVE NA LISTA
         email = membros
         print(email)
         mensagem = str('Caro membro, você faltou na reunião '
@@ -575,6 +598,7 @@ def reuniao_delete(request, pk):
 def ata(request):
     ata = Ata.objects.all().order_by('-dataPublicacao')
     if request.method == 'POST':
+        #REQUEST FILE USADO PARA ARQUIVO OU IMAGEM
         form = AtaForm(request.POST, request.FILES)
 
         if form.is_valid():
