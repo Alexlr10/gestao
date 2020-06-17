@@ -251,7 +251,6 @@ def aviso(request):
             #PEGANDO INFORMAÇOES DO FORMULARIO PARA ENVIO DO EMAIL
             Data = request.POST.get('Data')
             assunto = request.POST.get('assunto')
-            data = Data.split('-')
             descricao = request.POST.get('descricao')
 
             mensagem = strip_tags(descricao)
@@ -492,11 +491,6 @@ def projeto_delete(request, pk):
 def reuniao(request):
     reuniao = Reuniao.objects.all().order_by('-dataReuniao')
 
-    # usu = Usuario.objects.filter(Situacao=True).order_by('Nome')
-    # usuario = []
-    # for u in usu:
-    #     usuario.append(u)
-
 
     if request.method == 'POST':
         form = ReuniaoForm(request.POST)
@@ -521,8 +515,8 @@ def reuniao(request):
 
             #BUSCANDO A ULTIMA REUNIAO CADASTRADA PARA O ENVIO DO EMAIL
             reu = Reuniao.objects.last()
-            membros = [u for u in reu.presenca.values_list('Email', flat=True)]#FLAT=TRUE NAO EXIBE A CHAVE NA LISTA
-            email = membros
+            email = [u for u in reu.presenca.values_list('Email', flat=True)]#FLAT=TRUE NAO EXIBE A CHAVE NA LISTA
+
             print(email)
 
             send_mail(
@@ -555,19 +549,13 @@ def reuniao_edit(request, pk):
     reuniao = get_object_or_404(Reuniao, pk=pk)
 
 
-    # usu = Usuario.objects.filter(Situacao=True).order_by('Nome')
-    # usuario = []
-    # for u in usu:
-    #     usuario.append(u)
-
     form = ReuniaoForm(request.POST or None, instance=reuniao)
 
     if form.is_valid():
         form.save()
         # BUSCANDO A ULTIMA REUNIAO CADASTRADA PARA O ENVIO DO EMAIL
         reu = Reuniao.objects.last()
-        membros = [u for u in reu.presenca.values_list('Email', flat=True)]#FLAT=TRUE NAO EXIBE A CHAVE NA LISTA
-        email = membros
+        email = [u for u in reu.presenca.values_list('Email', flat=True)]#FLAT=TRUE NAO EXIBE A CHAVE NA LISTA
         print(email)
         mensagem = str('Caro membro, você faltou na reunião '
                        '' + reu.tipoReuniao + ' da data de ' + str(

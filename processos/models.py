@@ -249,6 +249,8 @@ class Reuniao(models.Model):
             return 'DIRETORIA - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
         elif self.tipoReuniao == 'PROJETOS':
             return 'PROJETOS - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
+        elif self.tipoReuniao == 'EXTERNA':
+            return 'EXTERNA - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
 
     def __str__(self):
         if self.tipoReuniao == 'GERAL':
@@ -257,7 +259,8 @@ class Reuniao(models.Model):
             return 'DIRETORIA - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
         elif self.tipoReuniao == 'PROJETOS':
             return 'PROJETOS - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
-
+        elif self.tipoReuniao == 'EXTERNA':
+            return 'EXTERNA - '+ str(self.dataReuniao.strftime("%d/%m/%Y"))
 
 class Ata(models.Model):
     Reuniao = models.ForeignKey(Reuniao, on_delete=models.CASCADE, related_name='Reuniao')
