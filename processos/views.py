@@ -206,12 +206,24 @@ def mensagem(request):
 @login_required
 def ouvidoria(request):
     ouvidoria = Ouvidoria.objects.all()
+
     if request.method == 'POST':
         form = OuvidoriaForm(request.POST)
 
         if form.is_valid():
             form.save()
             messages.success(request, 'Menssagem enviada com sucesso')
+            #BUSCA O EMAIL DOS MEMBROS DO RH PARA AVISAR QUE A UMA MENSAGEM DA OUVIDORIA
+            email = [u for u in Usuario.objects.values_list('Email', flat=True).filter(Funcao='RH')]
+            print(email)
+            mensagem = 'O RH acaba de receber uma mensagem via Ouvidoria Next Step, por favor verifique o sistema de Gestão Interna'
+            send_mail(
+                'Ouvidoria Next Step',
+                mensagem,
+                'sistemanextstepsi@gmail.com',
+                email,
+                fail_silently=False,
+            )
             return redirect('ouvidoria')
 
     form = OuvidoriaForm()
