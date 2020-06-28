@@ -171,12 +171,9 @@ class MeusDadosForm(forms.ModelForm):
 
 
 class ClienteForm(forms.ModelForm):
-    # data_intimacao = forms.DateField(widget=forms.TextInput(attrs={'format': 'dd/mm/yyyy', 'type': 'date'}))
-
     class Meta:
         model = Cliente
         fields = '__all__'
-        # exclude = ['data_cadastro', 'data_atualizacao']
 
         widgets = {
 

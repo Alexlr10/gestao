@@ -14,33 +14,6 @@ from django.contrib.auth.decorators import login_required
 import json
 
 
-# class usuariosUpdate(UpdateView):
-#     model = Usuario
-#     fields = ('Nome',
-#               'Login',
-#               'Situacao',
-#               'CPF',
-#               'Email',
-#               'Funcao',
-#               )
-#     success_url = reverse_lazy('usuarios')
-#     template_name = 'usuario_edit.html'
-#
-#
-# class usuariosDelete(DeleteView):
-#     model = Usuario
-#     success_url = reverse_lazy('usuarios')
-#     template_name = 'usuarios_delete.html'
-
-
-# @login_required
-# def usuario_delete(request, pk):
-#     usuario = Usuario.objects.get(pk=pk)
-#     usuario.delete()
-#     messages.error(request, 'Cadastro removido com sucesso')
-#
-#     return redirect('usuarios')
-
 
 def usuarios(request):
     if request.POST:
@@ -52,14 +25,13 @@ def usuarios(request):
             #PEGANDO O LOGIN E O EMAIL CADASTRADO PARA ENVIAR A MENSAGEM POR EMAIL PARA O NOVO USUARIO
             login = request.POST.get('Login')
             email = request.POST.get('Email')
-            mensagem = str('Parabens!!! Você agora é um novo membro Next Step!!\n'
+            mensagem = str('Parabens!!! Você agora é um novo membro Empresa Júnior Next Step!!\n'
                            'Login: '+ login + '\n Senha: 12345678\n'
-                                              'você pode alterar à qualquer momento acessando'
-             
+                                              'você pode alterar à qualquer momento acessando '
                                               'seu Perfil-Meus Dados no sistema')
             #FUNCAO PARA ENVIO DE EMAIL
             send_mail(
-                'Next Step',
+                'Empresa Júnior Next Step Step',
                 mensagem,
                 'sistemanextstepsi@gmail.com',
                 [email],
@@ -83,7 +55,6 @@ def usuarios(request):
         'usuario': usuario,
         'form': form,
         'ultima_imp': ultima_imp
-        # 'Filial': i,
 
     }
 
@@ -217,13 +188,13 @@ def ouvidoria(request):
             email = [u for u in Usuario.objects.values_list('Email', flat=True).filter(Funcao='RH').filter(Situacao = True)]
             print(email)
             mensagem = 'O RH acaba de receber uma mensagem via Ouvidoria Next Step, por favor verifique o sistema de Gestão Interna'
-            # send_mail(
-            #     'Ouvidoria Next Step',
-            #     mensagem,
-            #     'sistemanextstepsi@gmail.com',
-            #     email,
-            #     fail_silently=False,
-            # )
+            send_mail(
+                'Ouvidoria Next Step',
+                mensagem,
+                'sistemanextstepsi@gmail.com',
+                email,
+                fail_silently=False,
+            )
             return redirect('ouvidoria')
 
     form = OuvidoriaForm()
@@ -377,8 +348,6 @@ def cliente_delete(request, pk):
 
     return redirect('cliente')
 
-
-
 ######## Serviço
 @login_required
 def servico(request):
@@ -427,16 +396,10 @@ def servico_delete(request, pk):
     return redirect('servico')
 
 
-
-
 ######## Projeto
 @login_required
 def projeto(request):
     projeto = Projeto.objects.all()
-    # usu = Usuario.objects.filter(Situacao=True)
-    # usuario = []
-    # for u in usu:
-    #     usuario.append(u)
     if request.method == 'POST':
         form = ProjetoForm(request.POST)
 
@@ -450,7 +413,6 @@ def projeto(request):
     context = {
         'form': form,
         'projeto': projeto,
-     #   'usuario':usuario
     }
 
     return render(request, 'projeto.html', context)
@@ -458,10 +420,6 @@ def projeto(request):
 @login_required
 def projeto_edit(request, pk):
     projeto = get_object_or_404(Projeto, pk=pk)
-    # usu = Usuario.objects.filter(Situacao=True)
-    # usuario = []
-    # for u in usu:
-    #     usuario.append(u)
 
     form = ProjetoForm(request.POST or None, instance=projeto)
 
@@ -472,7 +430,6 @@ def projeto_edit(request, pk):
     context = {
         'form': form,
         'projeto': projeto,
-       # 'usuario':usuario
     }
 
     return render(request, 'projeto_edit.html', context)
@@ -504,13 +461,13 @@ def reuniao(request):
 
             #VERIFICANDO QUAL FOI O TIPO DE REUNIAO CADASTRADA
             if tipoReuniao == 'GERAL':
-                mensagem = str('A Next terá uma reunião GERAL dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
+                mensagem = str('A Next Step marca uma reunião GERAL no dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ', com as seguintes instruções: \n' + pauta)
             elif tipoReuniao == 'DIRETORIA':
-                mensagem = str('A Next terá uma reunião de DIRETORIA dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
+                mensagem = str('A Next Step marca uma reunião DIRETORIA no dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ', com as seguintes instruções: \n' + pauta)
             elif tipoReuniao == 'PROJETOS':
-                mensagem = str('A Next terá uma reunião da equipe de PROJETOS dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
+                mensagem = str('A Next Step marca uma reunião PROJETOS no dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ', com as seguintes instruções: \n' + pauta)
             elif tipoReuniao == 'EXTERNA':
-                mensagem = str('A Next terá uma reunião da equipe de EXTERNA dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ' com as seguintes paltas: \n' + pauta)
+                mensagem = str('A Next Step marca uma reunião EXTERNA no dia '+ data[2] + '/'+  data[1] +'/'+  data[0] + ', com as seguintes instruções: \n' + pauta)
 
 
             #BUSCANDO A ULTIMA REUNIAO CADASTRADA PARA O ENVIO DO EMAIL
@@ -520,7 +477,7 @@ def reuniao(request):
             print(email)
 
             send_mail(
-                'NextStep - REUNIÃO',
+                'Empresa Júnior Next Step - REUNIÃO',
                  mensagem,
                 'sistemanextstepsi@gmail.com',
                  email,
@@ -531,15 +488,11 @@ def reuniao(request):
             messages.success(request, 'Reunião cadastrada com sucesso')
             return redirect('reuniao')
 
-
-
-
     form = ReuniaoForm()
 
     context = {
         'form': form,
         'reuniao': reuniao,
-        #'usuario': usuario
     }
 
     return render(request, 'reuniao.html', context)
@@ -562,9 +515,6 @@ def reuniao_edit(request, pk):
             reu.dataReuniao.strftime("%d/%m/%Y")) + ' e não foi justificada,'
                                                     ' sua falta será contabilizada em nosso sistema.'
                                                     'Em caso de dúvidas entre em contato com o RH.')
-        print(list(email))
-        print(mensagem)
-
         send_mail(
             'NextStep - REUNIÃO',
             mensagem,
