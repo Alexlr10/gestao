@@ -10,6 +10,7 @@
     <form method="POST" action="{% url 'projeto_edit' projeto.id %}">
         {% csrf_token %}
         {{ form.servico|bootstrap }}
+            {{ form.repositorio|bootstrap }}
         <div class="row">
             <div class="col-sm-6">
                 {{ form.dataEntrega|bootstrap }}
@@ -19,22 +20,7 @@
             </div>
         </div>
         {{ form.responsaveis|bootstrap }}
-        {##}
-        {#        <div class="form-group">#}
-        {#            <label class="control-label  ">Responsaveis</label>#}
-        {##}
-        {#            <div class=" ">#}
-        {#                <select name="responsaveis" class="responsaveis"#}
-        {#                        style="width: 580px" required=""#}
-        {#                        name="states[]" multiple="multiple">#}
-        {##}
-        {#                    {% for u in usuario %}#}
-        {#                        <option name="responsaveis"#}
-        {#                                value="{{ u.id }}">{{ u.Nome }}</option>#}
-        {#                    {% endfor %}#}
-        {#                </select>#}
-        {#            </div>#}
-        {#        </div>#}
+
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         <button type="submit" class="btn btn-success">Alterar</button>
     </form>

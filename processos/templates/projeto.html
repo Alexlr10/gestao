@@ -55,6 +55,7 @@
                         <thead>
                         <tr>
                             <th>Serviço - Cliente</th>
+                            <th>Repositorio</th>
                             <th>Data de Entrega</th>
                             <th>Status</th>
                             <th>Responsaveis</th>
@@ -68,7 +69,9 @@
                         {% for u in projeto %}
                             <tr>
                                 <td>{{ u.servico }}</td>
+                               <td><a href="{{ u.repositorio }}" target="_blank">{{ u.repositorio }}</a></td>
                                 <td>{{ u.dataEntrega }}</td>
+
                                 {% if u.status  == 0 %}
                                     <td><span class="badge bg-blue">Iniciado</span></td>
                                 {% elif u.status  == 1 %}
@@ -138,6 +141,7 @@
                         {% csrf_token %}
 
                         {{ form.servico|bootstrap }}
+                        {{ form.repositorio|bootstrap }}
 
                         <div class="row">
                             <div class="col-sm-6" style="width: 290px">
@@ -151,22 +155,7 @@
 
                             {{ form.responsaveis|bootstrap }}
 
-{##}
-{#                                                <div class="form-group">#}
-{#                                                    <label class="control-label  ">Responsaveis</label>#}
-{##}
-{#                                                    <div class=" ">#}
-{#                                                        <select name="responsaveis" class="responsaveis"#}
-{#                                                                style="width: 580px" required=""#}
-{#                                                                name="states[]" multiple="multiple">#}
-{##}
-{#                                                            {% for u in usuario %}#}
-{#                                                                <option name="responsaveis"#}
-{#                                                                        value="{{ u.id }}">{{ u.Nome }}</option>#}
-{#                                                            {% endfor %}#}
-{#                                                        </select>#}
-{#                                                    </div>#}
-{#                                                </div>#}
+
 
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-success">Cadastrar</button>

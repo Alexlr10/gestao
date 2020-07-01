@@ -213,7 +213,7 @@ class ProjetoForm(forms.ModelForm):
 
     class Meta:
         model = Projeto
-        fields = ['servico','dataEntrega','status','responsaveis']
+        fields = ['servico','repositorio','dataEntrega','status','responsaveis']
 
         widgets = {
             'servico': forms.Select(attrs={'class': 'servico', 'style': 'width:580px;','margin-top':'-4px', 'id': 'id_servico'}),

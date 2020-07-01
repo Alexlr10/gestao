@@ -226,6 +226,7 @@ class Servico(models.Model):
 
 class Projeto(models.Model):
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name='Servicos')
+    repositorio = models.URLField(("Repositorio"),max_length=128)
     dataEntrega = models.DateField('Entrega', blank=True, null=True)
     status = models.IntegerField('Status', choices=STATUS)
     responsaveis = models.ManyToManyField('Usuario', null=True, blank=True, related_name="responsaveis")
