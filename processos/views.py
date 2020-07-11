@@ -1,6 +1,6 @@
 import decimal
 
-from django.db.models import Sum
+from django.db.models import Sum, F
 from django.db.models.functions import TruncMonth
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -607,13 +607,9 @@ def receita(request):
 
 
 
-    receitaAReceber = Receita.objects.filter(Pagamento=False).values(mes=TruncMonth('Data')).annotate(receita=Sum('valorParcela'))
+    receitaAReceber = Receita.objects.filter(Pagamento=False).\
+        values(mes=TruncMonth('Data')).annotate(receita=Sum('valorParcela')).order_by('-mes')
 
-
-
-    # for u in receitaAReceber:
-    #     print(u.periodo)
-    #     print(u.receita)
 
     if request.method == 'POST':
         form = ReceitaForm(request.POST)
@@ -716,13 +712,20 @@ def despesa_edit(request, pk):
 
 @login_required
 def balanco(request):
-    balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY') as periodo,
-                                       sum(receita) as rendimento,  sum(despesa) as despesa,
-                                         (sum(receita) - sum(despesa)) as total FROM
-                                           public.processos_balanco 
-                                           WHERE processos_balanco."Pagamento" = true
-                                           GROUP BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY')
-                                           ORDER BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY') DESC''')
+    # balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY') as periodo,
+    #                                    sum(receita) as rendimento,  sum(despesa) as despesa,
+    #                                      (sum(receita) - sum(despesa)) as total FROM
+    #                                        public.processos_balanco
+    #                                        WHERE processos_balanco."Pagamento" = true
+    #                                        GROUP BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY')
+    #                                        ORDER BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY') DESC''')
+
+
+    balanco = Balanco.objects.filter(Pagamento=True).\
+        values(mes=TruncMonth('datas')).\
+        annotate(receita=Sum('receita'),despesa=Sum('despesa'),total=F("receita") - F("despesa")).order_by('-mes')
+
+
 
     balancoPrimeiroSemestre = Balanco.objects.raw('''SELECT DISTINCT 1 as id,to_char(processos_balanco."datas", 'YYYY') as ano,
                                                     sum(receita) as rendimento,

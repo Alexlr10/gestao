@@ -123,8 +123,8 @@
                             <tr>
 
 
-                                <td><span class="badge bg-grey">{{ u.periodo|date:"M Y" }}</span></td>
-                                <td><span class="badge bg-green">{{ u.rendimento }}</span></td>
+                                <td><span class="badge bg-grey">{{ u.mes|date:"M Y" }}</span></td>
+                                <td><span class="badge bg-green">{{ u.receita }}</span></td>
                                 <td><span class="badge bg-red">{{ u.despesa }}</span></td>
                                 {% if u.total > 0 %}
                                     <td><span class="badge bg-green">{{ u.total }}</span></td>

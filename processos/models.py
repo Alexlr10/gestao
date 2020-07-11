@@ -298,7 +298,7 @@ class Despesas(models.Model):
 class Balanco(models.Model):
     receitas_id = models.IntegerField('receitas_id', blank=True, null=True)
     despesa_id = models.IntegerField('despesa_id', blank=True, null=True)
-    receita = models.DecimalField('compra', max_digits=6, decimal_places=2,blank=True, null=True)
+    receita = models.DecimalField('receita', max_digits=6, decimal_places=2,blank=True, null=True)
     despesa = models.DecimalField('despesa', max_digits=6, decimal_places=2,blank=True, null=True)
     datas = models.DateField('datas', blank=True, null=True)
     Pagamento = models.BooleanField('Pagamento Efetuado', default=True)
