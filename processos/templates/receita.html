@@ -135,8 +135,10 @@
                         <tbody>
 
                         {% for u in receitaAReceber %}
+
+
                             <tr>
-                                <td><span class="badge bg-grey">{{ u.periodo|date:"M Y" }}</span></td>
+                                <td><span class="badge bg-grey">{{ u.mes|date:"M Y" }}</span></td>
 
 
                                 <td><span class="badge bg-green">{{ u.receita }}</span></td>

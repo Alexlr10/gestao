@@ -1,4 +1,7 @@
 import decimal
+
+from django.db.models import Sum
+from django.db.models.functions import TruncMonth
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.utils.datetime_safe import strftime, datetime
@@ -595,13 +598,22 @@ def ata_delete(request, pk):
 @login_required
 def receita(request):
     receita = Receita.objects.all().order_by('-Data')
-    receitaAReceber = Receita.objects.raw('''SELECT 1 as id, to_date(to_char(processos_receita."Data", 'MM-YYYY'), 'MM-YYYY') as periodo,
-                                              Sum(processos_receita."valorParcela") as receita
-                                              FROM   public.processos_receita
-                                                WHERE processos_receita."Pagamento" = false
-                                                 GROUP BY to_char(processos_receita."Data",'MM-YYYY')
-                                                 ORDER BY to_char(processos_receita."Data",'MM-YYYY') ''')
+    # receitaAReceber = Receita.objects.raw('''SELECT 1 as id, to_date(to_char(processos_receita."Data", 'MM-YYYY'), 'MM-YYYY') as periodo,
+    #                                           Sum(processos_receita."valorParcela") as receita
+    #                                           FROM   public.processos_receita
+    #                                             WHERE processos_receita."Pagamento" = false
+    #                                              GROUP BY to_char(processos_receita."Data",'MM-YYYY')
+    #                                              ORDER BY to_char(processos_receita."Data",'MM-YYYY') ''')
 
+
+
+    receitaAReceber = Receita.objects.filter(Pagamento=False).values(mes=TruncMonth('Data')).annotate(receita=Sum('valorParcela'))
+
+
+
+    # for u in receitaAReceber:
+    #     print(u.periodo)
+    #     print(u.receita)
 
     if request.method == 'POST':
         form = ReceitaForm(request.POST)
@@ -617,6 +629,7 @@ def receita(request):
         'form': form,
         'receita': receita,
         'receitaAReceber':receitaAReceber,
+      #  'teste':teste
     }
 
     return render(request, 'receita.html', context)
