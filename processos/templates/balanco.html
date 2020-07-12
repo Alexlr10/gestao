@@ -42,18 +42,18 @@
                                 </thead>
                                 <tbody>
 
-                                {% for u in somatorioGeral %}
+
                                     <tr>
 
 
-                                        <td><span class="badge bg-green">{{ u.rendimento }}</span></td>
-                                        <td><span class="badge bg-red">{{ u.despesa }}</span></td>
-                                        {% if u.total > 0 %}
-                                            <td><span class="badge bg-green">{{ u.total }}</span></td>
+                                        <td><span class="badge bg-green">{{ somatorioGeral.receitas }}</span></td>
+                                        <td><span class="badge bg-red">{{ somatorioGeral.despesas }}</span></td>
+                                        {% if somatorioGeral.total > 0 %}
+                                            <td><span class="badge bg-green">{{ somatorioGeral.total }}</span></td>
                                         {% elif u.total == 0 %}
-                                            <td><span class="badge bg-orange">{{ u.total }}</span></td>
+                                            <td><span class="badge bg-orange">{{ somatorioGeral.total }}</span></td>
                                         {% else %}
-                                            <td><span class="badge bg-red">{{ u.total }}</span></td>
+                                            <td><span class="badge bg-red">{{ somatorioGeral.total }}</span></td>
                                         {% endif %}
 
                                         </td>
@@ -72,7 +72,6 @@
                                     </div>
 
 
-                                {% endfor %}
 
 
                                 </tfoot>
@@ -201,15 +200,15 @@
                             <tr>
 
 
-                                <td><span class="badge bg-grey">{{ u.ano }}</span></td>
-                                <td><span class="badge bg-green">{{ u.rendimento }}</span></td>
+                                <td><span class="badge bg-grey">{{ u.ano|date:"Y" }}</span></td>
+                                <td><span class="badge bg-green">{{ u.receita }}</span></td>
                                 <td><span class="badge bg-red">{{ u.despesa }}</span></td>
                                 {% if u.total > 0 %}
                                     <td><span class="badge bg-green">{{ u.total }}</span></td>
                                 {% elif u.total == 0 %}
-                                    <td><span class="badge bg-orange">{{ u.rendimento }}</span></td>
+                                    <td><span class="badge bg-orange">{{ u.total }}</span></td>
                                 {% else %}
-                                    <td><span class="badge bg-red">{{ u.rendimento }}</span></td>
+                                    <td><span class="badge bg-red">{{ u.total }}</span></td>
                                 {% endif %}
 
 
@@ -273,8 +272,8 @@
                                     <tr>
 
 
-                                        <td><span class="badge bg-grey">{{ u.ano }}</span></td>
-                                        <td><span class="badge bg-green">{{ u.rendimento }}</span></td>
+                                        <td><span class="badge bg-grey">{{ u.ano|date:"Y"}}</span></td>
+                                        <td><span class="badge bg-green">{{ u.receita }}</span></td>
                                         <td><span class="badge bg-red">{{ u.despesa }}</span></td>
                                         {% if u.total > 0 %}
                                             <td><span class="badge bg-green">{{ u.total }}</span></td>

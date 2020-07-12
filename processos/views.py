@@ -1,7 +1,7 @@
 import decimal
 
-from django.db.models import Sum, F
-from django.db.models.functions import TruncMonth
+from django.db.models import Sum, F, Q
+from django.db.models.functions import TruncMonth, TruncYear
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.utils.datetime_safe import strftime, datetime
@@ -727,39 +727,58 @@ def balanco(request):
 
 
 
-    balancoPrimeiroSemestre = Balanco.objects.raw('''SELECT DISTINCT 1 as id,to_char(processos_balanco."datas", 'YYYY') as ano,
-                                                    sum(receita) as rendimento,
-                                                    sum(despesa) as despesa, (sum(receita) - sum(despesa)) as total 
-                                                    FROM public.processos_balanco  where 
-                                                    processos_balanco."Pagamento" = true and 
-                                                    (to_char(processos_balanco."datas", 'MM') = '01' 
-                                                    or to_char(processos_balanco."datas", 'MM') = '02' or 
-                                                    to_char(processos_balanco."datas", 'MM') = '03' or
-                                                     to_char(processos_balanco."datas", 'MM') = '04' or 
-                                                     to_char(processos_balanco."datas", 'MM') = '05' or 
-                                                     to_char(processos_balanco."datas", 'MM') = '06')
-                                                      GROUP BY to_char(processos_balanco."datas", 'YYYY') ''')
+    # balancoPrimeiroSemestre = Balanco.objects.raw('''SELECT DISTINCT 1 as id,to_char(processos_balanco."datas", 'YYYY') as ano,
+    #                                                 sum(receita) as rendimento,
+    #                                                 sum(despesa) as despesa, (sum(receita) - sum(despesa)) as total
+    #                                                 FROM public.processos_balanco  where
+    #                                                 processos_balanco."Pagamento" = true and
+    #                                                 (to_char(processos_balanco."datas", 'MM') = '01'
+    #                                                 or to_char(processos_balanco."datas", 'MM') = '02' or
+    #                                                 to_char(processos_balanco."datas", 'MM') = '03' or
+    #                                                  to_char(processos_balanco."datas", 'MM') = '04' or
+    #                                                  to_char(processos_balanco."datas", 'MM') = '05' or
+    #                                                  to_char(processos_balanco."datas", 'MM') = '06')
+    #                                                   GROUP BY to_char(processos_balanco."datas", 'YYYY') ''')
+    #
 
-    balancoSegundoSemestre = Balanco.objects.raw('''SELECT DISTINCT 1 as id,to_char(processos_balanco."datas", 'YYYY') as ano,
-                                                        sum(receita) as rendimento,
-                                                        sum(despesa) as despesa, (sum(receita) - sum(despesa)) as total 
-                                                        FROM public.processos_balanco  where 
-                                                         processos_balanco."Pagamento" = true and 
-                                                        (to_char(processos_balanco."datas", 'MM') = '07' 
-                                                        or to_char(processos_balanco."datas", 'MM') = '08' or 
-                                                        to_char(processos_balanco."datas", 'MM') = '09' or
-                                                         to_char(processos_balanco."datas", 'MM') = '10' or 
-                                                         to_char(processos_balanco."datas", 'MM') = '11' or 
-                                                         to_char(processos_balanco."datas", 'MM') = '12')
-                                                          GROUP BY to_char(processos_balanco."datas", 'YYYY') ''')
+    balancoPrimeiroSemestre = Balanco.objects.\
+        values(ano=TruncYear('datas')).filter(Pagamento=True).\
+        filter(Q(datas__month= 1)|Q(datas__month= 2)|Q(datas__month= 3)|Q(datas__month= 4)|Q(datas__month= 5)|Q(datas__month= 6))\
+        .annotate(receita=Sum('receita'),despesa=Sum('despesa'),total=F("receita") - F("despesa")).order_by('-ano')
+
+
+
+    # balancoSegundoSemestre = Balanco.objects.raw('''SELECT DISTINCT 1 as id,to_char(processos_balanco."datas", 'YYYY') as ano,
+    #                                                     sum(receita) as rendimento,
+    #                                                     sum(despesa) as despesa, (sum(receita) - sum(despesa)) as total
+    #                                                     FROM public.processos_balanco  where
+    #                                                      processos_balanco."Pagamento" = true and
+    #                                                     (to_char(processos_balanco."datas", 'MM') = '07'
+    #                                                     or to_char(processos_balanco."datas", 'MM') = '08' or
+    #                                                     to_char(processos_balanco."datas", 'MM') = '09' or
+    #                                                      to_char(processos_balanco."datas", 'MM') = '10' or
+    #                                                      to_char(processos_balanco."datas", 'MM') = '11' or
+    #                                                      to_char(processos_balanco."datas", 'MM') = '12')
+    #                                                       GROUP BY to_char(processos_balanco."datas", 'YYYY') ''')
+
+
+    balancoSegundoSemestre = Balanco.objects.\
+        values(ano=TruncYear('datas')).filter(Pagamento=True).\
+        filter(Q(datas__month= 7)|Q(datas__month= 8)|Q(datas__month= 9)|Q(datas__month= 10)|Q(datas__month= 11)|Q(datas__month= 12))\
+        .annotate(receita=Sum('receita'),despesa=Sum('despesa'),total=F("receita") - F("despesa")).order_by('-ano')
+
 
     balancoCompleto = Balanco.objects.all().order_by('-datas')
 
-    somatorioGeral = Balanco.objects.raw('''SELECT DISTINCT  1 as id,
-                                    sum(receita) as rendimento,  sum(despesa) as despesa,
-                                      (sum(receita) - sum(despesa)) as total FROM 
-                                        public.processos_balanco 
-                                        WHERE processos_balanco."Pagamento" = true ''')
+    # somatorioGeral = Balanco.objects.raw('''SELECT DISTINCT  1 as id,
+    #                                 sum(receita) as rendimento,  sum(despesa) as despesa,
+    #                                   (sum(receita) - sum(despesa)) as total FROM
+    #                                     public.processos_balanco
+    #                                     WHERE processos_balanco."Pagamento" = true ''')
+
+    somatorioGeral = Balanco.objects.\
+        filter(Pagamento=True).aggregate(receitas=Sum('receita'),despesas=Sum('despesa'), total=Sum(F('receita')-F('despesa')))
+
 
     form = BalancoForm(request.POST)
 
