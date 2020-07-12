@@ -1,6 +1,6 @@
 import decimal
 
-from django.db.models import Sum, F, Q
+from django.db.models import Sum, F, Q, Count
 from django.db.models.functions import TruncMonth, TruncYear
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -477,7 +477,6 @@ def reuniao(request):
             reu = Reuniao.objects.last()
             email = [u for u in reu.presenca.values_list('Email', flat=True)]#FLAT=TRUE NAO EXIBE A CHAVE NA LISTA
 
-            print(email)
 
             send_mail(
                 'Empresa Júnior Next Step - REUNIÃO',
@@ -825,15 +824,20 @@ def balanco_edit(request, pk):
 
 @login_required
 def faltasReunioes(request):
-    faltas = Reuniao.objects.raw('''SELECT 1 as id, to_date(to_char(processos_reuniao."dataReuniao", 'MM YYYY'), 'MM YYYY') as mes,
-                                    processos_usuario."Nome", count(processos_usuario."Nome") as faltas
-                                    FROM  public.processos_reuniao, public.processos_reuniao_ausencia, 
-                                    public.processos_usuario WHERE 
-                                    processos_reuniao.id = processos_reuniao_ausencia.reuniao_id AND
-                                      processos_usuario.id = processos_reuniao_ausencia.usuario_id
-                                       group by processos_usuario."Nome", 
-                                       to_char(processos_reuniao."dataReuniao", 'MM YYYY')
-                                         order by to_char(processos_reuniao."dataReuniao", 'MM YYYY') desc''')
+    # faltas = Reuniao.objects.raw('''SELECT 1 as id, to_date(to_char(processos_reuniao."dataReuniao", 'MM YYYY'), 'MM YYYY') as mes,
+    #                                 processos_usuario."Nome", count(processos_usuario."Nome") as faltas
+    #                                 FROM  public.processos_reuniao, public.processos_reuniao_ausencia,
+    #                                 public.processos_usuario WHERE
+    #                                 processos_reuniao.id = processos_reuniao_ausencia.reuniao_id AND
+    #                                   processos_usuario.id = processos_reuniao_ausencia.usuario_id
+    #                                    group by processos_usuario."Nome",
+    #                                    to_char(processos_reuniao."dataReuniao", 'MM YYYY')
+    #                                      order by to_char(processos_reuniao."dataReuniao", 'MM YYYY') desc''')
+
+    faltas = Reuniao.objects.values('ausencia__Nome')\
+        .annotate(faltas=Count('ausencia__Nome'),mes=TruncMonth('dataReuniao')).order_by('-mes')
+
+
     form = ReuniaoForm()
     context = {
         'form':form,
