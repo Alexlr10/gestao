@@ -149,14 +149,7 @@
                             </tr>
 
 
-                            <div class="modal fade" id="myModal{{ u.id }}" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
 
-                                    </div>
-                                </div>
-                            </div>
 
 
                         {% endfor %}
@@ -184,9 +177,9 @@
                 <div class="modal-body" id="myModal">
                     <form method="POST">
                         {% csrf_token %}
-                        <div class="table-responsive">
+
                             {{ form.Servico|bootstrap }}
-                        </div>
+
                         <div class="row">
                             <div class="col-sm-6">
                                 {{ form.Data|bootstrap }}
@@ -212,9 +205,9 @@
 
     <script>
 
-        $(document).ready(function () {
+       $(document).ready(function () {
             // $('.reuniao').select2();
-            $('#id_servico').select2({
+            $('#id_Servico').select2({
                 dropdownParent: $('#myModal')
             });
 

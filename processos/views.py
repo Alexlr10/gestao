@@ -607,8 +607,7 @@ def receita(request):
 
 
 
-    receitaAReceber = Receita.objects.filter(Pagamento=False).\
-        values(mes=TruncMonth('Data')).annotate(receita=Sum('valorParcela')).order_by('-mes')
+    receitaAReceber = Receita.objects.filter(Pagamento=False).values(mes=TruncMonth('Data')).annotate(receita=Sum('valorParcela')).order_by('-mes')
 
 
     if request.method == 'POST':
@@ -625,7 +624,6 @@ def receita(request):
         'form': form,
         'receita': receita,
         'receitaAReceber':receitaAReceber,
-      #  'teste':teste
     }
 
     return render(request, 'receita.html', context)
@@ -664,7 +662,7 @@ def despesa(request):
     despesa = Despesas.objects.all().order_by('-data')
     despesaaPagar = Despesas.objects.filter(Pagamento=False).order_by('-data')
     today = datetime.today()
-    print(today)
+
     form = DespesasForm(request.POST)
 
     if request.method == 'POST':

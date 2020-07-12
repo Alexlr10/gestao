@@ -270,10 +270,10 @@ class ReceitaForm(forms.ModelForm):
     class Meta:
         model = Receita
         fields = '__all__'
-        # exclude = ['data_cadastro', 'data_atualizacao']
+
 
         widgets = {
-            'Servico': forms.Select(attrs={'claas':'col-sm-12', 'id': 'id_servico'}),
+            'Servico': forms.Select(attrs={'class': 'Servico', 'style': 'width:580px;', 'margin-top': '-4px', 'id': 'id_Servico'}),
             'Data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
             'Entrada': forms.TextInput(attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
             'valorParcela': forms.TextInput(
