@@ -259,43 +259,61 @@ def aviso(request):
 
 #FUNCAO PARA BUSCAR OS DADOS PARA PLOTAGEM DO GRAFICO
 def grafico(request):
-    balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY') as periodo,
-                                       sum(receita) as rendimento,  sum(despesa) as despesa,
-                                         (sum(receita) - sum(despesa)) as total FROM
-                                           public.processos_balanco 
-                                           WHERE processos_balanco."Pagamento" = true
-                                           GROUP BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY')
-                                           ORDER BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY')''')
+    # balanco = Balanco.objects.raw('''SELECT DISTINCT  1 as id,to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY') as periodo,
+    #                                    sum(receita) as rendimento,  sum(despesa) as despesa,
+    #                                      (sum(receita) - sum(despesa)) as total FROM
+    #                                        public.processos_balanco
+    #                                        WHERE processos_balanco."Pagamento" = true
+    #                                        GROUP BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY')
+    #                                        ORDER BY to_date(to_char(processos_balanco."datas", 'MM-YYYY'), 'MM YYYY')''')
 
-    receitaAReceber = Receita.objects.raw('''SELECT 1 as id, to_char(processos_receita."Data", 'MM-YYYY') as periodo,
-                                              Sum(processos_receita."valorParcela") as receita
-                                              FROM   public.processos_receita
-                                                WHERE processos_receita."Pagamento" = true
-                                                 GROUP BY to_char(processos_receita."Data",'MM-YYYY')
-                                                 ORDER BY to_date(to_char(processos_receita."Data", 'MM-YYYY'), 'MM YYYY')''')
+    balanco = Balanco.objects.filter(Pagamento=True). \
+        values(mes=TruncMonth('datas')). \
+        annotate(receita=Sum('receita'), despesa=Sum('despesa'), total=F("receita") - F("despesa")).order_by('mes')
 
+    # receitaAReceber = Receita.objects.raw('''SELECT 1 as id, to_char(processos_receita."Data", 'MM-YYYY') as periodo,
+    #                                           Sum(processos_receita."valorParcela") as receita
+    #                                           FROM   public.processos_receita
+    #                                             WHERE processos_receita."Pagamento" = true
+    #                                              GROUP BY to_char(processos_receita."Data",'MM-YYYY')
+    #                                              ORDER BY to_date(to_char(processos_receita."Data", 'MM-YYYY'), 'MM YYYY')''')
+
+    receitaRecebida = Receita.objects.filter(Pagamento=True).values(mes=TruncMonth('Data')).\
+        annotate(receita=Sum('valorParcela')).order_by('mes')
 
 
     #TRANSFORMANDDO DATA EM STRING E CONCATENANDO A ORDEM DE EXIBIÇAO
-    datas = [str (obj.periodo)[5:7] + '-' + str (obj.periodo)[0:4] for obj in balanco]
+    #datas = [str (obj.periodo)[5:7] + '-' + str (obj.periodo)[0:4] for obj in balanco]
+    # A MESMA OPERAÇAO DE CIMA SEM A UTILIZAÇAO DE RAW
+    datas = []
+    for obj in balanco:
+        datas.append(str(obj['mes'])[5:7] + '-' + str(obj['mes'])[0:4])
 
-    balancos = [obj.total for obj in balanco]
+   # balancos = [obj.total for obj in balanco]
 
-    rendimentos = [obj.rendimento for obj in balanco]
+    balancos = []
+    for obj in balanco:
+        balancos.append(obj['total'])
 
-    receita = [obj.receita for obj in receitaAReceber]
-    data = [str (obj.periodo) for obj in receitaAReceber]
+ #   receita = [obj.receita for obj in receitaAReceber]
 
-    print(datas)
+    receita = []
+    for obj in receitaRecebida:
+        receita.append(obj['receita'])
+
+  #  data = [str(obj.periodo) for obj in receitaAReceber]
+
+    data = []
+    for obj in receitaRecebida:
+        data.append(str(obj['mes'])[5:7] + '-' + str(obj['mes'])[0:4])
+
+
 
     #UTILIZANDO FUNCAO JSON,DUMPS PARA TRANSFORMAR OS DADOS EM JSON
     context = {
 
         'datas': json.dumps(datas),
         'balancos': json.dumps(balancos, default=decimal_default),
-
-        'rendimentos': json.dumps(rendimentos, default=decimal_default),
-
         'receita': json.dumps(receita, default=decimal_default),
         'data': json.dumps(data)
     }
