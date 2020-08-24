@@ -4,6 +4,7 @@
 *.sqlite3
 # Name of your virtuan env
 media
+staticfiles
 env
 *pyc
 .media
