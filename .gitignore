@@ -3,9 +3,8 @@
 # If you are using sqlite3
 *.sqlite3
 # Name of your virtuan env
-\media
-\staticfiles
-env
+/staticfiles
+/env
 *pyc
-.media
-.env
+/media
+/.env
