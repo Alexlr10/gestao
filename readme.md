@@ -50,7 +50,7 @@
    sudo apt install docker-ce
 
 5. Verificar Status do Docker
-   Assim que a instalação estiver completa, é uma ótima ideia verificar o status do serviço.
+   Assim que a instalação estiver completa, verifique o status do serviço.
 
    sudo systemctl status docker
 

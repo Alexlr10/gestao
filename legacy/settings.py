@@ -116,16 +116,16 @@ DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dbur
 # }
 
 #BANCO DO POSTGRESQL DOCKER
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'postgres',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'db',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT'),
+    }
+}
 
 
 #BANCO DO MYSQL
@@ -189,11 +189,11 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = config('SESSION_EXPIRE_AT_BROWSER_CLOSE'),
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'sistemanextstepsi@gmail.com'
-EMAIL_HOST_PASSWORD = 'nextstepsi'
-EMAIL_USE_TLS = True
+EMAIL_HOST = config('EMAIL_HOST'),
+EMAIL_PORT = config('EMAIL_PORT'),
+EMAIL_HOST_USER = config('EMAIL_HOST_USER'),
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD'),
+EMAIL_USE_TLS = config('EMAIL_USE_TLS'),
 
