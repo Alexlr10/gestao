@@ -18,7 +18,7 @@ services:
 
   web:
     build: .
-    command: sh -c "python manage.py migrate && python manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn -w 4 legacy.wsgi -b 0.0.0.0:8000"
     volumes:
       - .:/webapps
     ports:
@@ -27,4 +27,17 @@ services:
       - db
     depends_on:
       - db
+  
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./static:/webapps/static/
+      - ./media:/webapps/media/
+    depends_on:
+      - web
+    ports:
+      - 80:80
+    networks:
+      - default
 
