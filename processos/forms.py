@@ -21,6 +21,7 @@ class UsuarioCreationForm(forms.ModelForm):
                   'CPF',
                   'Matricula',
                   'Email',
+                  'Celular',
                   'Facebook',
                   'Instagram',
                   'LinkedIn',
