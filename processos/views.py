@@ -32,14 +32,18 @@ def usuarios(request):
                            'Login: '+ login + '\n Senha: 12345678\n'
                                               'você pode alterar à qualquer momento acessando '
                                               'seu Perfil-Meus Dados no sistema')
-            #FUNCAO PARA ENVIO DE EMAIL
-            send_mail(
-                'Empresa Júnior Next Step Step',
-                mensagem,
-                'sistemanextstepsi@gmail.com',
-                [email],
-                fail_silently=False,
-            )
+
+            ativo = request.POST.get('Situacao')
+            print(ativo)
+            if(ativo != None):
+                #FUNCAO PARA ENVIO DE EMAIL
+                send_mail(
+                    'Empresa Júnior Next Step Step',
+                    mensagem,
+                    'sistemanextstepsi@gmail.com',
+                    [email],
+                    fail_silently=False,
+                )
             return redirect('usuarios')
         context = {
             'usuario': usuario,
