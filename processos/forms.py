@@ -276,9 +276,9 @@ class ReceitaForm(forms.ModelForm):
         widgets = {
             'Servico': forms.Select(attrs={'class': 'Servico', 'style': 'width:580px;', 'margin-top': '-4px', 'id': 'id_Servico'}),
             'Data': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'Entrada': forms.TextInput(attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
+            'Entrada': forms.TextInput(attrs={'type': 'number', 'step': 0.01, 'class': 'form-control', 'value': 0.0}),
             'valorParcela': forms.TextInput(
-                attrs={'type': 'number', 'step': 0.1, 'class': 'form-control', 'value': 0.0}),
+                attrs={'type': 'number', 'step': 0.01, 'class': 'form-control', 'value': 0.0}),
         }
 
 

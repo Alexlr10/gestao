@@ -192,13 +192,13 @@ class Cliente(models.Model):
 
     nome = models.CharField(_('Nome'), max_length=40, null=True, blank=True)
     cidade = models.CharField(_('Cidade'), max_length=80, null=True, blank=True)
-    bairro = models.CharField(_('Bairro'), max_length=20, null=True, blank=True)
+    bairro = models.CharField(_('Bairro'), max_length=80, null=True, blank=True)
     rua = models.CharField(_('Rua'), max_length=80, null=True, blank=True)
     numero = models.CharField(_('Numero'), max_length=20, null=True, blank=True)
     cep = models.CharField(_('CEP'), max_length=15, null=True, blank=True)
     cpf = models.CharField(_('CPF/CNPJ'), max_length=15, null=True, blank=True)
     contato = models.CharField(_('Contato'), max_length=20, null=True, blank=True)
-    email = models.CharField(_('Email'), max_length=20, null=True, blank=True)
+    email = models.CharField(_('Email'), max_length=40, null=True, blank=True)
 
     class Meta:
         verbose_name = _("Cliente")
