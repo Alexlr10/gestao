@@ -116,16 +116,16 @@ DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, cast=dbur
 # }
 
 #BANCO DO POSTGRESQL DOCKER
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': config('NAME'),
-#         'USER': config('USER'),
-#         'PASSWORD': config('PASSWORD'),
-#         'HOST': config('HOST'),
-#         'PORT': config('PORT'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT'),
+    }
+}
 
 
 #BANCO DO MYSQL
