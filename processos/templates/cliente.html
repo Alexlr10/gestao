@@ -56,12 +56,12 @@
 
 
                                 <td>
-                                    <a href="{% url 'cliente_edit' u.id %}" data-toggle="modal"
+                                    <a href="{% url 'cliente_edit' u.id %}"  data-toggle="modal"
                                        data-target="#myModal{{ u.id }}">
                                         <button type="button" class="btn btn-xs btn-warning">Editar</button>
                                     </a>
                                     <a href="{% url 'cliente_delete' u.id %}">
-                                        <button type="button" class="btn btn-xs btn-danger">Apagar</button>
+                                        <button type="button" class="btn btn-xs btn-danger" alert="return onmessage('Deseja realmente apagar o registro?')">Apagar</button>
                                     </a>
 
                                 </td>

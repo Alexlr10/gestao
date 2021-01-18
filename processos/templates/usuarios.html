@@ -58,7 +58,7 @@
                                     {% elif u.Funcao == 'PRO' %}
                                         PROJETOS
                                     {% elif u.Funcao == 'RH' %}
-                                        RECURSSOS HUMANOS
+                                        RECURSOS HUMANOS
                                     {% endif %}
                                 </td>
                                 <td>{{ u.Celular }}</td>
@@ -71,7 +71,7 @@
                                        data-target="#myModal{{ u.id }}">
                                         <button type="button" class="btn btn-xs btn-warning">Editar</button>
                                     </a>
-                                    <a href="{% url 'usuarios_delete' u.id %}">
+                                    <a href="{% url 'usuarios_delete' u.id %}" onclick="return onmessage('Deseja realmente apagar o registro?')">
                                         <button type="button" class="btn btn-xs btn-danger">Apagar</button>
                                     </a>
 
