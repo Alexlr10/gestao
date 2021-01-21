@@ -150,7 +150,7 @@
                     </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a>
+                     
                             </li>
                             <li><a href="{% url 'usuarios' %}"><i class="fa fa-user-plus"></i><span>Usuários</span></a>
                             </li>
@@ -176,7 +176,8 @@
 
 
                         <ul class="treeview-menu">
-
+                            <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a>
+                            </li>
                             <li><a href="{% url 'receita' %}"><i class="fa  fa-money"></i> <span>Receita</span></a></li>
                             <li><a href="{% url 'despesa' %}"><i class="fa fa-credit-card"></i><span>Despesas</span></a>
                             </li>
@@ -211,9 +212,7 @@
                             <li><a href="#"
                                    onCLick="window.open('https://trello.com/b/5zCMe3zB/presid%C3%AAncia','_blank');"><i
                                     class="fa  fa-trello"></i> <span>Trello</span></a></li>
-                            <li><a href="#"
-                                   onCLick="window.open('https://trello.com/b/vtmGZ5Ww/lapidando','_blank');"><i
-                                    class="fa  fa-trello"></i> <span>Lapidando</span></a></li>
+                       
 
                             <li><a href="#"
                                    onCLick="window.open('https://app.slack.com/client/T0108MUDHV1/C010A4FG8PK','_blank');"><i
@@ -247,7 +246,6 @@
                     </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a>
                             </li>
                             <li><a href="{% url 'usuarios' %}"><i class="fa fa-user-plus"></i><span>Usuários</span></a>
                             </li>
@@ -337,31 +335,6 @@
 
                 {% endif %}
 
-                {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'QUA' %}
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa  fa-check-square"></i>
-                            <span>Qualidade</span>
-                            <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="{% url 'cliente' %}"><i class="fa  fa-users"></i> <span>Clientes</span></a>
-                            </li>
-                            <li><a href="{% url 'servico' %}"><i class="fa  fa-wrench"></i> <span>Serviços</span></a>
-                            </li>
-                            <li><a href="#"
-                                   onCLick="window.open('https://trello.com/b/L3n3lYZw/equipe-de-qualidade','_blank');"><i
-                                    class="fa  fa-trello"></i> <span>Trello</span></a></li>
-                            <li><a href="#"
-                                   onCLick="window.open('https://trello.com/b/vtmGZ5Ww/lapidando','_blank');"><i
-                                    class="fa  fa-trello"></i> <span>Lapidando</span></a></li>
-                        </ul>
-
-
-                    </li>
-                {% endif %}
 
                 {% if request.user.Funcao == 'PROP' or request.user.Funcao == 'PRO' %}
                     <li class="treeview">

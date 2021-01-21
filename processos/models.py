@@ -11,7 +11,6 @@ FUNCAO_CHOICE = (
     ('PROP','Proprietario'),
     ('PRE', 'Presidencia'),
     ('MAR', 'Marketing'),
-    ('QUA', 'Qualidade'),
     ('ADM','Adm/Financeiro'),
     ('PRO', 'Projetos'),
     ('RH', 'Recursos Humanos'),
@@ -134,11 +133,12 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     Matricula = models.CharField('Matricula', max_length=128)
     Situacao = models.BooleanField('Ativo', default=True)
     CPF = models.CharField('CPF', max_length=20)
-    RG = models.CharField('RG', max_length=20, blank=True, null=True)
-    Bairro = models.CharField('Bairro', max_length=100, blank=True, null=True)
-    Rua = models.CharField('Rua', max_length=100, blank=True, null=True)
-    N = models.CharField('Número', max_length=10, blank=True, null=True)
-    CEP = models.CharField('CEP', max_length=50, blank=True, null=True)
+    RG = models.CharField('RG', max_length=20)
+    nascimento = models.DateField('Nascimento', blank=True, null=True)
+    Bairro = models.CharField('Bairro', max_length=100)
+    Rua = models.CharField('Rua', max_length=100)
+    N = models.CharField('Número', max_length=10)
+    CEP = models.CharField('CEP', max_length=50)
     Email = models.EmailField('Email', max_length=254)
     Celular = models.CharField('Celular', max_length=50, blank=True, null=True)
     Facebook = models.CharField('Facebook link', max_length=120, null=True, blank=True)

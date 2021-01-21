@@ -19,6 +19,12 @@ class UsuarioCreationForm(forms.ModelForm):
                   'Login',
                   'Situacao',
                   'CPF',
+                  'RG',
+                  'Bairro',
+                  'Rua',
+                  'N',
+                  'CEP',
+                  'nascimento',
                   'Matricula',
                   'Email',
                   'Celular',
@@ -33,7 +39,7 @@ class UsuarioCreationForm(forms.ModelForm):
         widgets = {
 
             'Situacao': forms.CheckboxInput(attrs={'id': 'situacao', 'onclick': 'myFunction()'}),
-
+            'nascimento': forms.TextInput(attrs={'type': 'date'}),
         }
 
     def clean_password2(self):
