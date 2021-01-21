@@ -23,6 +23,7 @@ class UsuarioCreationForm(forms.ModelForm):
                   'Bairro',
                   'Rua',
                   'N',
+                  'cidade',
                   'CEP',
                   'nascimento',
                   'Matricula',
@@ -154,13 +155,17 @@ class MeusDadosForm(forms.ModelForm):
 
         model = Usuario
         #fields = '__all__'
-        fields = ['Foto','Nome','Email','Matricula','CPF','RG','Celular','Login','password']
+        fields = ['Foto','Nome','Email','Matricula','Rua','N','Bairro','cidade','CPF','RG','Celular','Login','password']
 
         widgets = {
             'Foto': forms.FileInput(),
             'Nome': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Nome'}),
             'Email': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Email'}),
             'Matricula': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Matricula'}),
+            'Rua': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Rua'}),
+            'N': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Número'}),
+            'Bairro': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Bairro'}),
+            'cidade': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Cidade'}),
             'CPF': forms.TextInput(attrs={'class': 'form-control','placeholder': 'CPF'}),
             'RG': forms.TextInput(attrs={'class': 'form-control','placeholder': 'RG'}),
             'Celular': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Celular'}),

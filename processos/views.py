@@ -108,7 +108,6 @@ def editar_meus_dados(request):
         usuario = get_object_or_404(Usuario, pk=request.user.id)
 
         form = MeusDadosForm(request.POST or None, request.FILES or None, instance=usuario)
-        print(form.errors)
         if form.is_valid():
             Email = request.POST.get('Email')
             form.save()

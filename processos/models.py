@@ -138,6 +138,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     Bairro = models.CharField('Bairro', max_length=100)
     Rua = models.CharField('Rua', max_length=100)
     N = models.CharField('Número', max_length=10)
+    cidade = models.CharField('Cidade', max_length=10)
     CEP = models.CharField('CEP', max_length=50)
     Email = models.EmailField('Email', max_length=254)
     Celular = models.CharField('Celular', max_length=50, blank=True, null=True)
